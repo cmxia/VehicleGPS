@@ -1,0 +1,24 @@
+﻿<Window x:Class="VehicleGPS.Views.Control.MessCenter.ModifyMemo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ModifyMemo" Height="300" Width="300" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
+    <Grid x:Name="LayoutRoot" Margin="2" Background="Beige">
+        <Grid.RowDefinitions>
+            <RowDefinition  Height="*"/>
+            <RowDefinition  Height="1.5*"/>
+            <RowDefinition Height="25" />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="3,0,0,0">
+            <TextBlock Height="25" Text="好友ID：" FontSize="14" Padding="10,5,0,0" />
+            <TextBlock Height="25" Name="F_Id" FontSize="14" Padding="0,5,0,0" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="1">
+            <TextBlock Height="25" Text="备注：" FontSize="14" Padding="10,3,0,0" Margin="3,0,0,0" />
+            <TextBox Height="25" FontSize="14" Name="Fmemo" MinWidth="180" Width="Auto"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="OKButton" Content="确 定" Click="OKButton_Click" FontSize="13" Width="60" Height="23" Margin="0,0,10,0"  Background="Azure"/>
+            <Button x:Name="CancelButton" Content="取 消" Click="CancelButton_Click" FontSize="13" Width="60" Height="23" Margin="10,0,10,0" Background="Azure"/>
+        </StackPanel>
+    </Grid>
+</Window>

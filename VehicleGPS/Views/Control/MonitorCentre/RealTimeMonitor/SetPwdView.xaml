@@ -1,0 +1,56 @@
+﻿<Window x:Class="VehicleGPS.Views.Control.MonitorCentre.RealTimeMonitor.SetPwdView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="配置报警解除密码" Height="150" Width="260" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize">
+    <Border>
+        <Border.Background>
+            <ImageBrush ImageSource="/Images/background.jpg"></ImageBrush>
+        </Border.Background>
+        <Grid Margin="5" Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="10" Height="4">
+                <Border.Background>
+                    <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                </Border.Background>
+            </Border>
+            <Border Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="10" Height="4">
+                <Border.Background>
+                    <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                </Border.Background>
+            </Border>
+            <Border Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="10" Height="4">
+                <Border.Background>
+                    <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                </Border.Background>
+            </Border>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="原密码：" VerticalAlignment="Center" HorizontalAlignment="Right"></TextBlock>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="新密码：" VerticalAlignment="Center" HorizontalAlignment="Right"></TextBlock>
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="确认密码：" VerticalAlignment="Center" HorizontalAlignment="Right"></TextBlock>
+            <PasswordBox Grid.Row="0" Grid.Column="1" Margin="5" x:Name="origin_pwd"/>
+            <PasswordBox Grid.Row="2" Grid.Column="1" Margin="5" x:Name="new_pwd"/>
+            <PasswordBox Grid.Row="4" Grid.Column="1" Margin="5" x:Name="confirm_pwd"/>
+            <Border Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3">
+                <Border.Background>
+                    <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                </Border.Background>
+                <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Content="确定" x:Name="confirm_btn" Click="confirm_btn_Click" Padding="10,3" Margin="3"></Button>
+                    <Button Content="取消" x:Name="cancel_btn" Click="cancel_btn_Click" Padding="10,3" Margin="3"></Button>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

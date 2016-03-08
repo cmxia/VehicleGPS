@@ -1,0 +1,455 @@
+﻿<!--RealTimeMonitor.xaml-->
+<UserControl x:Class="VehicleGPS.Views.Control.MonitorCentre.RealTimeMonitor.RealTimeMonitor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:mybinding="clr-namespace:VehicleGPS.Views"
+             mc:Ignorable="d" 
+             HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Models/ResourceDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="400"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" x:Name="Grid_WebMap">
+            <WebBrowser x:Name="webMap"></WebBrowser>
+        </Grid>
+        <GridSplitter Grid.Row="1" VerticalAlignment="Center" Height="4" 
+                      HorizontalAlignment="Stretch" ShowsPreview="False">
+            <GridSplitter.Background>
+                <ImageBrush ImageSource="/Images/background.jpg"></ImageBrush>
+            </GridSplitter.Background>
+        </GridSplitter>
+        <Border Grid.Row="2">
+            <TabControl>
+                <TabControl.BorderBrush>
+                    <ImageBrush ImageSource="/Images/SolidContent_bg.png"></ImageBrush>
+                </TabControl.BorderBrush>
+                <TabItem Header="实时数据">
+                    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" ></RowDefinition>
+                            <!--<RowDefinition Height="25"></RowDefinition>-->
+                        </Grid.RowDefinitions>
+                        <DataGrid Grid.Row="0" x:Name="Grid_VehicleInfo" AutoGenerateColumns="False" 
+                              CanUserAddRows="False" CanUserDeleteRows="False" SelectedItem="{Binding SelectedVehicle}" 
+                        Background="Transparent" ItemsSource="{Binding ListVehicleInfoCurrentPage}" 
+                              IsReadOnly="True" SelectionChanged="Grid_VehicleInfo_SelectionChanged" >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="PreviewMouseDoubleClick">
+                                    <i:InvokeCommandAction Command="{Binding DoubleClickCommand}"></i:InvokeCommandAction>
+                                </i:EventTrigger>
+                                <i:EventTrigger EventName="MouseRightButtonUp">
+                                    <i:InvokeCommandAction Command="{Binding MouseRightButtonUpCommand}"></i:InvokeCommandAction>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <DataGrid.Resources>
+                                <mybinding:BindingProxy x:Key="proxy" Data="{Binding}"></mybinding:BindingProxy>
+                            </DataGrid.Resources>
+
+                            <DataGrid.Columns >
+                                <!--<DataGridTextColumn Header="序号" Binding="{Binding VehicleInfo.Sequence}" ></DataGridTextColumn>-->
+                                <DataGridTextColumn Header="车牌号码" Binding="{Binding VehicleInfo.VehicleId}" Visibility="{Binding Data.ShowSettingVM.VehicleIdV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="内部编号" Binding="{Binding VehicleInfo.FInnerId}" Visibility="{Binding Data.ShowSettingVM.FInnerIdV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="SIM卡号" Binding="{Binding VehicleInfo.SIM}" Visibility="{Binding Data.ShowSettingVM.SIMV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="所属车队" Binding="{Binding VehicleInfo.ParentUnitName}" Visibility="{Binding Data.ShowSettingVM.ParentUnitNameV,Source={StaticResource proxy}}" ></DataGridTextColumn>
+                                <!--<DataGridTextColumn Header="车辆状态" Binding="{Binding VehicleInfo.VehiclecurState}" Visibility="{Binding Data.ShowSettingVM.VehiclecurStateV,Source={StaticResource proxy}}" ></DataGridTextColumn>-->
+                                <DataGridTextColumn Header="车辆类别" Binding="{Binding VehicleInfo.VehicleType}" Visibility="{Binding Data.ShowSettingVM.VehicleTypeV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="在线状态" Binding="{Binding VehicleInfo.VehicleGPSInfo.OnlineStates}" Visibility="{Binding Data.ShowSettingVM.OnlineStatesV,Source={StaticResource proxy}}"></DataGridTextColumn>
+
+                                <DataGridTextColumn Header="ACC状态" Binding="{Binding VehicleInfo.VehicleGPSInfo.Accstatus}" Visibility="{Binding Data.ShowSettingVM.AccstatusV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="当前位置" Binding="{Binding VehicleInfo.VehicleGPSInfo.CurLocation}" Visibility="{Binding Data.ShowSettingVM.CurLocationV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="经度" Binding="{Binding VehicleInfo.VehicleGPSInfo.Longitude}" Visibility="{Binding Data.ShowSettingVM.LongitudeV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="纬度" Binding="{Binding VehicleInfo.VehicleGPSInfo.Latitude}" Visibility="{Binding Data.ShowSettingVM.LatitudeV,Source={StaticResource proxy}}"></DataGridTextColumn>
+
+                                <DataGridTextColumn Header="上传时间" Binding="{Binding VehicleInfo.VehicleGPSInfo.Datetime}" Visibility="{Binding Data.ShowSettingVM.DatetimeV,Source={StaticResource proxy}}"></DataGridTextColumn>
+
+                                <DataGridTextColumn Header="GPS速度" Binding="{Binding VehicleInfo.VehicleGPSInfo.Speed}" Visibility="{Binding Data.ShowSettingVM.SpeedV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="GPS里程" Binding="{Binding VehicleInfo.VehicleGPSInfo.GPSMileage}" Visibility="{Binding Data.ShowSettingVM.GPSMileageV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="油量" Binding="{Binding VehicleInfo.VehicleGPSInfo.OilVolumn}" Visibility="{Binding Data.ShowSettingVM.OilVolumnV,Source={StaticResource proxy}}"></DataGridTextColumn>
+
+                                <DataGridTextColumn Header="厂牌型号" Binding="{Binding VehicleInfo.BrandModel}" Visibility="{Binding Data.ShowSettingVM.BrandModelV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="燃油类型" Binding="{Binding VehicleInfo.OilType}" Visibility="{Binding Data.ShowSettingVM.OilTypeV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="车架号" Binding="{Binding VehicleInfo.VIN}" Visibility="{Binding Data.ShowSettingVM.VINV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="发动机号" Binding="{Binding VehicleInfo.EngineId}" Visibility="{Binding Data.ShowSettingVM.EngineIdV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="车辆型号" Binding="{Binding VehicleInfo.VehicleModel}" Visibility="{Binding Data.ShowSettingVM.VehicleModelV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="购置证号" Binding="{Binding VehicleInfo.PurchaseNum}" Visibility="{Binding Data.ShowSettingVM.PurchaseNumV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="营运证号" Binding="{Binding VehicleInfo.OperatNum}" Visibility="{Binding Data.ShowSettingVM.OperatNumV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="车辆颜色" Binding="{Binding VehicleInfo.VehicleColor}" Visibility="{Binding Data.ShowSettingVM.VehicleColorV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="吨位" Binding="{Binding VehicleInfo.Tonnage}" Visibility="{Binding Data.ShowSettingVM.TonnageV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="轮胎数" Binding="{Binding VehicleInfo.tiresNum}" Visibility="{Binding Data.ShowSettingVM.TiresNumV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="百公里油耗（空载）" Binding="{Binding VehicleInfo.EmptyCost}" Visibility="{Binding Data.ShowSettingVM.EmptyCostV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="百公里油耗（满载）" Binding="{Binding VehicleInfo.FullCost}" Visibility="{Binding Data.ShowSettingVM.FullCostV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="核定承载方量" Binding="{Binding VehicleInfo.LoadAmount}" Visibility="{Binding Data.ShowSettingVM.LoadAmountV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="GPS车载终端编号" Binding="{Binding VehicleInfo.GPSID}" Visibility="{Binding Data.ShowSettingVM.GPSIDV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="座位数" Binding="{Binding VehicleInfo.seatsNum}" Visibility="{Binding Data.ShowSettingVM.SeatsNumV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="汽车销售商" Binding="{Binding VehicleInfo.CarDealers}" Visibility="{Binding Data.ShowSettingVM.CarDealersV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="购买日期" Binding="{Binding VehicleInfo.purchaseDate}" Visibility="{Binding Data.ShowSettingVM.PurchaseDateV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="上牌日期" Binding="{Binding VehicleInfo.cardDate}" Visibility="{Binding Data.ShowSettingVM.CardDateV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="是否贷保" Binding="{Binding VehicleInfo.debetOrNot}" Visibility="{Binding Data.ShowSettingVM.DebetOrNotV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="承载容量" Binding="{Binding VehicleInfo.LoadCapacity}" Visibility="{Binding Data.ShowSettingVM.LoadCapacityV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="油箱容量" Binding="{Binding VehicleInfo.FuelCapacity}" Visibility="{Binding Data.ShowSettingVM.FuelCapacityV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="是否贷款" Binding="{Binding VehicleInfo.LoansOrNot}" Visibility="{Binding Data.ShowSettingVM.LoansOrNotV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="车辆成本" Binding="{Binding VehicleInfo.VehicleCosts}" Visibility="{Binding Data.ShowSettingVM.VehicleCostsV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="使用年限" Binding="{Binding VehicleInfo.Life}" Visibility="{Binding Data.ShowSettingVM.LifeV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="预计残值" Binding="{Binding VehicleInfo.SalvageValue}" Visibility="{Binding Data.ShowSettingVM.SalvageValueV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="任务状况" Binding="{Binding VehicleInfo.VehicleState}" Visibility="{Binding Data.ShowSettingVM.VehicleStateV,Source={StaticResource proxy}}"></DataGridTextColumn>
+
+
+
+                                <DataGridTextColumn Header="GPS状态" Binding="{Binding VehicleInfo.VehicleGPSInfo.GpsStatus}" Visibility="{Binding Data.ShowSettingVM.GpsStatusV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="海拔高原" Binding="{Binding VehicleInfo.VehicleGPSInfo.Altitude}" Visibility="{Binding Data.ShowSettingVM.AltitudeV,Source={StaticResource proxy}}"></DataGridTextColumn>
+
+                                <DataGridTextColumn Header="仪表速度" Binding="{Binding VehicleInfo.VehicleGPSInfo.DevSpeed}" Visibility="{Binding Data.ShowSettingVM.DevSpeedV,Source={StaticResource proxy}}"></DataGridTextColumn>
+
+                                <DataGridTextColumn Header="仪表里程" Binding="{Binding VehicleInfo.VehicleGPSInfo.Mileage}" Visibility="{Binding Data.ShowSettingVM.MileageV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="方向" Binding="{Binding VehicleInfo.VehicleGPSInfo.Direction}" Visibility="{Binding Data.ShowSettingVM.DirectionV,Source={StaticResource proxy}}"></DataGridTextColumn>
+
+
+
+
+                                <DataGridTextColumn Header="运营状态" Binding="{Binding VehicleInfo.VehicleGPSInfo.Workstatus}" Visibility="{Binding Data.ShowSettingVM.WorkstatusV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="GPS模式" Binding="{Binding VehicleInfo.VehicleGPSInfo.Gpsmode}" Visibility="{Binding Data.ShowSettingVM.GpsmodeV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="油路状态" Binding="{Binding VehicleInfo.VehicleGPSInfo.Oilwaystatus}" Visibility="{Binding Data.ShowSettingVM.OilwaystatusV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="震动状态" Binding="{Binding VehicleInfo.VehicleGPSInfo.Shakestatus}" Visibility="{Binding Data.ShowSettingVM.ShakestatusV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="喇叭状态" Binding="{Binding VehicleInfo.VehicleGPSInfo.Hornstatus}" Visibility="{Binding Data.ShowSettingVM.HornstatusV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="空调状态" Binding="{Binding VehicleInfo.VehicleGPSInfo.Conditionerstatus}" Visibility="{Binding Data.ShowSettingVM.ConditionerstatusV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="车门状态" Binding="{Binding VehicleInfo.VehicleGPSInfo.Vdstatus}" Visibility="{Binding Data.ShowSettingVM.VdstatusV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="前车门状态" Binding="{Binding VehicleInfo.VehicleGPSInfo.Fdstatus}" Visibility="{Binding Data.ShowSettingVM.FdstatusV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="后车门状态" Binding="{Binding VehicleInfo.VehicleGPSInfo.Bdstatus}" Visibility="{Binding Data.ShowSettingVM.BdstatusV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="左转向状态" Binding="{Binding VehicleInfo.VehicleGPSInfo.Ltstatus}" Visibility="{Binding Data.ShowSettingVM.LtstatusV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="右转向状态" Binding="{Binding VehicleInfo.VehicleGPSInfo.Rtstatus}" Visibility="{Binding Data.ShowSettingVM.RtstatusV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="远光灯状态" Binding="{Binding VehicleInfo.VehicleGPSInfo.Farlstatus}" Visibility="{Binding Data.ShowSettingVM.FarlstatusV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="近光灯状态" Binding="{Binding VehicleInfo.VehicleGPSInfo.Nearlstatus}" Visibility="{Binding Data.ShowSettingVM.NearlstatusV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="车辆电路状态" Binding="{Binding VehicleInfo.VehicleGPSInfo.Vcstatus}" Visibility="{Binding Data.ShowSettingVM.VcstatusV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="经纬度加密状态" Binding="{Binding VehicleInfo.VehicleGPSInfo.Llsecret}" Visibility="{Binding Data.ShowSettingVM.LlsecretV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="正反转状态" Binding="{Binding VehicleInfo.VehicleGPSInfo.Pnstatus}" Visibility="{Binding Data.ShowSettingVM.PnstatusV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="发动机状态" Binding="{Binding VehicleInfo.VehicleGPSInfo.Enginestatus}" Visibility="{Binding Data.ShowSettingVM.EnginestatusV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="刹车状态" Binding="{Binding VehicleInfo.VehicleGPSInfo.Brakestatus}" Visibility="{Binding Data.ShowSettingVM.BrakestatusV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="安全状态" Binding="{Binding VehicleInfo.VehicleGPSInfo.Protectstatus}" Visibility="{Binding Data.ShowSettingVM.ProtectstatusV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="负载状态" Binding="{Binding VehicleInfo.VehicleGPSInfo.Loadstatus}" Visibility="{Binding Data.ShowSettingVM.LoadstatusV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="总线状态" Binding="{Binding VehicleInfo.VehicleGPSInfo.Busstatus}" Visibility="{Binding Data.ShowSettingVM.BusstatusV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="GSM模块状态" Binding="{Binding VehicleInfo.VehicleGPSInfo.Gsmstatus}" Visibility="{Binding Data.ShowSettingVM.GsmstatusV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="锁车电路状态" Binding="{Binding VehicleInfo.VehicleGPSInfo.Lcstatus}" Visibility="{Binding Data.ShowSettingVM.LcstatusV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="前雾灯状态" Binding="{Binding VehicleInfo.VehicleGPSInfo.Ffstatus}" Visibility="{Binding Data.ShowSettingVM.FfstatusV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="后雾灯状态" Binding="{Binding VehicleInfo.VehicleGPSInfo.Bfstatus}" Visibility="{Binding Data.ShowSettingVM.BfstatusV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="GPS天线状态" Binding="{Binding VehicleInfo.VehicleGPSInfo.Gpsantstatus}" Visibility="{Binding Data.ShowSettingVM.GpsantstatusV,Source={StaticResource proxy}}"></DataGridTextColumn>
+
+                                <DataGridTextColumn Header="紧急报警" Binding="{Binding VehicleInfo.VehicleGPSInfo.Soswarn}" Visibility="{Binding Data.ShowSettingVM.SoswarnV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="超速报警" Binding="{Binding VehicleInfo.VehicleGPSInfo.Overspeedwarn}" Visibility="{Binding Data.ShowSettingVM.OverspeedwarnV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="疲劳驾驶" Binding="{Binding VehicleInfo.VehicleGPSInfo.Tiredwarn}" Visibility="{Binding Data.ShowSettingVM.TiredwarnV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="预警" Binding="{Binding VehicleInfo.VehicleGPSInfo.Prewarn}" Visibility="{Binding Data.ShowSettingVM.PrewarnV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="GNSS模块故障" Binding="{Binding VehicleInfo.VehicleGPSInfo.Gnssfatal}" Visibility="{Binding Data.ShowSettingVM.GnssfatalV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="GNSS天线未接或被剪断" Binding="{Binding VehicleInfo.VehicleGPSInfo.Gnssantwarn}" Visibility="{Binding Data.ShowSettingVM.GnssantwarnV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="GNSS天线短路" Binding="{Binding VehicleInfo.VehicleGPSInfo.Gnssshortwarn}" Visibility="{Binding Data.ShowSettingVM.GnssshortwarnV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="终端主电源欠压" Binding="{Binding VehicleInfo.VehicleGPSInfo.Lowvolwarn}" Visibility="{Binding Data.ShowSettingVM.LowvolwarnV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="终端主电源高压" Binding="{Binding VehicleInfo.VehicleGPSInfo.Highvolwarn}" Visibility="{Binding Data.ShowSettingVM.HighvolwarnV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="终端主电源断电" Binding="{Binding VehicleInfo.VehicleGPSInfo.Outagewarn}" Visibility="{Binding Data.ShowSettingVM.OutagewarnV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="终端LCD或者显示器故障" Binding="{Binding VehicleInfo.VehicleGPSInfo.Lcdfatalwarn}" Visibility="{Binding Data.ShowSettingVM.LcdfatalwarnV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="TTS模块故障" Binding="{Binding VehicleInfo.VehicleGPSInfo.Ttsfatalwarn}" Visibility="{Binding Data.ShowSettingVM.TtsfatalwarnV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="摄像头故障" Binding="{Binding VehicleInfo.VehicleGPSInfo.Camerafatalwarn}" Visibility="{Binding Data.ShowSettingVM.CamerafatalwarnV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="视频丢失报警" Binding="{Binding VehicleInfo.VehicleGPSInfo.Vediolosewarn}" Visibility="{Binding Data.ShowSettingVM.VediolosewarnV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="视频遮挡报警" Binding="{Binding VehicleInfo.VehicleGPSInfo.Vedioshelterwarn}" Visibility="{Binding Data.ShowSettingVM.VedioshelterwarnV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="当天累计驾驶超时" Binding="{Binding VehicleInfo.VehicleGPSInfo.Accumtimeout}" Visibility="{Binding Data.ShowSettingVM.AccumtimeoutV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="超时停车" Binding="{Binding VehicleInfo.VehicleGPSInfo.Stoptimeout}" Visibility="{Binding Data.ShowSettingVM.StoptimeoutV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="进出区域报警" Binding="{Binding VehicleInfo.VehicleGPSInfo.Inoutareawarn}" Visibility="{Binding Data.ShowSettingVM.InoutareawarnV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="路段行驶时间不足/过长报警" Binding="{Binding VehicleInfo.VehicleGPSInfo.Drivingtimewarn}" Visibility="{Binding Data.ShowSettingVM.DrivingtimewarnV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="路线偏离报警" Binding="{Binding VehicleInfo.VehicleGPSInfo.Deviatewarn}" Visibility="{Binding Data.ShowSettingVM.DeviatewarnV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="车辆VSS故障" Binding="{Binding VehicleInfo.VehicleGPSInfo.Vssfatalwarn}" Visibility="{Binding Data.ShowSettingVM.VssfatalwarnV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="车辆油量异常报警" Binding="{Binding VehicleInfo.VehicleGPSInfo.Oilexceptionwarn}" Visibility="{Binding Data.ShowSettingVM.OilexceptionwarnV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="车辆被盗报警" Binding="{Binding VehicleInfo.VehicleGPSInfo.Vehiclestolenwarn}" Visibility="{Binding Data.ShowSettingVM.VehiclestolenwarnV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="非法点火报警" Binding="{Binding VehicleInfo.VehicleGPSInfo.Illignitewarn}" Visibility="{Binding Data.ShowSettingVM.IllignitewarnV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="非法位移报警" Binding="{Binding VehicleInfo.VehicleGPSInfo.Illmovewarn}" Visibility="{Binding Data.ShowSettingVM.IllmovewarnV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="碰撞侧翻报警" Binding="{Binding VehicleInfo.VehicleGPSInfo.Crashwarn}" Visibility="{Binding Data.ShowSettingVM.CrashwarnV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="SD卡异常报警" Binding="{Binding VehicleInfo.VehicleGPSInfo.Sdexceptionwarn}" Visibility="{Binding Data.ShowSettingVM.SdexceptionwarnV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="劫警" Binding="{Binding VehicleInfo.VehicleGPSInfo.Robwarn}" Visibility="{Binding Data.ShowSettingVM.RobwarnV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="司机停车休息时间不足报警" Binding="{Binding VehicleInfo.VehicleGPSInfo.Sleeptimewarn}" Visibility="{Binding Data.ShowSettingVM.SleeptimewarnV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="非法时段行驶报警" Binding="{Binding VehicleInfo.VehicleGPSInfo.Illtimedrivingwarn}" Visibility="{Binding Data.ShowSettingVM.IlltimedrivingwarnV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="越战报警" Binding="{Binding VehicleInfo.VehicleGPSInfo.Overstationwarn}" Visibility="{Binding Data.ShowSettingVM.OverstationwarnV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="非法开车门报警" Binding="{Binding VehicleInfo.VehicleGPSInfo.Ilopendoorwarn}" Visibility="{Binding Data.ShowSettingVM.IlopendoorwarnV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="设防报警" Binding="{Binding VehicleInfo.VehicleGPSInfo.Protectwarn}" Visibility="{Binding Data.ShowSettingVM.ProtectwarnV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="剪线报警" Binding="{Binding VehicleInfo.VehicleGPSInfo.Trimmingwarn}" Visibility="{Binding Data.ShowSettingVM.TrimmingwarnV,Source={StaticResource proxy}}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="密码错误报警" Binding="{Binding VehicleInfo.VehicleGPSInfo.Passwdwarn}" Visibility="{Binding Data.ShowSettingVM.PasswdwarnV,Source={StaticResource proxy}}" ></DataGridTextColumn>
+                                <DataGridTextColumn Header="禁行报警" Binding="{Binding VehicleInfo.VehicleGPSInfo.Prohibitmovewarn}" Visibility="{Binding Data.ShowSettingVM.ProhibitmovewarnV,Source={StaticResource proxy}}" ></DataGridTextColumn>
+                                <DataGridTextColumn Header="非法停车报警" Binding="{Binding VehicleInfo.VehicleGPSInfo.Illstopwarn}" Visibility="{Binding Data.ShowSettingVM.IllstopwarnV,Source={StaticResource proxy}}" ></DataGridTextColumn>
+                            </DataGrid.Columns>
+                            <DataGrid.ContextMenu>
+                                <ContextMenu >
+                                    <MenuItem Header="车辆信息"  Command="{Binding RealTimeTreeVM.VehicleCommand}"/>
+                                    <MenuItem Header="车辆跟踪"  Command="{Binding RealTimeTreeVM.VehicleTrackCommand}"/>
+                                    <MenuItem Header="轨迹回放"  Command="{Binding RealTimeTreeVM.TrackPlayCommand}"/>
+                                    <MenuItem Header="基站定位"  Command="{Binding RealTimeTreeVM.StationLocateCommand}"/>
+                                    <MenuItem Header="指令下发">
+                                        <MenuItem Header="终端参数设置">
+                                            <MenuItem Header="心跳发送时间间隔" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="1;4;0|终端心跳发送时间间隔(s)"/>
+                                            <MenuItem Header="TCP消息设置">
+                                                <MenuItem Header="应答超时时间" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="2;4;0|TCP消息应答超时时间(s)"/>
+                                                <MenuItem Header="重传次数" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="3;4;0|TCP消息重传次数"/>
+                                            </MenuItem>
+                                            <MenuItem Header="UDP消息设置">
+                                                <MenuItem Header="应答超时时间" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="4;4;0|UDP消息应答超时时间(s)"/>
+                                                <MenuItem Header="重传次数" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="5;4;0|UDP消息重传次数"/>
+                                            </MenuItem>
+                                            <MenuItem Header="SMS消息设置">
+                                                <MenuItem Header="应答超时时间" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="6;4;0|SMS消息应答超时时间(s)"/>
+                                                <MenuItem Header="重传次数" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="7;4;0|SMS消息重传次数"/>
+                                            </MenuItem>
+                                        </MenuItem>
+                                        <MenuItem Header="服务器设置">
+                                            <MenuItem Header="主服务器设置" >
+                                                <MenuItem Header="无线通信拨号访问点" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="16;4;3|主服务器APN"/>
+                                                <MenuItem Header="无线通信拨号用户名" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="17;4;3|主服务器无线通信拨号用户名"/>
+                                                <MenuItem Header="无线通信拨号密码" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="18;4;3|主服务器无线通信拨号密码"/>
+                                                <MenuItem Header="地址IP或域名" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="19;4;0|主服务器地址，IP或域名"/>
+                                            </MenuItem>
+                                            <MenuItem Header="备份服务器设置" >
+                                                <MenuItem Header="无线通信拨号访问点" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="20;4;3|备份服务器APN"/>
+                                                <MenuItem Header="无线通信拨号用户名" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="21;4;3|备份服务器无线通信拨号用户名"/>
+                                                <MenuItem Header="无线通信拨号密码"  Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="22;4;3|备份服务器无线通信拨号密码"/>
+                                                <MenuItem Header="地址IP或域名" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="23;4;3|备份服务器地址，IP或域名"/>
+                                            </MenuItem>
+                                            <MenuItem Header="TCP端口" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="24;4;0|TCP端口"/>
+                                            <MenuItem Header="UDP端口" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="25;4;0|UDP端口"/>
+                                        </MenuItem>
+                                        <MenuItem Header="位置汇报设置">
+                                            <MenuItem Header="位置汇报策略" Command="{Binding RealTimeTreeVM.PosStrategyCommand}"/>
+                                            <MenuItem Header="位置汇报方案" Command="{Binding RealTimeTreeVM.CommonRadioCommand}" CommandParameter="位置汇报方案"/>
+                                            <MenuItem Header="汇报时间设置">
+                                                <MenuItem Header="驾驶员未登录汇报时间间隔" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="34;4;0|驾驶员未登录汇报时间间隔(s)"/>
+                                                <MenuItem Header="休眠时汇报时间间隔" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="39;4;0|休眠时汇报时间间隔(s)"/>
+                                                <MenuItem Header="紧急报警时汇报时间间隔" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="40;4;0|紧急报警时汇报时间间隔(s)"/>
+                                                <MenuItem Header="缺省时间汇报间隔" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="41;4;0|缺省时间汇报间隔(s)"/>
+                                            </MenuItem>
+                                            <MenuItem Header="汇报距离设置">
+                                                <MenuItem Header="驾驶员未登录汇报距离间隔" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="45;4;0|驾驶员未登录汇报距离间隔(m)"/>
+                                                <MenuItem Header="休眠时汇报距离间隔" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="46;4;0|休眠时汇报距离间隔(m)"/>
+                                                <MenuItem Header="紧急报警时汇报距离间隔" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="47;4;0|紧急报警时汇报距离间隔(m)"/>
+                                                <MenuItem Header="缺省距离汇报间隔" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="44;4;0|缺省距离汇报间隔(m)"/>
+                                            </MenuItem>
+                                            <MenuItem Header="拐点补传角度(小于180)" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="48;4;0|拐点补传角度(小于180)"/>
+                                        </MenuItem>
+                                        <MenuItem Header="通话设置">
+                                            <MenuItem Header="监控平台电话号码" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="64;4;3|监控平台电话号码"/>
+                                            <MenuItem Header="复位电话号码" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="65;4;3|复位电话号码"/>
+                                            <MenuItem Header="恢复出厂设置电话号码" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="66;4;3|恢复出厂设置电话号码"/>
+                                            <MenuItem Header="监控平台SMS电话号码" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="67;4;3|监控平台SMS电话号码"/>
+                                            <MenuItem Header="接收终端SMS文本报警号码" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="68;4;3|接收终端SMS文本报警号码"/>
+                                            <MenuItem Header="终端电话接听策略" Command="{Binding RealTimeTreeVM.CommonRadioCommand}" CommandParameter="终端电话接听策略"/>
+                                            <MenuItem Header="每次最长通话时间" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="70;4;0|每次最长通话时间(s)"/>
+                                            <MenuItem Header="当月最长通话时间" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="71;4;0|当月最长通话时间(s)"/>
+                                            <MenuItem Header="监听电话号码" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="72;4;3|监听电话号码"/>
+                                            <MenuItem Header="监管平台特权短信号码" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="73;4;3|监管平台特权短信号码"/>
+                                        </MenuItem>
+                                        <MenuItem Header="报警设置">
+                                            <MenuItem Header="报警屏蔽字" Command="{Binding RealTimeTreeVM.AlarmCommand}" CommandParameter="报警屏蔽字"/>
+                                            <MenuItem Header="报警发送文本SMS开关" Command="{Binding RealTimeTreeVM.AlarmCommand}" CommandParameter="报警发送文本SMS开关"/>
+                                            <MenuItem Header="报警拍摄开关" Command="{Binding RealTimeTreeVM.AlarmCommand}" CommandParameter="报警拍摄开关"/>
+                                            <MenuItem Header="报警拍摄存储标志" Command="{Binding RealTimeTreeVM.AlarmCommand}" CommandParameter="报警拍摄存储标志"/>
+                                            <MenuItem Header="关键标志" Command="{Binding RealTimeTreeVM.AlarmCommand}" CommandParameter="关键标志"/>
+                                        </MenuItem>
+                                        <MenuItem Header="超速设置">
+                                            <MenuItem Header="最高速度" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="85;4;0|最高速度(km/h)"/>
+                                            <MenuItem Header="超速持续时间" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="86;4;0|超速持续时间(s)"/>
+                                        </MenuItem>
+                                        <MenuItem Header="疲劳驾驶设置">
+                                            <MenuItem Header="连续驾驶时间门限" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="87;4;0|连续驾驶时间门限(s)"/>
+                                            <MenuItem Header="当天累计驾驶时间门限" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="88;4;0|当天累计驾驶时间门限(s)"/>
+                                            <MenuItem Header="最小休息时间" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="89;4;0|最小休息时间(s)"/>
+                                            <MenuItem Header="最长停车时间" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="90;4;0|最长停车时间(s)"/>
+                                        </MenuItem>
+                                        <MenuItem Header="拍照参数设置">
+                                            <MenuItem Header="图像/视频质量" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="112;4;0|图像/视频质量"/>
+                                            <MenuItem Header="亮度" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="113;4;0|亮度" />
+                                            <MenuItem Header="对比度" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="114;4;0|对比度"/>
+                                            <MenuItem Header="饱和度" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="115;4;0|饱和度"/>
+                                            <MenuItem Header="色度" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="116;4;0|色度"/>
+                                        </MenuItem>
+                                        <MenuItem Header="车辆参数设置">
+                                            <MenuItem Header="里程表读数" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="128;4;0|车辆里程表读数"/>
+                                            <MenuItem Header="所在省域ID" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="129;2;1|车辆所在省域ID"/>
+                                            <MenuItem Header="所在市域ID" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="130;2;1|车辆所在市域ID"/>
+                                            <MenuItem Header="机动车号牌" Command="{Binding RealTimeTreeVM.CommonCommand}" CommandParameter="131;4;3|机动车号牌"/>
+                                            <MenuItem Header="车牌颜色" Command="{Binding RealTimeTreeVM.VehicleColCommand}" CommandParameter="{Binding ElementName=tv_Vehivle}"/>
+                                        </MenuItem>
+                                        <MenuItem Header="文本信息下发"  Command="{Binding RealTimeTreeVM.SendTextCommand}" CommandParameter="{Binding ElementName=tv_Vehicle}"/>
+                                        <MenuItem Header="事件设置" Command="{Binding RealTimeTreeVM.EventSetCommand}"/>
+                                        <MenuItem Header="设置电话本" Command="{Binding RealTimeTreeVM.PhoneSetCommand}"/>
+                                        <MenuItem Header="区域路线设置">
+                                            <MenuItem Header="设置圆形区域" Command="{Binding RealTimeTreeVM.SettingCircleCommand}"/>
+                                            <MenuItem Header="设置矩形区域" Command="{Binding RealTimeTreeVM.SettingRectCommand}" />
+                                            <MenuItem Header="设置多边形区域" Command="{Binding RealTimeTreeVM.SettingPolyCommand}"/>
+                                            <MenuItem Header="设置路线" Command="{Binding RealTimeTreeVM.SettingLineCommand}"/>
+                                            <MenuItem Header="删除区域或路线" Command="{Binding RealTimeTreeVM.DelRegionCommand}"/>
+                                        </MenuItem>
+                                        <MenuItem Header="华强设置类指令">
+                                            <MenuItem Header="设置号码" Command="{Binding RealTimeTreeVM.HQ_NumberCommand}" CommandParameter="设置号码"/>
+                                            <MenuItem Header="设置密码" Command="{Binding RealTimeTreeVM.HQ_NumberCommand}" CommandParameter="设置密码"/>
+                                            <MenuItem Header="设置终端上传后需要中心回复的项目" Command="{Binding RealTimeTreeVM.HQ_Setting_C_I_Command}" CommandParameter="设置终端上传后需要中心回复的项目"/>
+                                            <MenuItem Header="其他设置" Command="{Binding RealTimeTreeVM.HQ_NumberCommand}" CommandParameter="其他设置"/>
+                                            <MenuItem Header="设置功能开关" Command="{Binding RealTimeTreeVM.HQ_Setting_C_I_Command}" CommandParameter="设置功能开关"/>
+                                            <MenuItem Header="设置报警范围" Command="{Binding RealTimeTreeVM.HQ_Setting_ScopeCommand}" CommandParameter="设置报警范围"/>
+                                            <MenuItem Header="设置特定短信息菜单" Command="{Binding RealTimeTreeVM.HQ_Setting_MessageCommand}" CommandParameter="设置特定短信息菜单"/>
+                                            <MenuItem Header="设置运行商LOGO" Command="{Binding RealTimeTreeVM.HQ_Setting_LogoCommand}" CommandParameter="设置运行商LOGO"/>
+                                            <MenuItem Header="华强通话限制" Command="{Binding RealTimeTreeVM.HQ_Setting_CallCommand}" CommandParameter="通话限制"/>
+                                            <MenuItem Header="设置多边形报警范围" Command="{Binding RealTimeTreeVM.HQ_Setting_PoloygnCommand}" CommandParameter="多边形报警范围"/>
+                                            <MenuItem Header="查询终端参数1" Command="{Binding RealTimeTreeVM.HQ_NoneDataCommand}" CommandParameter="查询终端参数1"/>
+                                            <MenuItem Header="查询终端参数2" Command="{Binding RealTimeTreeVM.HQ_NoneDataCommand}" CommandParameter="查询终端参数2"/>
+                                            <MenuItem Header="查询终端产品ID" Command="{Binding RealTimeTreeVM.HQ_NoneDataCommand}" CommandParameter="查询终端产品ID"/>
+                                            <MenuItem Header="设置终端产品ID" Command="{Binding RealTimeTreeVM.HQ_FixSpeedCommand}" CommandParameter="设置终端产品ID"/>
+                                            <MenuItem Header="设置终端参数" Command="{Binding RealTimeTreeVM.HQ_SettingParaCommand}"/>
+                                        </MenuItem>
+                                        <MenuItem Header="华强控制类指令">
+                                            <MenuItem Header="控制终端工作状态" Command="{Binding RealTimeTreeVM.HQ_WorkingStateCommand}" CommandParameter="控制终端工作状态"/>
+                                            <MenuItem Header="遥控智能锁车功能" Command="{Binding RealTimeTreeVM.HQ_WorkingStateCommand}" CommandParameter="遥控智能锁车功能"/>
+                                            <MenuItem Header="监听功能" Command="{Binding RealTimeTreeVM.HQ_MonitorCommand}"/>
+                                            <MenuItem Header="终端设置允许" Command="{Binding RealTimeTreeVM.HQ_WorkingStateCommand}" CommandParameter="终端设置允许"/>
+                                            <MenuItem Header="不带范围的点名信息" Command="{Binding RealTimeTreeVM.HQ_NoneDataCommand}" CommandParameter="不带范围的点名信息"/>
+                                            <MenuItem Header="解除终端报警" Command="{Binding RealTimeTreeVM.HQ_NoneDataCommand}" CommandParameter="解除终端报警"/>
+                                            <MenuItem Header="查询车辆电瓶电压信息" Command="{Binding RealTimeTreeVM.HQ_NoneDataCommand}" CommandParameter="查询车辆电瓶电压信息"/>
+                                            <MenuItem Header="要求终端进入GPRS模式" Command="{Binding RealTimeTreeVM.HQ_GPRSCommand}"/>
+                                            <MenuItem Header="查询车辆里程信息" Command="{Binding RealTimeTreeVM.HQ_VehicleMileageCommand}"/>
+                                            <MenuItem Header="设置压缩回传参数" Command="{Binding RealTimeTreeVM.HQ_CompressionCommand}"/>
+                                            <MenuItem Header="设置定距回传" Command="{Binding RealTimeTreeVM.HQ_DistanceBackCommand}"/>
+                                            <MenuItem Header="带范围的单次点名信息" Command="{Binding RealTimeTreeVM.HQ_OneCallCommand}"/>
+                                            <MenuItem Header="设置定速回传参数" Command="{Binding RealTimeTreeVM.HQ_FixSpeedCommand}" CommandParameter="设置定速回传参数"/>
+                                            <MenuItem Header="设置在线待命时位置回传的时间间隔" Command="{Binding RealTimeTreeVM.HQ_StandByCommand}"/>
+                                            <MenuItem Header="设置空车时的定时回传时间间隔及次数" Command="{Binding RealTimeTreeVM.HQ_EmptyBackCommand}"/>
+                                            <MenuItem Header="华强中心下发给任意附件的的任意信息" Command="{Binding RealTimeTreeVM.HQ_AnyInformationCommand}"/>
+                                        </MenuItem>
+                                        <MenuItem Header="华强网络参数设置类指令">
+                                            <MenuItem Header="更改IP和端口号" Command="{Binding RealTimeTreeVM.HQ_IPandPortCommand}" CommandParameter="更改IP和端口号"/>
+                                            <MenuItem Header="设置第二监控中心IP和端口号" Command="{Binding RealTimeTreeVM.HQ_IPandPortCommand}" CommandParameter="设置第二监控中心IP和端口号"/>
+                                            <MenuItem Header="更改用户名、密码、拨号号码、APN" Command="{Binding RealTimeTreeVM.HQ_UserCodeCommand}"/>
+                                            <MenuItem Header="终端掉线后重新建立GPRS连接的最大时间" Command="{Binding RealTimeTreeVM.HQ_OfflineGPRSCommand}" CommandParameter="终端掉线后重新建立GPRS连接的最大时间"/>
+                                            <MenuItem Header="设置服务器UDP端口号" Command="{Binding RealTimeTreeVM.HQ_OfflineGPRSCommand}" CommandParameter="设置服务器UDP端口号"/>
+                                        </MenuItem>
+                                        <MenuItem Header="华强多媒体设置类指令">
+                                            <MenuItem Header="要求上传一幅图像"  Command="{Binding RealTimeTreeVM.HQ_NoneDataCommand}" CommandParameter="要求上传一幅图像"/>
+                                            <MenuItem Header="要求上传多幅图像" Command="{Binding RealTimeTreeVM.HQ_EmegentPicCommand}" CommandParameter="要求上传多幅图像"/>
+                                            <MenuItem Header="紧急情况下图像抓拍时间间隔和抓拍次数" Command="{Binding RealTimeTreeVM.HQ_EmegentPicCommand}" CommandParameter="紧急情况下图像抓拍时间间隔和抓拍次数"/>
+                                            <MenuItem Header="设置运行时定时拍摄的时间间隔"  Command="{Binding RealTimeTreeVM.HQ_OfflineGPRSCommand}" CommandParameter="设置运行时定时拍摄的时间间隔"/>
+                                        </MenuItem>
+                                    </MenuItem>
+
+                                </ContextMenu>
+                            </DataGrid.ContextMenu>
+                        </DataGrid>
+                        <!--<WrapPanel Grid.Row="1">
+                            <WrapPanel.Background>
+                                <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                            </WrapPanel.Background>
+                            <WrapPanel  Margin="2">
+                                <WrapPanel >
+                                    <Button Width="50" Height="20" Command="{Binding ComeFirstCommand}" Content="首页"  
+                                    IsEnabled="{Binding FirstEnable}"/>
+                                    <Button Width="50" Height="20" Command="{Binding ComePrevCommand}" Content="前一页" Margin="10,0"
+                                    IsEnabled="{Binding PrevEnable}" />
+                                </WrapPanel>
+                                <WrapPanel VerticalAlignment="Center">
+                                    <TextBlock Text="当前第 "/>
+                                    <TextBlock Text="{Binding CurrentPage}" Foreground="Red"/>
+                                    <TextBlock Text=" 页,共 " />
+                                    <TextBlock Foreground="Red"  Text="{Binding TotalPage}"/>
+                                    <TextBlock Text=" 页"/>
+                                </WrapPanel>
+                                <WrapPanel >
+                                    <Button Width="50" Height="20" Command="{Binding ComeNextCommand}" Content="下一页" Margin="10,0"
+                                    IsEnabled="{Binding NextEnable}" />
+                                    <Button Width="50" Height="20" Command="{Binding ComeLastCommand}" Content="末页" Margin="0,0,10,0" 
+                                    IsEnabled="{Binding LastEnable}"/>
+                                </WrapPanel>
+                            </WrapPanel>
+                            <WrapPanel VerticalAlignment="Center" >
+                                <TextBlock Text="显示记录从 "/>
+                                <TextBlock Text="{Binding CurrentStart}"  Foreground="Red" />
+                                <TextBlock Text=" 到 "/>
+                                <TextBlock Text="{Binding CurrentEnd}" Foreground="Red" />
+                                <TextBlock Text=" 条, 总数 "/>
+                                <TextBlock Text="{Binding TotalCount}" Foreground="Red" />
+                                <TextBlock Text=" 条"/>
+                            </WrapPanel>
+                        </WrapPanel>-->
+                    </Grid>
+                </TabItem>
+                <TabItem Header="报警数据">
+                    <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" Background="Transparent" 
+                              IsReadOnly="True" ItemsSource="{Binding AlermInfoList}">
+                        <DataGrid.Resources>
+                            <mybinding:BindingProxy x:Key="proxy" Data="{Binding}"></mybinding:BindingProxy>
+                        </DataGrid.Resources>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="内部编号" Binding="{Binding VehicleId}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="SIM卡号" Binding="{Binding SimId}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="车牌号" Binding="{Binding VehicleNum}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="报警类型" Binding="{Binding AlarmContent}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="报警时间" Binding="{Binding Time}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="目标状态" Binding="{Binding VehicleStatus}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="处理状态" Binding="{Binding ProcessStatus}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="速度" Binding="{Binding Speed}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="所属单位" Binding="{Binding UnitName}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="驾驶员" Binding="{Binding Driver}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="经度" Binding="{Binding Long}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="纬度" Binding="{Binding Lat}"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
+                <TabItem Header="发出短语">
+                    <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" Background="Transparent" 
+                              IsReadOnly="True" ItemsSource="{Binding SendMessageList}">
+                        <DataGrid.Resources>
+                            <mybinding:BindingProxy x:Key="proxy" Data="{Binding}"></mybinding:BindingProxy>
+                        </DataGrid.Resources>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="SIM卡号" Binding="{Binding SimID}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="车牌号" Binding="{Binding VehicleNum}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="时间" Binding="{Binding Time}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="内容" Binding="{Binding Content}"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
+                <TabItem Header="接收短语">
+                    <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" Background="Transparent" 
+                              IsReadOnly="True" ItemsSource="{Binding ReceiveMessageList}">
+                        <DataGrid.Resources>
+                            <mybinding:BindingProxy x:Key="proxy" Data="{Binding}"></mybinding:BindingProxy>
+                        </DataGrid.Resources>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="SIM卡号" Binding="{Binding SimID}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="车牌号" Binding="{Binding VehicleNum}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="时间" Binding="{Binding Time}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="内容" Binding="{Binding Content}"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
+                <TabItem Header="指令状态">
+                    <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" Background="Transparent" 
+                              IsReadOnly="True" ItemsSource="{Binding InstructionInfoList}">
+                        <DataGrid.Resources>
+                            <mybinding:BindingProxy x:Key="proxy" Data="{Binding}"></mybinding:BindingProxy>
+                        </DataGrid.Resources>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="SIM卡号" Binding="{Binding cmdSim}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="车牌号" Binding="{Binding VehicleNum}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="发送指令" Binding="{Binding cmdContent}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="发送时间" Binding="{Binding cmdTime}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="发送状态" Binding="{Binding SendStatus}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="目标回传" Binding="{Binding ReturnMsg}"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
+            </TabControl>
+        </Border>
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,416 @@
+﻿<Window x:Class="VehicleGPS.Views.Control.MonitorCentre.TrackPlayBack.TrackPlayBack"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:VehicleGPS.Views.Control"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             Title="轨迹回放" Icon="/Images/playback.png" Height="700" Width="1200"
+             WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Models/ResourceDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <xctk:BusyIndicator IsBusy="{Binding IsBusy}"  BusyContent="正在加载,请稍后...">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="55"></RowDefinition>
+                <!--<RowDefinition Height="4"></RowDefinition>-->
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="350"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="25"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <StackPanel.Background>
+                    <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                </StackPanel.Background>
+                <GroupBox Header="1.车辆条件" Margin="2,2,10,6">
+                    <StackPanel Orientation="Horizontal" Margin="5,3,3,2">
+                        <TextBox Width="100" IsReadOnly="True" Text="{Binding SelectedVehicle.Name}" ></TextBox>
+                        <!--<local:ImageButton x:Name="imgBtn_Select" Image="/Images/query.png" ImageHeight="20" ImageWidth="20"
+                                   Text="选择" TextFontColor="Black" TextMargin="2,4,4,4"
+                                   Margin="2,0,0,0" ></local:ImageButton>-->
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="2.时间条件" Margin="2,2,10,6">
+                    <StackPanel Orientation="Horizontal" Margin="5,3,3,0">
+                        <xctk:DateTimePicker x:Name="dtp_BeginTime" Format="Custom" FormatString="yyyy-MM-dd HH:mm" Width="150"  Value="{Binding BeginTime}"></xctk:DateTimePicker>
+                        <TextBlock Text=" 至 " VerticalAlignment="Center"></TextBlock>
+                        <xctk:DateTimePicker x:Name="dtp_EndTime" Format="Custom" FormatString="yyyy-MM-dd HH:mm" Width="150" Value="{Binding EndTime}"></xctk:DateTimePicker>
+                        <local:ImageButton x:Name="imgBtn_Query" Image="/Images/query.png" ImageHeight="20" ImageWidth="20"
+                                   Text="查询" TextFontColor="Black" TextMargin="2,4,4,4"
+                                   Margin="2,0,0,0" >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                    <i:InvokeCommandAction Command="{Binding QueryCommand}"></i:InvokeCommandAction>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </local:ImageButton>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="初始化路径" Margin="2,2,10,6">
+                    <CheckBox Content="初始化" IsChecked="{Binding InitializeChecked}" VerticalAlignment="Center"></CheckBox>
+                </GroupBox>
+                <GroupBox Header="播放操作"  Margin="2,2,10,6">
+                    <StackPanel Orientation="Horizontal" Margin="0,3,0,0">
+                        <StackPanel Orientation="Horizontal" Margin="2,0,0,0">
+                            <local:ImageButton x:Name="imgBtn_StartPlay" Image="/Images/start_play.png" ImageHeight="20" ImageWidth="20" Margin="0,0,5,0"
+                                          Text="播放" TextFontColor="Black" IsEnabled="{Binding StartEnable}" >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                        <i:InvokeCommandAction Command="{Binding PlayCommand}"></i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </local:ImageButton>
+                            <local:ImageButton x:Name="imgBtn_PausePlay" Image="/Images/pause_play.png" ImageHeight="20" ImageWidth="20" Margin="0,0,5,0"
+                                          Text="暂停" TextFontColor="Black" IsEnabled="{Binding PauseEnable}" >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                        <i:InvokeCommandAction Command="{Binding PauseCommand}"></i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </local:ImageButton>
+                            <local:ImageButton x:Name="imgBtn_StopPlay" Image="/Images/stop_play.png" ImageHeight="20" ImageWidth="20" Margin="0,0,5,0"
+                                          Text="停止" TextFontColor="Black" IsEnabled="{Binding StopEnable}"  >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                        <i:InvokeCommandAction Command="{Binding StopCommand}"></i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </local:ImageButton>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="5,0,0,0">
+                            <local:ImageButton x:Name="imgBtn_MinusSpeed" Image="/Images/minus.png" ImageHeight="20" ImageWidth="20" Margin="5,0,5,0"
+                                          Text="减速" TextFontColor="Black" >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                        <i:InvokeCommandAction Command="{Binding SpeedDownCommand}"></i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </local:ImageButton>
+                            <Slider x:Name="slider_Speed" Minimum="1" Maximum="10" Width="100" Value="{Binding PlaySpeed}" VerticalAlignment="Center" ToolTip="{Binding Value,ElementName=slider_Speed}"></Slider>
+                            <local:ImageButton x:Name="imgBtn_PlusSpeed" Image="/Images/plus.png" ImageHeight="20" ImageWidth="20" Margin="5,0,5,0"
+                                          Text="加速" TextFontColor="Black"   >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                        <i:InvokeCommandAction Command="{Binding SpeedUpCommand}"></i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </local:ImageButton>
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+
+            <!--<Border Grid.Row="1" VerticalAlignment="Center" Height="4" HorizontalAlignment="Stretch">
+            <Border.Background>
+                <ImageBrush ImageSource="/Images/SolidContent_bg.png"></ImageBrush>
+            </Border.Background>
+        </Border>-->
+            <Grid Grid.Row="2">
+                <WebBrowser x:Name="webMap" Visibility="{Binding MapVisibility}"></WebBrowser>
+            </Grid>
+            <GridSplitter Grid.Row="3" VerticalAlignment="Center" Height="4" HorizontalAlignment="Stretch" ShowsPreview="False">
+                <GridSplitter.Background>
+                    <ImageBrush ImageSource="/Images/SolidContent_bg.png"></ImageBrush>
+                </GridSplitter.Background>
+            </GridSplitter>
+            <StackPanel Grid.Row="4" Orientation="Horizontal">
+                <StackPanel.Background>
+                    <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                </StackPanel.Background>
+                <TextBlock Text="记录总数：" VerticalAlignment="Center" Margin="17,0,0,0"></TextBlock>
+                <TextBlock Margin="5,0,20,0" VerticalAlignment="Center" Text="{Binding RecordCount}"></TextBlock>
+                <TextBlock Text="行驶时长：" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Margin="5,0,20,0" VerticalAlignment="Center" Text="{Binding DriveTime}"></TextBlock>
+                <TextBlock Text="休息时长：" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Margin="5,0,20,0" VerticalAlignment="Center" Text="{Binding RestTime}"></TextBlock>
+                <!--<TextBlock Text="行驶里程：" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Margin="5,0,20,0" VerticalAlignment="Center" Text="{Binding DriveMileage}"></TextBlock>-->
+                <TextBlock Text="最高速度：" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Margin="5,0,20,0" VerticalAlignment="Center" Text="{Binding MaxSpeed}"></TextBlock>
+                <TextBlock Text="平均速度：" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Margin="5,0,20,0" VerticalAlignment="Center" Text="{Binding AverageSpeed}"></TextBlock>
+            </StackPanel>
+            <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="export_detail" Padding="5,0" Content="导出明细数据" Command="{Binding PrintDetailCommand}"  VerticalAlignment="Center" HorizontalAlignment="Left"></Button>
+                <Button x:Name="export_warn" Padding="5,0" Content="导出报警数据" Command="{Binding PrintWarnCommand}"  VerticalAlignment="Center" HorizontalAlignment="Left"></Button>
+                <Button x:Name="export_park" Padding="5,0" Content="导出停车数据" Command="{Binding PrintStopCommand}"   VerticalAlignment="Center" HorizontalAlignment="Left"></Button>
+                <Button x:Name="export_overspeed" Padding="5,0" Content="导出超速数据" Command="{Binding PrintOverSpeedCommand}"   VerticalAlignment="Center" HorizontalAlignment="Left"></Button>
+                <!--<Button x:Name="export_online" Margin="5,0" Content="导出上下线" Command="{Binding PrintOnlineCommand}"   VerticalAlignment="Center" HorizontalAlignment="Left"></Button>-->
+            </StackPanel>
+            <Border Grid.Row="5">
+                <TabControl Background="White" >
+                    <TabControl.BorderBrush>
+                        <ImageBrush ImageSource="/Images/SolidContent_bg.png"></ImageBrush>
+                    </TabControl.BorderBrush>
+                    <TabItem Header="明细数据">
+                        <TabItem.Background>
+                            <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                        </TabItem.Background>
+                        <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <!--<RowDefinition Height="25"></RowDefinition>-->
+                            </Grid.RowDefinitions>
+                            <!--<ScrollViewer Grid.Row="0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">-->
+                            <DataGrid x:Name="Grid_VehicleInfo" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" 
+                                      Background="Transparent" ItemsSource="{Binding ListVehicleInfo}" IsReadOnly="True"
+                                      SelectedIndex="{Binding SelectedInfoIndex}" SelectionChanged="Grid_VehicleInfo_SelectionChanged" >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDoubleClick">
+                                        <i:InvokeCommandAction Command="{Binding DoubleClickCommand}" CommandParameter="{Binding SelectedItem,ElementName=Grid_VehicleInfo}"></i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="序号" Binding="{Binding GpsInfo.Sequence}"></DataGridTextColumn>
+                                    <!--<DataGridTextColumn Header="内部编号" Binding="{Binding FInnerId}"></DataGridTextColumn>-->
+                                    <DataGridTextColumn Header="车牌号码" Binding="{Binding Path=DataContext.SelectedVehicle.Name,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}}" ></DataGridTextColumn>
+                                    <DataGridTextColumn Header="SIM卡号" Binding="{Binding Path=DataContext.SelectedVehicle.SIM,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}}"></DataGridTextColumn>
+                                    <!--<DataGridTextColumn Header="车辆状态" Binding="{Binding VehiclecurState}" ></DataGridTextColumn>
+                                    <DataGridTextColumn Header="所属车队" Binding="{Binding CustomerName}" ></DataGridTextColumn>
+                                    <DataGridTextColumn Header="车辆类别" Binding="{Binding VehicleTypeName}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="厂牌型号" Binding="{Binding BrandModel}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="燃油类型" Binding="{Binding OilType}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="车架号" Binding="{Binding VIN}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="发动机号" Binding="{Binding EngineId}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="车辆型号" Binding="{Binding VehicleModel}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="购置证号" Binding="{Binding PurchaseNum}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="营运证号" Binding="{Binding OperatNum}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="车辆颜色" Binding="{Binding VehicleColor}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="吨位" Binding="{Binding Tonnage}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="轮胎数" Binding="{Binding tiresNum}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="百公里油耗（空载）" Binding="{Binding EmptyCost}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="百公里油耗（满载）" Binding="{Binding FullCost}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="核定承载方量" Binding="{Binding LoadAmount}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="GPS车载终端编号" Binding="{Binding GPSID}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="座位数" Binding="{Binding seatsNum}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="汽车销售商" Binding="{Binding CarDealers}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="购买日期" Binding="{Binding purchaseDate}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="上牌日期" Binding="{Binding cardDate}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="是否贷保" Binding="{Binding debetOrNot}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="承载容量" Binding="{Binding LoadCapacity}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="油箱容量" Binding="{Binding FuelCapacity}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="是否贷款" Binding="{Binding LoansOrNot}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="车辆成本" Binding="{Binding VehicleCosts}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="使用年限" Binding="{Binding Life}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="预计残值" Binding="{Binding SalvageValue}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="任务状况" Binding="{Binding VehicleState}"></DataGridTextColumn>-->
+
+                                    <DataGridTextColumn Header="当前位置" Binding="{Binding CurrentLocation}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="经度" Binding="{Binding GpsInfo.Longitude}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="纬度" Binding="{Binding GpsInfo.Latitude}"></DataGridTextColumn>
+
+                                    <DataGridTextColumn Header="上传时间" Binding="{Binding GpsInfo.Datetime}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="入库时间" Binding="{Binding GpsInfo.InsertTime}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="GPS速度" Binding="{Binding GpsInfo.Speed}"></DataGridTextColumn>
+                                    <!--<DataGridTextColumn Header="记录仪速度" Binding="{Binding GpsInfo.DevSpeed}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="GPS里程" Binding="{Binding GpsInfo.GPSMileage}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="GPS状态" Binding="{Binding GpsStatus}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="海拔高原" Binding="{Binding Altitude}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="GPS速度" Binding="{Binding Speed}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="GPS速度（行驶记录功能获取）" Binding="{Binding DevSpeed}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="方向" Binding="{Binding Direction}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="里程（车上里程表读数）" Binding="{Binding Mileage}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="里程（GPS读数）" Binding="{Binding GPSMileage}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="油量（车上油量表读数）" Binding="{Binding OilVolumn}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="在线状态" Binding="{Binding OnlineStates}"></DataGridTextColumn>-->
+
+                                    <DataGridTextColumn Header="ACC状态" Binding="{Binding GpsInfo.Accstatus}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="运营状态" Binding="{Binding GpsInfo.Workstatus}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="GPS模式" Binding="{Binding GpsInfo.Gpsmode}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="油路状态" Binding="{Binding GpsInfo.Oilwaystatus}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="震动状态" Binding="{Binding GpsInfo.Shakestatus}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="喇叭状态" Binding="{Binding GpsInfo.Hornstatus}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="空调状态" Binding="{Binding GpsInfo.Conditionerstatus}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="车门状态" Binding="{Binding GpsInfo.Vdstatus}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="前车门状态" Binding="{Binding GpsInfo.Fdstatus}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="后车门状态" Binding="{Binding GpsInfo.Bdstatus}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="左转向状态" Binding="{Binding GpsInfo.Ltstatus}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="右转向状态" Binding="{Binding GpsInfo.Rtstatus}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="远光灯状态" Binding="{Binding GpsInfo.Farlstatus}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="近光灯状态" Binding="{Binding GpsInfo.Nearlstatus}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="车辆电路状态" Binding="{Binding GpsInfo.Vcstatus}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="经纬度加密状态" Binding="{Binding GpsInfo.Llsecret}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="正反转状态" Binding="{Binding GpsInfo.Pnstatus}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="发动机状态" Binding="{Binding GpsInfo.Enginestatus}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="刹车状态" Binding="{Binding GpsInfo.Brakestatus}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="安全状态" Binding="{Binding GpsInfo.Protectstatus}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="负载状态" Binding="{Binding GpsInfo.Loadstatus}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="总线状态" Binding="{Binding GpsInfo.Busstatus}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="GSM模块状态" Binding="{Binding GpsInfo.Gsmstatus}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="锁车电路状态" Binding="{Binding GpsInfo.Lcstatus}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="前雾灯状态" Binding="{Binding GpsInfo.Ffstatus}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="后雾灯状态" Binding="{Binding GpsInfo.Bfstatus}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="GPS天线状态" Binding="{Binding GpsInfo.Gpsantstatus}"></DataGridTextColumn>
+
+                                    <!--<DataGridTextColumn Header="紧急报警" Binding="{Binding Soswarn}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="超速报警" Binding="{Binding Overspeedwarn}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="疲劳驾驶" Binding="{Binding Tiredwarn}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="预警" Binding="{Binding Prewarn}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="GNSS模块故障" Binding="{Binding Gnssfatal}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="GNSS天线未接或被剪断" Binding="{Binding Gnssantwarn}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="GNSS天线短路" Binding="{Binding Gnssshortwarn}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="终端主电源欠压" Binding="{Binding Lowvolwarn}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="终端主电源高压" Binding="{Binding Highvolwarn}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="终端主电源断电" Binding="{Binding Outagewarn}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="终端LCD或者显示器故障" Binding="{Binding Lcdfatalwarn}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="TTS模块故障" Binding="{Binding Ttsfatalwarn}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="摄像头故障" Binding="{Binding Camerafatalwarn}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="视频丢失报警" Binding="{Binding Vediolosewarn}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="视频遮挡报警" Binding="{Binding Vedioshelterwarn}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="当天累计驾驶超时" Binding="{Binding Accumtimeout}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="超时停车" Binding="{Binding Stoptimeout}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="路段行驶时间不足/过长报警" Binding="{Binding Drivingtimewarn}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="路线偏离报警" Binding="{Binding Deviatewarn}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="车辆VSS故障" Binding="{Binding Vssfatalwarn}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="车辆油量异常报警" Binding="{Binding Oilexceptionwarn}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="车辆被盗报警" Binding="{Binding Vehiclestolenwarn}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="非法点火报警" Binding="{Binding Illignitewarn}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="非法位移报警" Binding="{Binding Illmovewarn}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="碰撞侧翻报警" Binding="{Binding Crashwarn}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="SD卡异常报警" Binding="{Binding Sdexceptionwarn}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="劫警" Binding="{Binding Robwarn}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="司机停车休息时间不足报警" Binding="{Binding Sleeptimewarn}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="非法时段行驶报警" Binding="{Binding Illtimedrivingwarn}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="越战报警" Binding="{Binding Overstationwarn}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="非法开车门报警" Binding="{Binding Ilopendoorwarn}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="设防报警" Binding="{Binding Protectwarn}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="剪线报警" Binding="{Binding Trimmingwarn}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="密码错误报警" Binding="{Binding Passwdwarn}" ></DataGridTextColumn>
+                                    <DataGridTextColumn Header="禁行报警" Binding="{Binding Prohibitmovewarn}" ></DataGridTextColumn>
+                                    <DataGridTextColumn Header="非法停车报警" Binding="{Binding Illstopwarn}" ></DataGridTextColumn>-->
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <!--</ScrollViewer>-->
+                            <!--<WrapPanel Grid.Row="1" Margin="2" VerticalAlignment="Center">
+                            <WrapPanel>
+                                <WrapPanel >
+                                    <Button Width="50" Height="20" Command="{Binding ComeFirstCommand}" Content="首页"  />
+                                    <Button Width="50" Height="20" Command="{Binding ComePrevCommand}" Content="前一页" Margin="10,0"
+                                    IsEnabled="{Binding PrevEnable}" />
+                                </WrapPanel>
+                                <WrapPanel VerticalAlignment="Center">
+                                    <TextBlock Text="当前第 "/>
+                                    <TextBlock Text="{Binding CurrentPage}" Foreground="Red"/>
+                                    <TextBlock Text=" 页,共 " />
+                                    <TextBlock Foreground="Red"  Text="{Binding TotalPage}"/>
+                                    <TextBlock Text=" 页"/>
+                                </WrapPanel>
+                                <WrapPanel >
+                                    <Button Width="50" Height="20" Command="{Binding ComeNextCommand}" Content="下一页" Margin="10,0"
+                                    IsEnabled="{Binding NextEnable}" />
+                                    <Button Width="50" Height="20" Command="{Binding ComeLastCommand}" Content="末页" Margin="0,0,10,0" />
+                                </WrapPanel>
+                            </WrapPanel>
+                            <WrapPanel VerticalAlignment="Center" >
+                                <TextBlock Text="显示记录从 "/>
+                                <TextBlock Text="{Binding CurrentStart}"  Foreground="Red" />
+                                <TextBlock Text=" 到 "/>
+                                <TextBlock Text="{Binding CurrentEnd}" Foreground="Red" />
+                                <TextBlock Text=" 条, 总数 "/>
+                                <TextBlock Text="{Binding TotalCount}" Foreground="Red" />
+                                <TextBlock Text=" 条"/>
+                            </WrapPanel>
+                        </WrapPanel>-->
+                        </Grid>
+                    </TabItem>
+                    <!--<TabItem Header="速度分析">
+                    <TabItem.Background>
+                        <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                    </TabItem.Background>
+                </TabItem>-->
+                    <TabItem Header="报警地点">
+                        <TabItem.Background>
+                            <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                        </TabItem.Background>
+                        <DataGrid x:Name="DG_WarnInfo" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" 
+                                   Background="Transparent" ItemsSource="{Binding ListVehicleWarnInfo}" IsReadOnly="True">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="PreviewMouseDoubleClick">
+                                    <i:InvokeCommandAction Command="{Binding DoubleClickWarnCommand}" CommandParameter="{Binding SelectedItem,ElementName=DG_WarnInfo}"></i:InvokeCommandAction>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="序号" Binding="{Binding Sequence}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="报警时间" Binding="{Binding WarnTime}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="报警持续时间" Binding="{Binding LastTime}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="报警类型" Binding="{Binding WarnType}"></DataGridTextColumn>
+                                <!--<DataGridTextColumn Header="报警原由" Binding="{Binding WarnData}"></DataGridTextColumn>-->
+                                <DataGridTextColumn Header="报警地点" Binding="{Binding Address}"></DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </TabItem>
+                    <TabItem Header="停车地点">
+                        <TabItem.Background>
+                            <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                        </TabItem.Background>
+                        <DataGrid x:Name="DG_StopInfo" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" 
+                                      Background="Transparent" ItemsSource="{Binding ListVehicleStopInfo}" IsReadOnly="True">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="PreviewMouseDoubleClick">
+                                    <i:InvokeCommandAction Command="{Binding DoubleClickStopCommand}" CommandParameter="{Binding SelectedItem,ElementName=DG_StopInfo}"></i:InvokeCommandAction>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="序号" Binding="{Binding Sequence}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="开始时间" Binding="{Binding StartTime}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="结束时间" Binding="{Binding EndTime}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="停车时长" Binding="{Binding LastTime}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="停车位置" Binding="{Binding Address}"></DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </TabItem>
+                    <TabItem Header="超速路段">
+                        <TabItem.Background>
+                            <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                        </TabItem.Background>
+                        <DataGrid x:Name="DG_OverInfo" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" 
+                                      Background="Transparent" ItemsSource="{Binding ListVehicleOverSpeedInfo}" IsReadOnly="True">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="PreviewMouseDoubleClick">
+                                    <i:InvokeCommandAction Command="{Binding DoubleClickOverCommand}" CommandParameter="{Binding SelectedItem,ElementName=DG_OverInfo}"></i:InvokeCommandAction>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="序号" Binding="{Binding Sequence}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="开始时间" Binding="{Binding StartTime}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="结束时间" Binding="{Binding EndTime}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="超速时长" Binding="{Binding LastTime}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="开始位置" Binding="{Binding StartAddress}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="结束位置" Binding="{Binding EndAddress}"></DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </TabItem>
+                    <!--<TabItem Header="上下线明细">
+                        <TabItem.Background>
+                            <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                        </TabItem.Background>
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                            <DataGrid x:Name="DG_OnlineInfo" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" Background="Transparent">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDoubleClick">
+                                        <i:InvokeCommandAction Command="{Binding DoubleClickOnlineCommand}" CommandParameter="{Binding SelectedItem,ElementName=DG_OnlineInfo}"></i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="序号"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="上线时间"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="下线时间"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="上线地点"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="下线地点"></DataGridTextColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </ScrollViewer>
+                    </TabItem>-->
+                </TabControl>
+            </Border>
+        </Grid>
+    </xctk:BusyIndicator>
+</Window>

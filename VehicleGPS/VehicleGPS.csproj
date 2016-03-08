@@ -1,0 +1,1818 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{410B5C42-7686-4B7C-9FE3-ACBF2BBA3C52}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VehicleGPS</RootNamespace>
+    <AssemblyName>VehicleGPS</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <PublishUrl>http://192.168.1.104:7778/VehicleCS/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <TargetCulture>zh-CN</TargetCulture>
+    <ProductName>车辆监控客户端</ProductName>
+    <PublisherName>车辆监控客户端</PublisherName>
+    <SuiteName>车辆监控客户端</SuiteName>
+    <MinimumRequiredVersion>1.0.0.0</MinimumRequiredVersion>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>Default.html</WebPage>
+    <ApplicationRevision>38</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>true</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <ExcludeDeploymentUrl>true</ExcludeDeploymentUrl>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Images\logo.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>6216EAECDA18725FDAC7B7A51FB9A78D6B151822</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>VehicleGPS_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="clrzmq">
+      <HintPath>DLL\clrzmq.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras.WPF4">
+      <HintPath>DLL\GalaSoft.MvvmLight.Extras.WPF4.dll</HintPath>
+    </Reference>
+    <Reference Include="GpsFix, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\GpsFix.dll</HintPath>
+    </Reference>
+    <Reference Include="Lite.ExcelLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Lite.ExcelLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Lite.Library, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Lite.Library.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Microsoft.Practices.Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="ReachFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Printing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Speech, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\System.Speech.dll</HintPath>
+    </Reference>
+    <Reference Include="system.web">
+      <HintPath>DLL\system.web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Controls.Input.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\System.Windows.Controls.Input.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Microsoft SDKs\Expression\Blend\.NETFramework\v4.0\Libraries\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Interactivity">
+      <HintPath>..\..\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WPFToolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\WPFToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="WPFVisifire.Charts, Version=1.0.1.0, Culture=neutral, PublicKeyToken=366fc8dc0356ba75, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\WPFVisifire.Charts.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.0.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.0.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.0.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.0.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.0.0\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.0.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Models\BasicTypeInfo.cs" />
+    <Compile Include="Models\CRegionInfo.cs" />
+    <Compile Include="Models\CVBasicInfo.cs" />
+    <Compile Include="Models\CVDetailInfo.cs" />
+    <Compile Include="Models\Dialog\PopupBorder.xaml.cs">
+      <DependentUpon>PopupBorder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DispatchCentre\SiteManage\DispatchSiteInfo.cs" />
+    <Compile Include="Models\DispatchCentre\TaskManage\StatisticsTaskInfo.cs" />
+    <Compile Include="Models\DispatchCentre\VehicleDispatch\BackToStationInfo.cs" />
+    <Compile Include="Models\DispatchCentre\VehicleDispatch\DriverInfo.cs" />
+    <Compile Include="Models\DispatchCentre\VehicleDispatch\DispatchVehicleInfo.cs" />
+    <Compile Include="Models\DispatchCentre\VehicleDispatch\SiteInfo.cs" />
+    <Compile Include="Models\DispatchCentre\VehicleDispatch\TaskInfo.cs" />
+    <Compile Include="Models\DispatchCentre\VehicleDispatch\TowerInfo.cs" />
+    <Compile Include="Models\DispatchCentre\VehicleDispatch\VehicleInfo.cs" />
+    <Compile Include="Models\GPSInfo.cs" />
+    <Compile Include="Models\GpsOnlineInfo.cs" />
+    <Compile Include="Models\GPSOverSpeedInfo.cs" />
+    <Compile Include="Models\GPSStopInfo.cs" />
+    <Compile Include="Models\GPSWarnInfo.cs" />
+    <Compile Include="Models\InstructionRight.cs" />
+    <Compile Include="Models\Login\HeartBody.cs" />
+    <Compile Include="Models\Login\StaticLoginInfo.cs" />
+    <Compile Include="Models\MessageToServiceType.cs" />
+    <Compile Include="Models\MonitorCentre\AlermInfo.cs" />
+    <Compile Include="Models\MonitorCentre\CommandInfo.cs" />
+    <Compile Include="Models\MonitorCentre\ImageCheckVehicle.cs" />
+    <Compile Include="Models\MonitorCentre\ImageInfo.cs" />
+    <Compile Include="Models\MonitorCentre\MessageInfo.cs" />
+    <Compile Include="Models\MonitorCentre\PointOfLine.cs" />
+    <Compile Include="Models\MonitorCentre\TrackBackGpsInfo.cs" />
+    <Compile Include="Models\MonitorCentre\VBaseInfo.cs" />
+    <Compile Include="Models\Report\OilCost.cs" />
+    <Compile Include="Models\ResolveGpsStatusWarn.cs" />
+    <Compile Include="Models\RightInfo.cs" />
+    <Compile Include="Models\StaticBasicInfo.cs" />
+    <Compile Include="Models\StaticBasicType.cs" />
+    <Compile Include="Models\StaticDetailInfo.cs" />
+    <Compile Include="Models\StaticGpsInfo.cs" />
+    <Compile Include="Models\StaticMessageInfo.cs" />
+    <Compile Include="Models\StaticRealTimeInfo.cs" />
+    <Compile Include="Models\StaticRegionInfo.cs" />
+    <Compile Include="Models\StaticRight.cs" />
+    <Compile Include="Models\StaticTreeState.cs" />
+    <Compile Include="Models\StaticWarnInfo.cs" />
+    <Compile Include="Models\VehicleCommon.cs" />
+    <Compile Include="Models\VehicleConfig.cs" />
+    <Compile Include="Models\WarnInfo.cs" />
+    <Compile Include="PrintPreview.xaml.cs">
+      <DependentUpon>PrintPreview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\DBWCFServices\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Services\BasicDataServiceWCF.cs" />
+    <Compile Include="Services\BusinessDataServiceWEB.cs" />
+    <Compile Include="Services\Dialog\MessageBoxHelper.cs" />
+    <Compile Include="Services\DispatchCentre\DispatchTreeOperate.cs" />
+    <Compile Include="Services\DispatchCentre\SiteManage\SiteMapService.cs" />
+    <Compile Include="Services\DispatchCentre\TaskManage\GetTaskInfoDBHelper.cs" />
+    <Compile Include="Services\DispatchCentre\VehicleDispatch\BackToStationDataOperate.cs" />
+    <Compile Include="Services\DispatchCentre\VehicleDispatch\BackToStationTreeOperate.cs" />
+    <Compile Include="Services\DispatchCentre\VehicleDispatch\VehicleDispatchDataOperate.cs" />
+    <Compile Include="Services\ExcelHelper.cs" />
+    <Compile Include="Services\IBasicDataService.cs" />
+    <Compile Include="Services\IBusinessDataServiceWEB.cs" />
+    <Compile Include="Services\IDHelper.cs" />
+    <Compile Include="Services\JsonHelper.cs" />
+    <Compile Include="Services\Log.cs" />
+    <Compile Include="Services\MonitorCentre\AbnormalStatictic\AbnormalStatictcMapService.cs" />
+    <Compile Include="Services\MonitorCentre\ImageCheck\ImageCheckMapService.cs" />
+    <Compile Include="Services\MonitorCentre\ImageCheck\ImageCheckOperate.cs" />
+    <Compile Include="Services\MonitorCentre\Instruction\InstructionMapService.cs" />
+    <Compile Include="Services\MonitorCentre\RealTimeMonitor\RealTimeMapService.cs" />
+    <Compile Include="Services\MonitorCentre\RealTimeMonitor\RealTimeTreeOperate.cs" />
+    <Compile Include="Services\MonitorCentre\RealTimeMonitor\RightClickOparate.cs" />
+    <Compile Include="Services\MonitorCentre\TrackPlayBack\TrackPlayDataOperate.cs" />
+    <Compile Include="Services\MonitorCentre\TrackPlayBack\TrackPlayMapService.cs" />
+    <Compile Include="Services\MonitorCentre\TrackPlayBack\TrackPlayTreeOperate.cs" />
+    <Compile Include="Services\MonitorCentre\VehicleTrack\VehicleTrackDataOperate.cs" />
+    <Compile Include="Services\MonitorCentre\VehicleTrack\VehicleTrackMapService.cs" />
+    <Compile Include="Services\MonitorCentre\VehicleTrack\VehicleTrackTreeOperate.cs" />
+    <Compile Include="Services\ReportCentre\OilCheckWebService.cs" />
+    <Compile Include="Services\ReportCentre\OilCostDetailsService.cs" />
+    <Compile Include="Services\ReportCentre\ReportTest.cs" />
+    <Compile Include="Services\ReportCentre\ReportTreeOperate.cs" />
+    <Compile Include="Services\ReportCentre\ReportUri.cs" />
+    <Compile Include="Services\SpeechHelper.cs" />
+    <Compile Include="Services\TelHelper.cs" />
+    <Compile Include="Services\VehicleStateUpdateServices.cs" />
+    <Compile Include="Update\UpdateView.xaml.cs">
+      <DependentUpon>UpdateView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Update\UpdateViewModel.cs" />
+    <Compile Include="ViewModels\AutoComplete\AutoCompleteItem.cs" />
+    <Compile Include="ViewModels\DispatchCentre\DispatchTreeNodeViewModel.cs" />
+    <Compile Include="ViewModels\DispatchCentre\DispatchTreeViewModel.cs" />
+    <Compile Include="ViewModels\DispatchCentre\SiteManage\SiteAddModViewModel.cs" />
+    <Compile Include="ViewModels\DispatchCentre\SiteManage\SiteManageMainViewModel.cs" />
+    <Compile Include="Models\DispatchCentre\TaskManage\DispatchTaskInfo.cs" />
+    <Compile Include="Services\DispatchCentre\IOperate.cs" />
+    <Compile Include="Services\DispatchCentre\SiteManage\SiteOperate.cs" />
+    <Compile Include="ViewModels\DispatchCentre\TaskManage\TaskAddModDelViewModel.cs" />
+    <Compile Include="ViewModels\DispatchCentre\TaskManage\TaskManageViewModel.cs" />
+    <Compile Include="ViewModels\DispatchCentre\TaskManage\TaskStatisticsViewModel.cs" />
+    <Compile Include="ViewModels\DispatchCentre\VehicleDispatch\BackToStationTreeNodeViewModel.cs" />
+    <Compile Include="ViewModels\DispatchCentre\VehicleDispatch\BackToStationTreeViewModel.cs" />
+    <Compile Include="ViewModels\DispatchCentre\VehicleDispatch\BackToStationViewModel.cs" />
+    <Compile Include="ViewModels\DispatchCentre\VehicleDispatch\DispatchInfoTreeItemViewModel.cs" />
+    <Compile Include="ViewModels\DispatchCentre\VehicleDispatch\DispatchInfoViewModel.cs" />
+    <Compile Include="ViewModels\DispatchCentre\VehicleDispatch\DispatchPointViewModel.cs" />
+    <Compile Include="ViewModels\DispatchCentre\VehicleDispatch\DispatchVehicleQueryOneVM.cs" />
+    <Compile Include="ViewModels\DispatchCentre\VehicleDispatch\DispatchVehicleQueryViewModel.cs" />
+    <Compile Include="ViewModels\DispatchCentre\VehicleDispatch\DispatchVehicleViewModel.cs" />
+    <Compile Include="ViewModels\DispatchCentre\VehicleDispatch\ForceBackToStationViewModel.cs" />
+    <Compile Include="ViewModels\DispatchCentre\VehicleDispatch\MDispatchVehicleViewModel.cs" />
+    <Compile Include="ViewModels\DispatchCentre\VehicleDispatch\RelieveCircleDispatchViewModel.cs" />
+    <Compile Include="ViewModels\DispatchCentre\VehicleDispatch\SetParameterViewModel.cs" />
+    <Compile Include="ViewModels\DispatchCentre\VehicleDispatch\TimeRemindSettingViewModel.cs" />
+    <Compile Include="ViewModels\DispatchCentre\VehicleDispatch\TracePlayBackOneVM.cs" />
+    <Compile Include="ViewModels\DispatchCentre\VehicleDispatch\TracePlayBackViewModel.cs" />
+    <Compile Include="ViewModels\DispatchCentre\VehicleDispatch\VehicleDispatchItemViewModel.cs" />
+    <Compile Include="ViewModels\DispatchCentre\VehicleDispatch\VehicleDispatchViewModel.cs" />
+    <Compile Include="ViewModels\DispatchCentre\VehicleDispatch\VehicleInfoViewModel.cs" />
+    <Compile Include="ViewModels\Login\LoginDataLoadViewModel.cs" />
+    <Compile Include="ViewModels\MessCenter\GetNewMessages.cs" />
+    <Compile Include="ViewModels\MonitorCentre\AbnormalStatictic\AbnormalStaticticMonitorViewModel.cs" />
+    <Compile Include="ViewModels\MonitorCentre\ImageCheck\ImageCheckTreeNodeViewModel.cs" />
+    <Compile Include="ViewModels\MonitorCentre\ImageCheck\ImageCheckTreeViewModel.cs" />
+    <Compile Include="ViewModels\MonitorCentre\ImageCheck\ImageCheckViewModel.cs" />
+    <Compile Include="ViewModels\Login\LoginViewModel.cs" />
+    <Compile Include="ViewModels\MonitorCentre\Instruction\DelRegionViewModel.cs" />
+    <Compile Include="ViewModels\MonitorCentre\Instruction\InstructionViewModel.cs" />
+    <Compile Include="ViewModels\MonitorCentre\Instruction\SetPointsViewModel.cs" />
+    <Compile Include="ViewModels\MonitorCentre\Instruction\ShotNowViewModel.cs" />
+    <Compile Include="ViewModels\MonitorCentre\RealTimeMonitor\RealTimeItemViewModel.cs" />
+    <Compile Include="ViewModels\MonitorCentre\RealTimeMonitor\RealTimeTreeViewModel.cs" />
+    <Compile Include="ViewModels\MonitorCentre\RealTimeMonitor\RealTimeTreeNodeViewModel.cs" />
+    <Compile Include="ViewModels\MonitorCentre\RealTimeMonitor\RealTimeViewModel.cs" />
+    <Compile Include="ViewModels\MonitorCentre\RealTimeMonitor\ShowSettingViewModel.cs" />
+    <Compile Include="ViewModels\MonitorCentre\RegionSearch\RegionSearchOneViewModel.cs" />
+    <Compile Include="ViewModels\MonitorCentre\RegionSearch\RegionSearchViewModel.cs" />
+    <Compile Include="ViewModels\MonitorCentre\TrackPlayBack\TrackPlayItemViewModel.cs" />
+    <Compile Include="ViewModels\MonitorCentre\TrackPlayBack\TrackPlayTreeNodeViewModel.cs" />
+    <Compile Include="ViewModels\MonitorCentre\TrackPlayBack\TrackPlayTreeViewModel.cs" />
+    <Compile Include="ViewModels\MonitorCentre\TrackPlayBack\TrackPlayViewModel.cs" />
+    <Compile Include="ViewModels\MonitorCentre\VehicleTrack\VehicleTrackTreeNodeViewModel.cs" />
+    <Compile Include="ViewModels\MonitorCentre\VehicleTrack\VehicleTrackTreeViewModel.cs" />
+    <Compile Include="ViewModels\MonitorCentre\VehicleTrack\VehicleTrackViewModel.cs" />
+    <Compile Include="ViewModels\ReportCentre\ReportTreeNodeViewModel.cs" />
+    <Compile Include="ViewModels\ReportCentre\ReportTreeViewModel.cs" />
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\Warn\MessageInfoViewModel.cs" />
+    <Compile Include="ViewModels\Warn\WarnInfoViewModel.cs" />
+    <Compile Include="Views\BindingProxy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\DispatchCentre\Common.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\DispatchCentre\DispatchCentre.xaml.cs">
+      <DependentUpon>DispatchCentre.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\DispatchCentre\DispatchTree.xaml.cs">
+      <DependentUpon>DispatchTree.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\DispatchCentre\SiteManage\SiteAddMod.xaml.cs">
+      <DependentUpon>SiteAddMod.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\DispatchCentre\SiteManage\SiteManageMain.xaml.cs">
+      <DependentUpon>SiteManageMain.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\DispatchCentre\SiteManage\SiteMapOperation.xaml.cs">
+      <DependentUpon>SiteMapOperation.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\DispatchCentre\TaskManage\ConcreteNumSelection.xaml.cs">
+      <DependentUpon>ConcreteNumSelection.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\DispatchCentre\TaskManage\TaskAddModDel.xaml.cs">
+      <DependentUpon>TaskAddModDel.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\DispatchCentre\TaskManage\TaskManage.xaml.cs">
+      <DependentUpon>TaskManage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\DispatchCentre\TaskManage\TaskStatistics.xaml.cs">
+      <DependentUpon>TaskStatistics.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\DispatchCentre\VehicleDispatch\AlarmSetting.xaml.cs">
+      <DependentUpon>AlarmSetting.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\DispatchCentre\VehicleDispatch\BackToStation.xaml.cs">
+      <DependentUpon>BackToStation.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\DispatchCentre\VehicleDispatch\BackToStationTree.xaml.cs">
+      <DependentUpon>BackToStationTree.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\DispatchCentre\VehicleDispatch\BottomControl.xaml.cs">
+      <DependentUpon>BottomControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\DispatchCentre\VehicleDispatch\CarPositionControlDown.xaml.cs">
+      <DependentUpon>CarPositionControlDown.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\DispatchCentre\VehicleDispatch\DispatchInfo.xaml.cs">
+      <DependentUpon>DispatchInfo.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\DispatchCentre\VehicleDispatch\DispatchPointUserControl.xaml.cs">
+      <DependentUpon>DispatchPointUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\DispatchCentre\VehicleDispatch\DispatchTaskUserControl.xaml.cs">
+      <DependentUpon>DispatchTaskUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\DispatchCentre\VehicleDispatch\DispatchVehicle.xaml.cs">
+      <DependentUpon>DispatchVehicle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\DispatchCentre\VehicleDispatch\DispatchVehicleQuery.xaml.cs">
+      <DependentUpon>DispatchVehicleQuery.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\DispatchCentre\VehicleDispatch\ForceBackToStation.xaml.cs">
+      <DependentUpon>ForceBackToStation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\DispatchCentre\VehicleDispatch\RelieveCircleDispatch.xaml.cs">
+      <DependentUpon>RelieveCircleDispatch.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\DispatchCentre\VehicleDispatch\SetParameter.xaml.cs">
+      <DependentUpon>SetParameter.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\DispatchCentre\VehicleDispatch\TimeRemindSetting.xaml.cs">
+      <DependentUpon>TimeRemindSetting.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\DispatchCentre\VehicleDispatch\TracePlayBack.xaml.cs">
+      <DependentUpon>TracePlayBack.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\DispatchCentre\VehicleDispatch\VehicleDispatch.xaml.cs">
+      <DependentUpon>VehicleDispatch.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\DispatchCentre\VehicleDispatch\VehicleInfo.xaml.cs">
+      <DependentUpon>VehicleInfo.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\DispatchCentre\XmlUtilSL.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\ImageButton.xaml.cs">
+      <DependentUpon>ImageButton.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\MapControl.xaml.cs">
+      <DependentUpon>MapControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\Map\MesCenter\ChatMes.xaml.cs">
+      <DependentUpon>ChatMes.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\Map\MesCenter\Chatting.xaml.cs">
+      <DependentUpon>Chatting.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\Map\MesCenter\ChildAlert.xaml.cs">
+      <DependentUpon>ChildAlert.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\Map\MesCenter\GroupChatting.xaml.cs">
+      <DependentUpon>GroupChatting.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\Map\MesCenter\GroupCreating.xaml.cs">
+      <DependentUpon>GroupCreating.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\Map\MesCenter\GroupMemManage.xaml.cs">
+      <DependentUpon>GroupMemManage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\Map\MesCenter\MessagesCenter.xaml.cs">
+      <DependentUpon>MessagesCenter.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\Map\MesCenter\ModifyGMemo.xaml.cs">
+      <DependentUpon>ModifyGMemo.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\Map\MesCenter\ModifyMemo.xaml.cs">
+      <DependentUpon>ModifyMemo.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\Map\MesCenter\SLChatMsg.xaml.cs">
+      <DependentUpon>SLChatMsg.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\Map\MesCenter\UniqueStrHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\MessageDialog.xaml.cs">
+      <DependentUpon>MessageDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\AbnormalStatistic\AbnormalStaticticMonitor.xaml.cs">
+      <DependentUpon>AbnormalStaticticMonitor.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\ImageCheck\ImageCheck.xaml.cs">
+      <DependentUpon>ImageCheck.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\ImageCheck\ImageCheckTree.xaml.cs">
+      <DependentUpon>ImageCheckTree.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\Instruction\Alarm.xaml.cs">
+      <DependentUpon>Alarm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\Instruction\Common.xaml.cs">
+      <DependentUpon>Common.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\Instruction\CommonRadio.xaml.cs">
+      <DependentUpon>CommonRadio.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\Instruction\DelRegion.xaml.cs">
+      <DependentUpon>DelRegion.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\Instruction\EventSet.xaml.cs">
+      <DependentUpon>EventSet.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\Instruction\Heartbeat.xaml.cs">
+      <DependentUpon>Heartbeat.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_AnyInformation.xaml.cs">
+      <DependentUpon>HQ_AnyInformation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_Compression.xaml.cs">
+      <DependentUpon>HQ_Compression.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_DistanceBack.xaml.cs">
+      <DependentUpon>HQ_DistanceBack.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_EmegentPic.xaml.cs">
+      <DependentUpon>HQ_EmegentPic.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_EmptyBack.xaml.cs">
+      <DependentUpon>HQ_EmptyBack.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_FixSpeed.xaml.cs">
+      <DependentUpon>HQ_FixSpeed.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_GPRS.xaml.cs">
+      <DependentUpon>HQ_GPRS.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_IPandPort.xaml.cs">
+      <DependentUpon>HQ_IPandPort.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_Monitor.xaml.cs">
+      <DependentUpon>HQ_Monitor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_NoneData.xaml.cs">
+      <DependentUpon>HQ_NoneData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_Number.xaml.cs">
+      <DependentUpon>HQ_Number.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_OfflineGPRS.xaml.cs">
+      <DependentUpon>HQ_OfflineGPRS.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_OneCall.xaml.cs">
+      <DependentUpon>HQ_OneCall.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_SettingPara.xaml.cs">
+      <DependentUpon>HQ_SettingPara.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_Setting_CI.xaml.cs">
+      <DependentUpon>HQ_Setting_CI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_Setting_Scope.xaml.cs">
+      <DependentUpon>HQ_Setting_Scope.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_Setting_Message.xaml.cs">
+      <DependentUpon>HQ_Setting_Message.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_Setting_Call.xaml.cs">
+      <DependentUpon>HQ_Setting_Call.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_Setting_Poloygn.xaml.cs">
+      <DependentUpon>HQ_Setting_Poloygn.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_Setting_Logo.xaml.cs">
+      <DependentUpon>HQ_Setting_Logo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_StandBy.xaml.cs">
+      <DependentUpon>HQ_StandBy.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_UserCode.xaml.cs">
+      <DependentUpon>HQ_UserCode.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_VehicleMileage.xaml.cs">
+      <DependentUpon>HQ_VehicleMileage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_WorkingState.xaml.cs">
+      <DependentUpon>HQ_WorkingState.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\Instruction\InstructionInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\Instruction\IPPort.xaml.cs">
+      <DependentUpon>IPPort.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\Instruction\Overspeed.xaml.cs">
+      <DependentUpon>Overspeed.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\Instruction\PhoneSet.xaml.cs">
+      <DependentUpon>PhoneSet.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\Instruction\PosStrategy.xaml.cs">
+      <DependentUpon>PosStrategy.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\Instruction\SendMessage.xaml.cs">
+      <DependentUpon>SendMessage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\Instruction\SendText.xaml.cs">
+      <DependentUpon>SendText.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\Instruction\SetCirLineRectPoly.xaml.cs">
+      <DependentUpon>SetCirLineRectPoly.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\Instruction\SetPointsView.xaml.cs">
+      <DependentUpon>SetPointsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\Instruction\ShotNow.xaml.cs">
+      <DependentUpon>ShotNow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\Instruction\Socket.cs" />
+    <Compile Include="Views\Control\MonitorCentre\Instruction\VehicleCol.xaml.cs">
+      <DependentUpon>VehicleCol.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\Instruction\VehicleInfo.xaml.cs">
+      <DependentUpon>VehicleInfo.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\MonitorCentre.xaml.cs">
+      <DependentUpon>MonitorCentre.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\MonitorTreeSetting.xaml.cs">
+      <DependentUpon>MonitorTreeSetting.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\RealTimeMonitor\AddRegion.xaml.cs">
+      <DependentUpon>AddRegion.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\RealTimeMonitor\KeyWordSearchView.xaml.cs">
+      <DependentUpon>KeyWordSearchView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\RealTimeMonitor\RealTimeMonitor.xaml.cs">
+      <DependentUpon>RealTimeMonitor.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\RealTimeMonitor\RealTimeTree.xaml.cs">
+      <DependentUpon>RealTimeTree.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\RealTimeMonitor\SetPwdView.xaml.cs">
+      <DependentUpon>SetPwdView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\RealTimeMonitor\VehicleInfoConfig.xaml.cs">
+      <DependentUpon>VehicleInfoConfig.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\RealTimeMonitor\VehicleInfoShowSetting.xaml.cs">
+      <DependentUpon>VehicleInfoShowSetting.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\RealTimeMonitor\WarnRelievePwd.xaml.cs">
+      <DependentUpon>WarnRelievePwd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\RegionSearch\RegionSearchView.xaml.cs">
+      <DependentUpon>RegionSearchView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\TrackPlayBack\TrackPlayBack.xaml.cs">
+      <DependentUpon>TrackPlayBack.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\TrackPlayBack\TrackPlayTree.xaml.cs">
+      <DependentUpon>TrackPlayTree.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\VehicleTrack\VehicleTrack.xaml.cs">
+      <DependentUpon>VehicleTrack.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\MonitorCentre\VehicleTrack\VehicleTrackTree.xaml.cs">
+      <DependentUpon>VehicleTrackTree.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\ReportCentre\ReportCentre.xaml.cs">
+      <DependentUpon>ReportCentre.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\ReportCentre\ReportCentreWeb.xaml.cs">
+      <DependentUpon>ReportCentreWeb.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Control\ReportCentre\Reports\AccAnalysis.xaml.cs">
+      <DependentUpon>AccAnalysis.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\ReportCentre\Reports\Common\ExcelHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\ReportCentre\Reports\Common\Pager.xaml.cs">
+      <DependentUpon>Pager.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\ReportCentre\Reports\Common\ParseAddress.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\ReportCentre\Reports\Common\ReportData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\ReportCentre\Reports\CurrentOil.xaml.cs">
+      <DependentUpon>CurrentOil.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\ReportCentre\Reports\HistoryOfIssuedInstructions.xaml.cs">
+      <DependentUpon>HistoryOfIssuedInstructions.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\ReportCentre\Reports\HistoryTrack.xaml.cs">
+      <DependentUpon>HistoryTrack.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\ReportCentre\Reports\IllegalWork.xaml.cs">
+      <DependentUpon>IllegalWork.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\ReportCentre\Reports\InOutRegionReport.xaml.cs">
+      <DependentUpon>InOutRegionReport.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\ReportCentre\Reports\LeaveWithoutTask.xaml.cs">
+      <DependentUpon>LeaveWithoutTask.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\ReportCentre\Reports\MileageDetails.xaml.cs">
+      <DependentUpon>MileageDetails.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\ReportCentre\Reports\MileageDetailsByDay.xaml.cs">
+      <DependentUpon>MileageDetailsByDay.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\ReportCentre\Reports\MileagePerDay.xaml.cs">
+      <DependentUpon>MileagePerDay.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\ReportCentre\Reports\MovingAnalysis.xaml.cs">
+      <DependentUpon>MovingAnalysis.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\ReportCentre\Reports\OfflineDetails.xaml.cs">
+      <DependentUpon>OfflineDetails.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\ReportCentre\Reports\OilCostDetails.xaml.cs">
+      <DependentUpon>OilCostDetails.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\ReportCentre\Reports\OilStatistic.xaml.cs">
+      <DependentUpon>OilStatistic.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\ReportCentre\Reports\OnlineOfflineReport.xaml.cs">
+      <DependentUpon>OnlineOfflineReport.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\ReportCentre\Reports\OverSpeedInArea.xaml.cs">
+      <DependentUpon>OverSpeedInArea.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\ReportCentre\Reports\OverSpeedTotal.xaml.cs">
+      <DependentUpon>OverSpeedTotal.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\ReportCentre\Reports\OverSpeedWarn.xaml.cs">
+      <DependentUpon>OverSpeedWarn.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\ReportCentre\Reports\ParkingStatistic.xaml.cs">
+      <DependentUpon>ParkingStatistic.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\ReportCentre\Reports\ParkingWithAccOn.xaml.cs">
+      <DependentUpon>ParkingWithAccOn.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\ReportCentre\Reports\SpeedDetails.xaml.cs">
+      <DependentUpon>SpeedDetails.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\ReportCentre\Reports\TotalMileage.xaml.cs">
+      <DependentUpon>TotalMileage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\ReportCentre\Reports\TransportDetails.xaml.cs">
+      <DependentUpon>TransportDetails.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\ReportCentre\Reports\UnitWarn.xaml.cs">
+      <DependentUpon>UnitWarn.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\ReportCentre\Reports\WarnDetail.xaml.cs">
+      <DependentUpon>WarnDetail.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\ReportCentre\ReportTree.xaml.cs">
+      <DependentUpon>ReportTree.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\ReportCentre\ReportTreeSetting.xaml.cs">
+      <DependentUpon>ReportTreeSetting.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Control\SeperateBorder.xaml.cs">
+      <DependentUpon>SeperateBorder.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Login\Config.xaml.cs">
+      <DependentUpon>Config.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Login\LoginDataLoad.xaml.cs">
+      <DependentUpon>LoginDataLoad.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Login\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Login\PasswordBoxHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Warn\FloatWindow.xaml.cs">
+      <DependentUpon>FloatWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Warn\GifImage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Warn\TipMsg.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Warn\WarnInfo.xaml.cs">
+      <DependentUpon>WarnInfo.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Window1.xaml.cs">
+      <DependentUpon>Window1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="zmq\Client.cs" />
+    <Compile Include="zmq\ClientObserver.cs" />
+    <Compile Include="zmq\JsonHelper.cs" />
+    <Compile Include="zmq\LatestGpsInfo.cs" />
+    <Compile Include="zmq\Log.cs" />
+    <Compile Include="zmq\MessageHander.cs" />
+    <Compile Include="zmq\MsgHB.cs" />
+    <Compile Include="zmq\Subscriber.cs" />
+    <Compile Include="zmq\zmqPackHelper.cs" />
+    <Page Include="DispatchDocument.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Models\Dialog\PopupBorder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Models\ResourceDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PrintPreview.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Update\UpdateView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\DispatchCentre\DispatchCentre.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\DispatchCentre\DispatchTree.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\DispatchCentre\SiteManage\SiteAddMod.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\DispatchCentre\SiteManage\SiteManageMain.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\DispatchCentre\SiteManage\SiteMapOperation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\DispatchCentre\TaskManage\ConcreteNumSelection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\DispatchCentre\TaskManage\TaskAddModDel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\DispatchCentre\TaskManage\TaskManage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\DispatchCentre\TaskManage\TaskStatistics.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\DispatchCentre\VehicleDispatch\AlarmSetting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\DispatchCentre\VehicleDispatch\BackToStation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\DispatchCentre\VehicleDispatch\BackToStationTree.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\DispatchCentre\VehicleDispatch\BottomControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\DispatchCentre\VehicleDispatch\CarPositionControlDown.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\DispatchCentre\VehicleDispatch\DispatchInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\DispatchCentre\VehicleDispatch\DispatchPointUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\DispatchCentre\VehicleDispatch\DispatchTaskUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\DispatchCentre\VehicleDispatch\DispatchVehicle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\DispatchCentre\VehicleDispatch\DispatchVehicleQuery.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\DispatchCentre\VehicleDispatch\ForceBackToStation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\DispatchCentre\VehicleDispatch\RelieveCircleDispatch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\DispatchCentre\VehicleDispatch\SetParameter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\DispatchCentre\VehicleDispatch\TimeRemindSetting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\DispatchCentre\VehicleDispatch\TracePlayBack.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\DispatchCentre\VehicleDispatch\VehicleDispatch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\DispatchCentre\VehicleDispatch\VehicleInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\ImageButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\MapControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\Map\MesCenter\ChatMes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\Map\MesCenter\Chatting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\Map\MesCenter\ChildAlert.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\Map\MesCenter\GroupChatting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\Map\MesCenter\GroupCreating.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\Map\MesCenter\GroupMemManage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\Map\MesCenter\MessagesCenter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\Map\MesCenter\ModifyGMemo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\Map\MesCenter\ModifyMemo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\Map\MesCenter\SLChatMsg.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\MessageDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\AbnormalStatistic\AbnormalStaticticMonitor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\ImageCheck\ImageCheck.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\ImageCheck\ImageCheckTree.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\Instruction\Alarm.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\Instruction\Common.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\Instruction\CommonRadio.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\Instruction\DelRegion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\Instruction\EventSet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\Instruction\Heartbeat.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_AnyInformation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_Compression.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_DistanceBack.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_EmegentPic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_EmptyBack.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_FixSpeed.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_GPRS.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_IPandPort.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_Monitor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_NoneData.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_Number.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_OfflineGPRS.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_OneCall.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_SettingPara.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_Setting_CI.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_Setting_Scope.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_Setting_Message.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_Setting_Call.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_Setting_Poloygn.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_Setting_Logo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_StandBy.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_UserCode.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_VehicleMileage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\Instruction\HQ\HQ_WorkingState.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\Instruction\IPPort.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\Instruction\Overspeed.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\Instruction\PhoneSet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\Instruction\PosStrategy.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\Instruction\SendMessage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\Instruction\SendText.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\Instruction\SetCirLineRectPoly.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\Instruction\SetPointsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\Instruction\ShotNow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\Instruction\VehicleCol.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\Instruction\VehicleInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\MonitorCentre.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\MonitorTreeSetting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\RealTimeMonitor\AddRegion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\RealTimeMonitor\KeyWordSearchView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\RealTimeMonitor\RealTimeMonitor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\RealTimeMonitor\RealTimeTree.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\RealTimeMonitor\SetPwdView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\RealTimeMonitor\VehicleInfoConfig.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\RealTimeMonitor\VehicleInfoShowSetting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\RealTimeMonitor\WarnRelievePwd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\RegionSearch\RegionSearchView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\TrackPlayBack\TrackPlayBack.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\TrackPlayBack\TrackPlayTree.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\VehicleTrack\VehicleTrack.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\MonitorCentre\VehicleTrack\VehicleTrackTree.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\ReportCentre\ReportCentre.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\ReportCentre\ReportCentreWeb.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\ReportCentre\Reports\AccAnalysis.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\ReportCentre\Reports\Common\Pager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\ReportCentre\Reports\CurrentOil.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\ReportCentre\Reports\HistoryOfIssuedInstructions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\ReportCentre\Reports\HistoryTrack.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\ReportCentre\Reports\IllegalWork.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\ReportCentre\Reports\InOutRegionReport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\ReportCentre\Reports\LeaveWithoutTask.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\ReportCentre\Reports\MileageDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\ReportCentre\Reports\MileageDetailsByDay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\ReportCentre\Reports\MileagePerDay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\ReportCentre\Reports\MovingAnalysis.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\ReportCentre\Reports\OfflineDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\ReportCentre\Reports\OilCostDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\ReportCentre\Reports\OilStatistic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\ReportCentre\Reports\OnlineOfflineReport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\ReportCentre\Reports\OverSpeedInArea.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\ReportCentre\Reports\OverSpeedTotal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\ReportCentre\Reports\OverSpeedWarn.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\ReportCentre\Reports\ParkingStatistic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\ReportCentre\Reports\ParkingWithAccOn.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\ReportCentre\Reports\SpeedDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\ReportCentre\Reports\TotalMileage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\ReportCentre\Reports\TransportDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\ReportCentre\Reports\UnitWarn.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\ReportCentre\Reports\WarnDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\ReportCentre\ReportTree.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\ReportCentre\ReportTreeSetting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Control\SeperateBorder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Login\Config.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Login\LoginDataLoad.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Login\LoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Warn\FloatWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Warn\WarnInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Window1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\app.manifest" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <None Include="Service References\DBWCFServices\DBHelper1.wsdl" />
+    <None Include="Service References\DBWCFServices\DBHelper2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DBWCFServices\DBHelper21.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Compile Include="Services\ProcessShutDown.cs" />
+    <None Include="VehicleGPS_TemporaryKey.pfx" />
+    <None Include="Views\Control\DispatchCentre\SiteManage\vssver2.scc" />
+    <None Include="Views\Control\DispatchCentre\TaskManage\vssver2.scc" />
+    <None Include="Views\Control\DispatchCentre\VehicleDispatch\vssver2.scc" />
+    <None Include="Views\Control\DispatchCentre\vssver2.scc" />
+    <None Include="Views\Control\Map\MesCenter\vssver2.scc" />
+    <None Include="Views\Control\Map\vssver2.scc" />
+    <None Include="Views\Control\MonitorCentre\Instruction\vssver2.scc" />
+    <None Include="Views\Control\MonitorCentre\RealTimeMonitor\Map\vssver2.scc" />
+    <None Include="Views\Control\MonitorCentre\RealTimeMonitor\vssver2.scc" />
+    <None Include="Views\Control\MonitorCentre\TrackPlayBack\Map\vssver2.scc" />
+    <None Include="Views\Control\MonitorCentre\TrackPlayBack\vssver2.scc" />
+    <None Include="Views\Control\MonitorCentre\VehicleTrack\Map\vssver2.scc" />
+    <None Include="Views\Control\MonitorCentre\VehicleTrack\vssver2.scc" />
+    <None Include="Views\Control\MonitorCentre\vssver2.scc" />
+    <None Include="Views\Control\ReImages\vssver2.scc" />
+    <None Include="Views\Control\ReportCentre\Reports\Common\vssver2.scc" />
+    <None Include="Views\Control\ReportCentre\Reports\vssver2.scc" />
+    <None Include="Views\Control\ReportCentre\vssver2.scc" />
+    <None Include="Views\Control\vssver2.scc" />
+    <None Include="Views\Login\vssver2.scc" />
+    <None Include="Views\vssver2.scc" />
+    <None Include="Views\Warn\vssver2.scc" />
+    <Resource Include="Images\loginclose.png" />
+    <Resource Include="Images\set.png" />
+    <None Include="Service References\DBWCFServices\configuration91.svcinfo" />
+    <None Include="Service References\DBWCFServices\configuration.svcinfo" />
+    <None Include="Service References\DBWCFServices\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\DBWCFServices\DBHelper1.disco" />
+    <Resource Include="Views\Control\ReImages\leftTitle_bg.png" />
+    <Resource Include="Views\Control\ReImages\topmenu_bg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\loginbutton.png" />
+    <Resource Include="Images\passwordLogin.png" />
+    <Resource Include="Images\Trs.Login.png" />
+    <Resource Include="Images\userLogin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\login_bd.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\fullscreen.png" />
+    <Resource Include="Images\logo.png" />
+    <Resource Include="Images\logout.png" />
+    <Resource Include="Images\top_bg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\InfoReports.png" />
+    <Resource Include="Images\MonitorCenter.png" />
+    <Resource Include="Images\SysManagement.png" />
+    <Resource Include="Images\VehicleMonitor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\logo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SolidContent_bg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\add.png" />
+    <Resource Include="Images\delete.png" />
+    <Resource Include="Images\update.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\calendar_blue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\do_search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\clock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Report\lclcmx.png" />
+    <Resource Include="Images\Report\lclctj.png" />
+    <Resource Include="Images\Report\lcxszlc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Report\yxacc.png" />
+    <Resource Include="Images\Report\yxcan.png" />
+    <Resource Include="Images\Report\yxjcqy.png" />
+    <Resource Include="Images\Report\yxlsgj.png" />
+    <Resource Include="Images\Report\yxsxxmx.png" />
+    <Resource Include="Images\Report\yxtctj.png" />
+    <Resource Include="Images\Report\yxwxhtctj.png" />
+    <Resource Include="Images\Report\yxxctj.png" />
+    <Resource Include="Images\Report\yxxltj.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Report\jqbjmx.png" />
+    <Resource Include="Images\Report\jqdwbjtj.png" />
+    <Resource Include="Images\Report\xcdcqy.png" />
+    <Resource Include="Images\Report\xcpjsd.png" />
+    <Resource Include="Images\Report\xcqytj.png" />
+    <Resource Include="Images\Report\xcsdmx.png" />
+    <Resource Include="Images\Report\xcsdyd.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Report\yxlx.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Report\yhmx.png" />
+    <Resource Include="Images\Report\yhtj.png" />
+    <Resource Include="Images\Report\yhybck.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\TreeSet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 和 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\pause_play.png" />
+    <Resource Include="Images\start_play.png" />
+    <Resource Include="Images\stop_play.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\minus.png" />
+    <Resource Include="Images\plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\query.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Car\park.png" />
+    <Resource Include="Images\Car\online.png" />
+    <Resource Include="Images\Car\offline.png" />
+    <Resource Include="Update\version.txt" />
+    <Resource Include="Images\Car\park2.png" />
+    <Resource Include="bin\Debug\conf\VehicleConfig.xml" />
+    <Content Include="bin\Debug\Voice\remindsound.wav" />
+    <Content Include="Views\Control\DispatchCentre\SiteManage\Map\MarkerClusterer.js" />
+    <Content Include="Views\Control\DispatchCentre\SiteManage\Map\SiteMap.htm" />
+    <Content Include="Views\Control\DispatchCentre\SiteManage\Map\SiteMapJS.js" />
+    <Content Include="Views\Control\DispatchCentre\SiteManage\Map\TextIconOverlay.js" />
+    <Content Include="Views\Control\Map\regionMap.htm" />
+    <Content Include="Views\Control\MonitorCentre\Instruction\Map\InstructionMap.htm" />
+    <Content Include="Views\Control\MonitorCentre\Instruction\Map\InstuctionMapJS.js" />
+    <Content Include="Views\Control\MonitorCentre\RealTimeMonitor\Map\MarkerClusterer.js" />
+    <Content Include="Views\Control\MonitorCentre\RealTimeMonitor\Map\RealTimeMap.htm" />
+    <Content Include="Views\Control\MonitorCentre\RealTimeMonitor\Map\RealTimeMapJS.js" />
+    <Content Include="Views\Control\MonitorCentre\RealTimeMonitor\Map\TextIconOverlay.js" />
+    <Resource Include="Views\Control\MonitorCentre\RealTimeMonitor\WarnPwd.xml" />
+    <Content Include="Views\Control\MonitorCentre\RegionSearch\RegionSearch.htm" />
+    <Content Include="Views\Control\MonitorCentre\RegionSearch\RegionSearch.js" />
+    <Content Include="Views\Control\MonitorCentre\TrackPlayBack\Map\TrackPlayMap.htm" />
+    <Content Include="Views\Control\MonitorCentre\TrackPlayBack\Map\TrackPlayMapJS.js" />
+    <Content Include="Views\Control\MonitorCentre\VehicleTrack\Map\VehicleTrackMap.htm" />
+    <Content Include="Views\Control\MonitorCentre\VehicleTrack\Map\VehicleTrackMapJS.js" />
+    <Content Include="Views\Control\ReportCentre\Reports\Common\reportMap.htm" />
+    <Content Include="Views\Control\ReportCentre\Reports\Common\reportMap.js" />
+    <Content Include="Views\Control\ReportCentre\Web\ReportCenter.htm" />
+    <Content Include="Views\Warn\alarmsound.wav" />
+    <Resource Include="Views\Warn\config.xml" />
+    <Resource Include="Views\Warn\WarnSetting.xml" />
+    <Content Include="Views\基于WPF的车辆监控与调度管理系统说明文档.chm" />
+    <Content Include="DLL\GpsFix.dll" />
+    <Content Include="DLL\Lite.ExcelLibrary.dll" />
+    <Content Include="DLL\Lite.Library.dll" />
+    <Content Include="DLL\Microsoft.Practices.Prism.dll" />
+    <Content Include="DLL\Newtonsoft.Json.dll" />
+    <Content Include="DLL\Newtonsoft.Json.Silverlight.dll" />
+    <Content Include="DLL\System.Speech.dll" />
+    <Content Include="DLL\System.Windows.Controls.Input.Toolkit.dll" />
+    <Content Include="DLL\System.Windows.Interactivity.dll" />
+    <Content Include="DLL\WPFToolkit.dll" />
+    <Content Include="DLL\WPFVisifire.Charts.dll" />
+    <Content Include="DLL\Xceed.Wpf.AvalonDock.dll" />
+    <Content Include="DLL\Xceed.Wpf.AvalonDock.Themes.Aero.dll" />
+    <Content Include="DLL\Xceed.Wpf.AvalonDock.Themes.Metro.dll" />
+    <Content Include="DLL\Xceed.Wpf.AvalonDock.Themes.VS2010.dll" />
+    <Content Include="DLL\Xceed.Wpf.DataGrid.dll" />
+    <Content Include="DLL\Xceed.Wpf.Toolkit.dll" />
+    <Resource Include="Images\warnicon.png" />
+    <Resource Include="Images\warnhide.jpg" />
+    <Resource Include="Images\warningAnimation.gif" />
+    <Resource Include="Images\warnshow.jpg" />
+    <Resource Include="Images\alarm_bg.png" />
+    <Resource Include="Images\Destination.png" />
+    <Resource Include="Images\Factory.png" />
+    <Resource Include="Images\overspeed.png" />
+    <Resource Include="Images\sendmessage.png" />
+    <Resource Include="Images\tipmessage.png" />
+    <Resource Include="Images\alert_icon.png" />
+    <Resource Include="Images\do_dis.png" />
+    <Resource Include="Images\do_split.png" />
+    <Resource Include="Images\MessageCenter.png" />
+    <Resource Include="Images\leftTitle_bg.png" />
+    <Resource Include="Images\alarm_3.png" />
+    <Resource Include="Images\chatting.png" />
+    <Resource Include="Images\dispatchleft.png" />
+    <Resource Include="Images\dispatchright.png" />
+    <Resource Include="Images\dispatchpoint.png" />
+    <Resource Include="Images\Report\jczlzdaz.png" />
+    <Resource Include="Images\Report\jczlzdsy.png" />
+    <Resource Include="Images\Report\yhxjtj.png" />
+    <Resource Include="Images\Report\yxmnlfx.png" />
+    <Resource Include="Images\help.png" />
+    <Resource Include="Images\Car\vehicle_park_64.png" />
+    <Resource Include="Images\Car\vehicle_unknow_64.png" />
+    <Resource Include="Images\Car\concreteCarOnlineTo_64.png" />
+    <Resource Include="Images\Car\pumpCarOnlineTo_64.png" />
+    <Resource Include="Images\Car\ServiceCarOnLineTo_64.png" />
+    <Resource Include="Images\popup_bg.png" />
+    <Content Include="Images\Direction\moveeast.png" />
+    <Content Include="Images\Direction\movenorth.png" />
+    <Content Include="Images\Direction\movenortheast.png" />
+    <Content Include="Images\Direction\movenorthwest.png" />
+    <Content Include="Images\Direction\movesouth.png" />
+    <Content Include="Images\Direction\movesoutheast.png" />
+    <Content Include="Images\Direction\movesouthwest.png" />
+    <Content Include="Images\Direction\movewest.png" />
+    <Content Include="Images\Direction\park.png" />
+    <Content Include="ViewModels\Login\MemoryLoginInfo.txt" />
+    <Resource Include="Images\background.jpg" />
+    <Resource Include="Images\Content_bg.jpg" />
+    <Resource Include="Images\loading.png" />
+    <Resource Include="Images\maintop.jpg" />
+    <Content Include="ViewModels\MonitorCentre\RealTimeMonitor\ShowSetting.xml" />
+    <Content Include="Images\Direction\east.png" />
+    <Content Include="Images\Direction\north.png" />
+    <Content Include="Images\Direction\northeast.png" />
+    <Content Include="Images\Direction\northwest.png" />
+    <Content Include="Images\Direction\south.png" />
+    <Content Include="Images\Direction\southeast.png" />
+    <Content Include="Images\Direction\southwest.png" />
+    <Content Include="Images\Direction\west.png" />
+    <Resource Include="Images\Car\concreteCarOffOnlineBlue_64.png" />
+    <Resource Include="Images\Car\concreteCarOnlineGreen_64.png" />
+    <Resource Include="Images\Car\pumpCarOffline_64.png" />
+    <Resource Include="Images\Car\pumpCarOffOnlineBlue_64.png" />
+    <Resource Include="Images\Car\pumpCarOnlineGreen_64.png" />
+    <Resource Include="Images\Car\pumpCarOnlineWarn_64.png" />
+    <Resource Include="Images\Car\pumpCarOnline_64.png" />
+    <Resource Include="Images\Car\ServiceCarOffline_64.png" />
+    <Resource Include="Images\Car\ServiceCarOffOnlineBlue_64.png" />
+    <Resource Include="Images\Car\ServiceCarOnLineGreen_64.png" />
+    <Resource Include="Images\Car\ServiceCarOnLineWarn_64.png" />
+    <Resource Include="Images\Car\ServiceCarOnLine_64.png" />
+    <Resource Include="Images\vehicletrack.png" />
+    <Resource Include="Images\IsFree_64.png" />
+    <Resource Include="Images\IsLeaving_64.png" />
+    <Resource Include="Images\IsMataining_64.png" />
+    <Resource Include="Images\IsWorking_64.png" />
+    <Resource Include="Images\earth2323.png" />
+    <Resource Include="Images\park.png" />
+    <Resource Include="Images\Car\concreteCarOffline_64.png" />
+    <Resource Include="Images\Car\concreteCarOnlineWarn_64.png" />
+    <Resource Include="Images\Car\concreteCarOnline_64.png" />
+    <Resource Include="Images\Car\unknow.png" />
+    <Resource Include="Images\Car\vehicle_park_32.png" />
+    <Resource Include="Images\monitor.png" />
+    <Resource Include="Images\trackclient.png" />
+    <Resource Include="Images\playback.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModels\ReportCentre\OilCostAnalysis\" />
+    <Folder Include="Views\Control\MonitorCentre\AbnormalStatistic\Map\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PublishFile Include="config.xml">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="ViewModels\MonitorCentre\RealTimeMonitor\ShowSetting.xml">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="Views\Warn\WarnSetting.xml">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\DBWCFServices\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

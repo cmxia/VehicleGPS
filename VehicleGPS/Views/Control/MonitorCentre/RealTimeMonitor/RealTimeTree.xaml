@@ -1,0 +1,268 @@
+﻿<UserControl x:Class="VehicleGPS.Views.Control.MonitorCentre.RealTimeMonitor.RealTimeTree"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:tookit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+               xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WPF4"
+             xmlns:local="clr-namespace:VehicleGPS.Views.Control"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="250">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.Background>
+                <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+            </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="车辆" VerticalAlignment="Center" Margin="3,0,3,0"></TextBlock>
+            <tookit:AutoCompleteBox x:Name="AutoComplete" Grid.Column="1" ItemsSource="{Binding ListAutoComplete}" Margin="2"
+                                    FilterMode="Contains" ValueMemberPath="NameSim" MinimumPopulateDelay="200">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding AutoCompleteSelectedCommand}" CommandParameter="{Binding ElementName=AutoComplete}"></i:InvokeCommandAction>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <tookit:AutoCompleteBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Margin="2">
+                            <Run Text="{Binding Name}"></Run>
+                            <TextBlock Text=" "></TextBlock>
+                            <Run Text="{Binding SIM}"></Run>
+                        </TextBlock>
+                    </DataTemplate>
+                </tookit:AutoCompleteBox.ItemTemplate>
+            </tookit:AutoCompleteBox>
+
+            <local:ImageButton x:Name="imgBtn_Setting" Grid.Column="2" Text="设置"></local:ImageButton>
+            <local:SeperateBorder Grid.Column="3"></local:SeperateBorder>
+            <local:ImageButton x:Name="imgBtn_Refresh" Grid.Column="4" Text="刷新" IsEnabled="{Binding IsRefreshEnable}" >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                        <i:InvokeCommandAction Command="{Binding RefreshCommand}"></i:InvokeCommandAction>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </local:ImageButton>
+        </Grid>
+        <Border Grid.Row="1" VerticalAlignment="Center" Height="4" HorizontalAlignment="Stretch">
+            <Border.Background>
+                <ImageBrush ImageSource="/Images/SolidContent_bg.png"></ImageBrush>
+            </Border.Background>
+        </Border>
+        <Border Grid.Row="2" Background="White">
+            <TreeView x:Name="tv_Vehicle"   ItemsSource="{Binding RootNode.ListChildNodes}" Margin="5" BorderThickness="0" 
+                      BorderBrush="White" SelectedItemChanged="tv_Vehicle_SelectedItemChanged">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="PreviewMouseDoubleClick">
+                        <i:InvokeCommandAction Command="{Binding DoubleClickCommand}" CommandParameter="{Binding ElementName=tv_Vehicle}"></i:InvokeCommandAction>
+                    </i:EventTrigger>
+                    <!--<i:EventTrigger EventName="PreviewMouseRightButtonDown">
+                        <cmd:EventToCommand Command="{Binding MouseRightButtonDownCommand}" PassEventArgsToCommand="True" />
+                    </i:EventTrigger>-->
+                </i:Interaction.Triggers>
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate ItemsSource="{Binding ListChildNodes}" x:Name="template">
+                        <StackPanel Orientation="Horizontal" Margin="0,3,0,3">
+                            <Image Source="{Binding ImageUrl}" VerticalAlignment="Center" Height="18" ToolTip="{Binding ImageTip}" ></Image>
+                            <CheckBox IsChecked="{Binding Path=IsSelected,UpdateSourceTrigger=PropertyChanged}" 
+                                     VerticalAlignment="Center" Margin="2,0,2,0"></CheckBox>
+                            <TextBlock Text="{Binding NodeInfo.InnerID,StringFormat='({0})'}" VerticalAlignment="Center" FontSize="12" Visibility="{Binding InnerIDVisible}"></TextBlock>
+                            <TextBlock Text="{Binding NodeInfo.Name}" VerticalAlignment="Center" FontSize="12"  Visibility="{Binding NameVisible}"></TextBlock>
+                            <TextBlock Text="{Binding NodeInfo.OnlineCount, StringFormat='({0}'}" FontSize="12" Visibility="{Binding OnlineNumberVisible}" VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Text="{Binding NodeInfo.Count, StringFormat='/{0})'}" FontSize="12" Visibility="{Binding OnlineNumberVisible}" VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+                <TreeView.ItemContainerStyle>
+                    <Style TargetType="TreeViewItem">
+                        <Setter Property="IsExpanded" Value="{Binding IsExpand,Mode=TwoWay}"></Setter>
+                        <Setter Property="IsSelected" Value="{Binding IsFocus,Mode=TwoWay}"></Setter>
+                        <EventSetter Event="TreeViewItem.PreviewMouseRightButtonDown" Handler="TreeViewItem_PreviewMouseRightButtonDown"/>
+                    </Style>
+                </TreeView.ItemContainerStyle>
+                <TreeView.ContextMenu>
+                    <ContextMenu >
+                        <MenuItem Header="车辆信息"  Command="{Binding VehicleCommand}" CommandParameter="{Binding ElementName=tv_Vehicle}"/>
+                        <MenuItem Header="车辆跟踪"  Command="{Binding VehicleTrackCommand}" CommandParameter="{Binding ElementName=tv_Vehicle}"/>
+                        <MenuItem Header="轨迹回放"  Command="{Binding TrackPlayCommand}" CommandParameter="{Binding ElementName=tv_Vehicle}"/>
+                        <MenuItem Header="基站定位"  Command="{Binding StationLocateCommand}" CommandParameter="{Binding ElementName=tv_Vehicle}"/>
+                        <!--<MenuItem Header="历史警情"  Command="{Binding VehicleCommand}" CommandParameter="{Binding ElementName=tv_Vehicle}"/>
+                        <MenuItem Header="里程统计"  Command="{Binding VehicleCommand}" CommandParameter="{Binding ElementName=tv_Vehicle}"/>
+                        <MenuItem Header="电子围栏"  Command="{Binding VehicleCommand}" CommandParameter="{Binding ElementName=tv_Vehicle}"/>-->
+                        <MenuItem Header="指令下发" Visibility="{Binding SendInstructionVisible}">
+                            <MenuItem Header="终端参数设置" Visibility="{Binding TerminalParaSetVisible}">
+                                <MenuItem Header="心跳发送时间间隔" Visibility="{Binding HeartBeatVisible}"  Command="{Binding CommonCommand}" CommandParameter="1;4;0|终端心跳发送时间间隔(s)"/>
+                                <MenuItem Header="TCP消息设置" Visibility="{Binding TCPMessageSetVisible}">
+                                    <MenuItem Header="应答超时时间" Visibility="{Binding TCPResponseVisible}" Command="{Binding CommonCommand}" CommandParameter="2;4;0|TCP消息应答超时时间(s)"/>
+                                    <MenuItem Header="重传次数" Visibility="{Binding TCPAgainVisible}" Command="{Binding CommonCommand}" CommandParameter="3;4;0|TCP消息重传次数"/>
+                                </MenuItem>
+                                <MenuItem Header="UDP消息设置" Visibility="{Binding UDPMessageSetVisible}">
+                                    <MenuItem Header="应答超时时间" Visibility="{Binding UDPResponseVisible}" Command="{Binding CommonCommand}" CommandParameter="4;4;0|UDP消息应答超时时间(s)"/>
+                                    <MenuItem Header="重传次数" Visibility="{Binding UDPAgainVisible}" Command="{Binding CommonCommand}" CommandParameter="5;4;0|UDP消息重传次数"/>
+                                </MenuItem>
+                                <MenuItem Header="SMS消息设置" Visibility="{Binding SMSMessageSetVisible}">
+                                    <MenuItem Header="应答超时时间" Visibility="{Binding SMSResponseVisible}" Command="{Binding CommonCommand}" CommandParameter="6;4;0|SMS消息应答超时时间(s)"/>
+                                    <MenuItem Header="重传次数" Visibility="{Binding SMSAgainVisible}" Command="{Binding CommonCommand}" CommandParameter="7;4;0|SMS消息重传次数"/>
+                                </MenuItem>
+                            </MenuItem>
+                            <MenuItem Header="服务器设置" Visibility="{Binding ServerSetVisible}">
+                                <MenuItem Header="主服务器设置" Visibility="{Binding MainServerVisible}">
+                                    <MenuItem Header="无线通信拨号访问点" Visibility="{Binding MainSiteVisible}" Command="{Binding CommonCommand}" CommandParameter="16;4;3|主服务器APN"/>
+                                    <MenuItem Header="无线通信拨号用户名" Visibility="{Binding MainUserVisible}" Command="{Binding CommonCommand}" CommandParameter="17;4;3|主服务器无线通信拨号用户名"/>
+                                    <MenuItem Header="无线通信拨号密码" Visibility="{Binding MainCodeVisible}" Command="{Binding CommonCommand}" CommandParameter="18;4;3|主服务器无线通信拨号密码"/>
+                                    <!--<MenuItem Header="IP和端口号" Visibility="{Binding MainIPVisible}" Command="{Binding IPPortCommand}" CommandParameter="19;4;0|主服务器IP和端口号"/>-->
+                                    <MenuItem Header="IP和端口号" Visibility="{Binding MainIPVisible}" Command="{Binding IPPortCommand}" CommandParameter="主服务器IP和端口号"/>
+                                </MenuItem>
+                                <MenuItem Header="备份服务器设置" Visibility="{Binding ViceServerVisible}">
+                                    <MenuItem Header="无线通信拨号访问点" Visibility="{Binding ViceSiteVisible}" Command="{Binding CommonCommand}" CommandParameter="20;4;3|备份服务器APN"/>
+                                    <MenuItem Header="无线通信拨号用户名" Visibility="{Binding ViceUserVisible}" Command="{Binding CommonCommand}" CommandParameter="21;4;3|备份服务器无线通信拨号用户名"/>
+                                    <MenuItem Header="无线通信拨号密码" Visibility="{Binding ViceCodeVisible}" Command="{Binding CommonCommand}" CommandParameter="22;4;3|备份服务器无线通信拨号密码"/>
+                                    <!--<MenuItem Header="IP和端口号" Visibility="{Binding ViceIPVisible}" Command="{Binding IPPortCommand}" CommandParameter="23;4;3|备份服务器IP和端口号"/>-->
+                                    <MenuItem Header="IP和端口号" Visibility="{Binding ViceIPVisible}" Command="{Binding IPPortCommand}" CommandParameter="备份服务器IP和端口号"/>
+                                </MenuItem>
+                                <!--<MenuItem Header="TCP端口" Visibility="{Binding TCPSiteVisible}" Command="{Binding CommonCommand}" CommandParameter="24;4;0|TCP端口"/>
+                                <MenuItem Header="UDP端口" Visibility="{Binding UDPSiteVisible}" Command="{Binding CommonCommand}" CommandParameter="25;4;0|UDP端口"/>-->
+                            </MenuItem>
+                            <MenuItem Header="位置汇报设置" Visibility="{Binding PosSetVisible}">
+                                <MenuItem Header="位置汇报策略" Visibility="{Binding PosStrategyVisible}" Command="{Binding PosStrategyCommand}"/>
+                                <MenuItem Header="位置汇报方案" Visibility="{Binding PosSolutionVisible}" Command="{Binding CommonRadioCommand}" CommandParameter="位置汇报方案"/>
+                                <MenuItem Header="汇报时间设置" Visibility="{Binding ReportTimeSetVisible}">
+                                    <MenuItem Header="驾驶员未登录汇报时间间隔" Visibility="{Binding UnloginTimeVisible}" Command="{Binding CommonCommand}" CommandParameter="34;4;0|驾驶员未登录汇报时间间隔(s)"/>
+                                    <MenuItem Header="休眠时汇报时间间隔" Visibility="{Binding RestTimeVisible}" Command="{Binding CommonCommand}" CommandParameter="39;4;0|休眠时汇报时间间隔(s)"/>
+                                    <MenuItem Header="紧急报警时汇报时间间隔" Visibility="{Binding EmergenceTimeVisible}" Command="{Binding CommonCommand}" CommandParameter="40;4;0|紧急报警时汇报时间间隔(s)"/>
+                                    <MenuItem Header="缺省时间汇报间隔" Visibility="{Binding LackTimeVisible}" Command="{Binding CommonCommand}" CommandParameter="41;4;0|缺省时间汇报间隔(s)"/>
+                                </MenuItem>
+                                <MenuItem Header="汇报距离设置" Visibility="{Binding ReportDistanceSetVisible}">
+                                    <MenuItem Header="驾驶员未登录汇报距离间隔" Visibility="{Binding UnloginDistanceVisible}" Command="{Binding CommonCommand}" CommandParameter="45;4;0|驾驶员未登录汇报距离间隔(m)"/>
+                                    <MenuItem Header="休眠时汇报距离间隔" Visibility="{Binding RestDistanceVisible}" Command="{Binding CommonCommand}" CommandParameter="46;4;0|休眠时汇报距离间隔(m)"/>
+                                    <MenuItem Header="紧急报警时汇报距离间隔" Visibility="{Binding EmergenceDistanceVisible}" Command="{Binding CommonCommand}" CommandParameter="47;4;0|紧急报警时汇报距离间隔(m)"/>
+                                    <MenuItem Header="缺省距离汇报间隔" Visibility="{Binding LackDistanceVisible}" Command="{Binding CommonCommand}" CommandParameter="44;4;0|缺省距离汇报间隔(m)"/>
+                                </MenuItem>
+                                <MenuItem Header="拐点补传角度(小于180)" Visibility="{Binding InflectionAngleVisible}" Command="{Binding CommonCommand}" CommandParameter="48;4;0|拐点补传角度(小于180)"/>
+                            </MenuItem>
+                            <MenuItem Header="通话设置" Visibility="{Binding CallSetVisible}">
+                                <MenuItem Header="监控平台电话号码" Visibility="{Binding PlatformNumVisible}" Command="{Binding CommonCommand}" CommandParameter="64;4;3|监控平台电话号码"/>
+                                <MenuItem Header="复位电话号码" Visibility="{Binding RetNumVisible}" Command="{Binding CommonCommand}" CommandParameter="65;4;3|复位电话号码"/>
+                                <MenuItem Header="恢复出厂设置电话号码" Visibility="{Binding FactorySettingNumVisible}" Command="{Binding CommonCommand}" CommandParameter="66;4;3|恢复出厂设置电话号码"/>
+                                <MenuItem Header="监控平台SMS电话号码" Visibility="{Binding PlatformSMSNumVisible}" Command="{Binding CommonCommand}" CommandParameter="67;4;3|监控平台SMS电话号码"/>
+                                <MenuItem Header="接收终端SMS文本报警号码" Visibility="{Binding TerminalSMSNumVisible}" Command="{Binding CommonCommand}" CommandParameter="68;4;3|接收终端SMS文本报警号码"/>
+                                <MenuItem Header="终端电话接听策略" Visibility="{Binding TerminalStrategyVisible}" Command="{Binding CommonRadioCommand}" CommandParameter="终端电话接听策略"/>
+                                <MenuItem Header="每次最长通话时间" Visibility="{Binding OnceMaxTimeVisible}" Command="{Binding CommonCommand}" CommandParameter="70;4;0|每次最长通话时间(s)"/>
+                                <MenuItem Header="当月最长通话时间" Visibility="{Binding MonthMaxTimeVisible}" Command="{Binding CommonCommand}" CommandParameter="71;4;0|当月最长通话时间(s)"/>
+                                <MenuItem Header="监听电话号码" Visibility="{Binding MonitorNumVisible}" Command="{Binding CommonCommand}" CommandParameter="72;4;3|监听电话号码"/>
+                                <MenuItem Header="监管平台特权短信号码" Visibility="{Binding PrivilegeNumVisible}" Command="{Binding CommonCommand}" CommandParameter="73;4;3|监管平台特权短信号码"/>
+                            </MenuItem>
+                            <MenuItem Header="报警设置" Visibility="{Binding AlarmSetVisible}">
+                                <MenuItem Header="报警屏蔽字" Visibility="{Binding AlarmShieldVisible}" Command="{Binding AlarmCommand}" CommandParameter="报警屏蔽字"/>
+                                <MenuItem Header="报警发送文本SMS开关" Visibility="{Binding AlarmTextSMSVisible}" Command="{Binding AlarmCommand}" CommandParameter="报警发送文本SMS开关"/>
+                                <MenuItem Header="报警拍摄开关" Visibility="{Binding AlarmShootSwitchVisible}" Command="{Binding AlarmCommand}" CommandParameter="报警拍摄开关"/>
+                                <MenuItem Header="报警拍摄存储标志" Visibility="{Binding AlarmStorSignVisible}" Command="{Binding AlarmCommand}" CommandParameter="报警拍摄存储标志"/>
+                                <MenuItem Header="关键标志" Visibility="{Binding AlarmKeySignVisible}" Command="{Binding AlarmCommand}" CommandParameter="关键标志"/>
+                            </MenuItem>
+                            <MenuItem Header="超速设置" Visibility="{Binding OverSpeedSetVisible}">
+                                <MenuItem Header="最高速度" Visibility="{Binding HighSpeedVisible}" Command="{Binding CommonCommand}" CommandParameter="85;4;0|最高速度(km/h)"/>
+                                <MenuItem Header="超速持续时间" Visibility="{Binding OverSpeedTimeVisible}" Command="{Binding CommonCommand}" CommandParameter="86;4;0|超速持续时间(s)"/>
+                            </MenuItem>
+                            <MenuItem Header="疲劳驾驶设置" Visibility="{Binding FatigueDriveSet}">
+                                <MenuItem Header="连续驾驶时间门限" Visibility="{Binding ContinuousDriveTimeVisible}" Command="{Binding CommonCommand}" CommandParameter="87;4;0|连续驾驶时间门限(s)"/>
+                                <MenuItem Header="当天累计驾驶时间门限" Visibility="{Binding DayTotalTimeVisible}" Command="{Binding CommonCommand}" CommandParameter="88;4;0|当天累计驾驶时间门限(s)"/>
+                                <MenuItem Header="最小休息时间" Visibility="{Binding MinRestTimeVisible}" Command="{Binding CommonCommand}" CommandParameter="89;4;0|最小休息时间(s)"/>
+                                <MenuItem Header="最长停车时间" Visibility="{Binding MaxStopTimeVisible}" Command="{Binding CommonCommand}" CommandParameter="90;4;0|最长停车时间(s)"/>
+                            </MenuItem>
+                            <MenuItem Header="摄像头立即拍摄命令" Visibility="{Binding ShotNowVisible}" Command="{Binding ShotNowCommand}"/>
+                            <MenuItem Header="拍照参数设置" Visibility="{Binding PhotoParaVisible}">
+                                <MenuItem Header="图像/视频质量" Visibility="{Binding ImageVideoVisible}" Command="{Binding CommonCommand}" CommandParameter="112;4;0|图像/视频质量"/>
+                                <MenuItem Header="亮度" Visibility="{Binding BrightnessVisible}" Command="{Binding CommonCommand}" CommandParameter="113;4;0|亮度" />
+                                <MenuItem Header="对比度" Visibility="{Binding ContrastVisible}" Command="{Binding CommonCommand}" CommandParameter="114;4;0|对比度"/>
+                                <MenuItem Header="饱和度" Visibility="{Binding SaturationVisible}" Command="{Binding CommonCommand}" CommandParameter="115;4;0|饱和度"/>
+                                <MenuItem Header="色度" Visibility="{Binding ColorVisible}" Command="{Binding CommonCommand}" CommandParameter="116;4;0|色度"/>
+                            </MenuItem>
+                            <MenuItem Header="车辆参数设置" Visibility="{Binding VehicleParaSetVisible}">
+                                <MenuItem Header="里程表读数" Visibility="{Binding MileNumVisible}" Command="{Binding CommonCommand}" CommandParameter="128;4;0|车辆里程表读数"/>
+                                <MenuItem Header="所在省域ID" Visibility="{Binding ProvinceIDVisible}" Command="{Binding CommonCommand}" CommandParameter="129;2;1|车辆所在省域ID"/>
+                                <MenuItem Header="所在市域ID" Visibility="{Binding CityIDVisible}" Command="{Binding CommonCommand}" CommandParameter="130;2;1|车辆所在市域ID"/>
+                                <MenuItem Header="机动车号牌" Visibility="{Binding VehicleNumVisible}" Command="{Binding CommonCommand}" CommandParameter="131;4;3|机动车号牌"/>
+                                <MenuItem Header="车牌颜色" Visibility="{Binding VehicleColVisible}" Command="{Binding VehicleColCommand}" CommandParameter="{Binding ElementName=tv_Vehivle}"/>
+                            </MenuItem>
+                            <MenuItem Header="文本信息下发" Visibility="{Binding SendTextVisible}" Command="{Binding SendTextCommand}" CommandParameter="{Binding ElementName=tv_Vehicle}"/>
+                            <MenuItem Header="事件设置" Visibility="{Binding EventSetVisible}" Command="{Binding EventSetCommand}"/>
+                            <MenuItem Header="设置电话本" Visibility="{Binding PhoneSetVisible}" Command="{Binding PhoneSetCommand}"/>
+                            <MenuItem Header="区域路线设置" Visibility="{Binding RegionLineSetVisible}">
+                                <MenuItem Header="设置圆形区域" Visibility="{Binding SetCircleVisible}" Command="{Binding SettingCircleCommand}"/>
+                                <MenuItem Header="设置矩形区域" Visibility="{Binding SetRectVisible}" Command="{Binding SettingRectCommand}" />
+                                <MenuItem Header="设置多边形区域" Visibility="{Binding SetPolyVisible}" Command="{Binding SettingPolyCommand}"/>
+                                <MenuItem Header="设置路线" Visibility="{Binding SetLineVisible}" Command="{Binding SettingLineCommand}"/>
+                                <MenuItem Header="删除区域或路线" Visibility="{Binding DeleteRegionVisible}" Command="{Binding DelRegionCommand}"/>
+                            </MenuItem>
+                            <MenuItem Header="华强设置类指令" Visibility="{Binding HQSettingVisible}">
+                                <MenuItem Header="设置号码" Visibility="{Binding HQNumberVisible}" Command="{Binding HQ_NumberCommand}" CommandParameter="设置号码"/>
+                                <MenuItem Header="设置密码" Visibility="{Binding HQCodeVisible}" Command="{Binding HQ_NumberCommand}" CommandParameter="设置密码"/>
+                                <MenuItem Header="设置终端上传后需要中心回复的项目" Visibility="{Binding HQAnswerVisible}" Command="{Binding HQ_Setting_C_I_Command}" CommandParameter="设置终端上传后需要中心回复的项目"/>
+                                <MenuItem Header="其他设置" Visibility="{Binding HQOtherSetVisible}" Command="{Binding HQ_NumberCommand}" CommandParameter="其他设置"/>
+                                <MenuItem Header="设置功能开关" Visibility="{Binding HQSetSwitchVisible}" Command="{Binding HQ_Setting_C_I_Command}" CommandParameter="设置功能开关"/>
+                                <MenuItem Header="设置报警范围" Visibility="{Binding HQSetAlarmRangeVisible}" Command="{Binding HQ_Setting_ScopeCommand}" CommandParameter="设置报警范围"/>
+                                <MenuItem Header="设置特定短信息菜单" Visibility="{Binding HQMessageMenuVisible}" Command="{Binding HQ_Setting_MessageCommand}" CommandParameter="设置特定短信息菜单"/>
+                                <MenuItem Header="设置运行商LOGO" Visibility="{Binding HQOperatorLogoVisible}" Command="{Binding HQ_Setting_LogoCommand}" CommandParameter="设置运行商LOGO"/>
+                                <MenuItem Header="华强通话限制" Visibility="{Binding HQCallLimitVisible}" Command="{Binding HQ_Setting_CallCommand}" CommandParameter="通话限制"/>
+                                <MenuItem Header="设置多边形报警范围" Visibility="{Binding HQPolyAlarmRangeVisible}" Command="{Binding HQ_Setting_PoloygnCommand}" CommandParameter="多边形报警范围"/>
+                                <MenuItem Header="查询终端参数1" Visibility="{Binding HQQueryPara1Visible}" Command="{Binding HQ_NoneDataCommand}" CommandParameter="查询终端参数1"/>
+                                <MenuItem Header="查询终端参数2" Visibility="{Binding HQQueryPara2Visible}" Command="{Binding HQ_NoneDataCommand}" CommandParameter="查询终端参数2"/>
+                                <MenuItem Header="查询终端产品ID" Visibility="{Binding HQQueryProductIDVisible}" Command="{Binding HQ_NoneDataCommand}" CommandParameter="查询终端产品ID"/>
+                                <MenuItem Header="设置终端产品ID" Visibility="{Binding HQSetProductIDVisible}" Command="{Binding HQ_FixSpeedCommand}" CommandParameter="设置终端产品ID"/>
+                                <MenuItem Header="设置终端参数" Visibility="{Binding HQSetParaVisible}" Command="{Binding HQ_SettingParaCommand}"/>
+                            </MenuItem>
+                            <MenuItem Header="华强控制类指令" Visibility="{Binding HQControlVisible}">
+                                <MenuItem Header="控制终端工作状态" Visibility="{Binding HQWorkStateVisible}" Command="{Binding HQ_WorkingStateCommand}" CommandParameter="控制终端工作状态"/>
+                                <MenuItem Header="遥控智能锁车功能" Visibility="{Binding HQLockCarVisible}" Command="{Binding HQ_WorkingStateCommand}" CommandParameter="遥控智能锁车功能"/>
+                                <MenuItem Header="监听功能" Visibility="{Binding HQMonitorVisible}" Command="{Binding HQ_MonitorCommand}"/>
+                                <MenuItem Header="终端设置允许" Visibility="{Binding HQTerminalSetVisible}" Command="{Binding HQ_WorkingStateCommand}" CommandParameter="终端设置允许"/>
+                                <MenuItem Header="不带范围的点名信息" Visibility="{Binding HQNoRangeCallVisible}" Command="{Binding HQ_NoneDataCommand}" CommandParameter="不带范围的点名信息"/>
+                                <MenuItem Header="解除终端报警" Visibility="{Binding HQRemoveTerminalAlarmVisible}" Command="{Binding HQ_NoneDataCommand}" CommandParameter="解除终端报警"/>
+                                <MenuItem Header="查询车辆电瓶电压信息" Visibility="{Binding HQQueryVoltageVisible}" Command="{Binding HQ_NoneDataCommand}" CommandParameter="查询车辆电瓶电压信息"/>
+                                <MenuItem Header="要求终端进入GPRS模式" Visibility="{Binding HQGPRSVisible}" Command="{Binding HQ_GPRSCommand}"/>
+                                <MenuItem Header="查询车辆里程信息" Visibility="{Binding HQQueryMileVisible}" Command="{Binding HQ_VehicleMileageCommand}"/>
+                                <MenuItem Header="设置压缩回传参数" Visibility="{Binding HQCompressionBackVisible}" Command="{Binding HQ_CompressionCommand}"/>
+                                <MenuItem Header="设置定距回传" Visibility="{Binding HQDistanceBackVisible}" Command="{Binding HQ_DistanceBackCommand}"/>
+                                <MenuItem Header="带范围的单次点名信息" Visibility="{Binding HQOneCallVisible}" Command="{Binding HQ_OneCallCommand}"/>
+                                <MenuItem Header="设置定速回传参数" Visibility="{Binding HQFixSpeedBackVisible}" Command="{Binding HQ_FixSpeedCommand}" CommandParameter="设置定速回传参数"/>
+                                <MenuItem Header="设置在线待命时位置回传的时间间隔" Visibility="{Binding HQStandByVisible}" Command="{Binding HQ_StandByCommand}"/>
+                                <MenuItem Header="设置空车时的定时回传时间间隔及次数" Visibility="{Binding HQEmptyBackVisible}" Command="{Binding HQ_EmptyBackCommand}"/>
+                                <MenuItem Header="华强中心下发给任意附件的的任意信息" Visibility="{Binding HQAnyInformationVisible}" Command="{Binding HQ_AnyInformationCommand}"/>
+                            </MenuItem>
+                            <MenuItem Header="华强网络参数设置类指令" Visibility="{Binding HQNetParaVisible}">
+                                <MenuItem Header="更改IP和端口号" Visibility="{Binding HQIPandPortVisible}" Command="{Binding HQ_IPandPortCommand}" CommandParameter="更改IP和端口号"/>
+                                <MenuItem Header="设置第二监控中心IP和端口号" Visibility="{Binding HQViceIPandPortVisible}" Command="{Binding HQ_IPandPortCommand}" CommandParameter="设置第二监控中心IP和端口号"/>
+                                <MenuItem Header="更改用户名、密码、拨号号码、APN" Visibility="{Binding HQUserCodeVisible}" Command="{Binding HQ_UserCodeCommand}"/>
+                                <MenuItem Header="终端掉线后重新建立GPRS连接的最大时间" Visibility="{Binding HQOffLineGPRSVisible}" Command="{Binding HQ_OfflineGPRSCommand}" CommandParameter="终端掉线后重新建立GPRS连接的最大时间"/>
+                                <MenuItem Header="设置服务器UDP端口号" Visibility="{Binding HQUDPportVisible}" Command="{Binding HQ_OfflineGPRSCommand}" CommandParameter="设置服务器UDP端口号"/>
+                            </MenuItem>
+                            <MenuItem Header="华强多媒体设置类指令" Visibility="{Binding HQMultimediaVisible}">
+                                <MenuItem Header="要求上传一幅图像" Visibility="{Binding HQOneImageVisible}" Command="{Binding HQ_NoneDataCommand}" CommandParameter="要求上传一幅图像"/>
+                                <MenuItem Header="要求上传多幅图像" Visibility="{Binding HQSomeImageVisible}" Command="{Binding HQ_EmegentPicCommand}" CommandParameter="要求上传多幅图像"/>
+                                <MenuItem Header="紧急情况下图像抓拍时间间隔和抓拍次数" Visibility="{Binding HQEmegentPicVisible}" Command="{Binding HQ_EmegentPicCommand}" CommandParameter="紧急情况下图像抓拍时间间隔和抓拍次数"/>
+                                <MenuItem Header="设置运行时定时拍摄的时间间隔" Visibility="{Binding HQTimerShotVisible}" Command="{Binding HQ_OfflineGPRSCommand}" CommandParameter="设置运行时定时拍摄的时间间隔"/>
+                            </MenuItem>
+                        </MenuItem>
+
+                    </ContextMenu>
+                </TreeView.ContextMenu>
+            </TreeView>
+        </Border>
+    </Grid>
+
+</UserControl>
+

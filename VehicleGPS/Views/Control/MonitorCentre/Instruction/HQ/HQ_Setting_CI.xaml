@@ -1,0 +1,143 @@
+﻿<Window x:Class="VehicleGPS.Views.Control.MonitorCentre.Instruction.HQ.HQ_Setting_CI"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Common" Height="650" Width="600" WindowStartupLocation="CenterScreen"
+        Icon="/Images/set.png">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Models/ResourceDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="43"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Border>
+            <Border.Background>
+                <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+            </Border.Background>
+            <TextBlock Text="指令设置" VerticalAlignment="Center" Margin="10,5,10,5"></TextBlock>
+        </Border>
+        <Border Grid.Row="1" BorderThickness="0.5" Margin="5">
+            <Border.BorderBrush>
+                <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+            </Border.BorderBrush>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox x:Name="ck_Store" Content="需要存储" Margin="20,5,20,5" Click="Store_CheckBox_Click"></CheckBox>
+                <CheckBox x:Name="ck_Reply" Content="需要回复" IsChecked="True"  Margin="20,5,20,5" Click="Reply_CheckBox_Click"></CheckBox>
+            </StackPanel>
+        </Border>
+        <Border Grid.Row="2" BorderThickness="0.5" Margin="5">
+            <Border.BorderBrush>
+                <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+            </Border.BorderBrush>
+            <StackPanel>
+                <StackPanel Name="sp_1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <CheckBox x:Name="ck_Name1" Content="登陆信息上传" Margin="20,5,20,5" Click="context_CheckBox_Click1"></CheckBox>
+                    <RadioButton x:Name="context_1" Content="关闭" GroupName="radio1" Visibility="Collapsed"  Margin="20,5,20,5" Click="Context_Info_Click1"></RadioButton>
+                    <RadioButton x:Name="context_2" Content="打开" GroupName="radio1" Visibility="Collapsed"  Margin="15,5,15,5" Click="Context_Info_Click1"></RadioButton>
+                </StackPanel >
+                <StackPanel Name="sp_2" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <CheckBox x:Name="ck_Name2" Content="脱网信息上传" Margin="20,5,20,5" Click="context_CheckBox_Click2"></CheckBox>
+                    <RadioButton x:Name="context_3" Content="关闭" GroupName="radio2"  Visibility="Collapsed"  Margin="20,5,20,5" Click="Context_Info_Click2"></RadioButton>
+                    <RadioButton x:Name="context_4" Content="打开" GroupName="radio2"  Visibility="Collapsed"  Margin="15,5,15,5" Click="Context_Info_Click2"></RadioButton>
+                </StackPanel >
+                <StackPanel Name="sp_3" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <CheckBox x:Name="ck_Name3" Content="DTMF报警" Margin="20,5,20,5" Click="context_CheckBox_Click3"></CheckBox>
+                    <RadioButton x:Name="context_5" Content="关闭" GroupName="radio3"  Visibility="Collapsed" IsChecked="True"  Margin="20,5,20,5" Click="Context_Info_Click3"></RadioButton>
+                    <RadioButton x:Name="context_6" Content="打开" GroupName="radio3"  Visibility="Collapsed"  Margin="15,5,15,5" Click="Context_Info_Click3"></RadioButton>
+                </StackPanel>
+                <StackPanel Name="sp_4" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" >
+                    <CheckBox x:Name="ck_Name4" Content="传感器上传功能" Margin="20,5,20,5" Click="context_CheckBox_Click4"></CheckBox>
+                    <RadioButton x:Name="context_7" Content="关闭" GroupName="radio4" Visibility="Collapsed"  Margin="20,5,20,5" Click="Context_Info_Click4"></RadioButton>
+                    <RadioButton x:Name="context_8" Content="打开" GroupName="radio4" Visibility="Collapsed"  Margin="15,5,15,5" Click="Context_Info_Click4"></RadioButton>
+                </StackPanel>
+                <StackPanel Name="sp_5" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <CheckBox x:Name="ck_Name5" Content="设置终端默认通信方式" Margin="20,5,20,5" Click="context_CheckBox_Click5"></CheckBox>
+                    <RadioButton x:Name="context_9" Content="GSM" GroupName="radio5" Visibility="Collapsed"  Margin="20,5,20,5" Click="Context_Info_Click5"></RadioButton>
+                    <RadioButton x:Name="context_10" Content="GPRS" GroupName="radio5" Visibility="Collapsed"  Margin="15,5,15,5" Click="Context_Info_Click5"></RadioButton>
+                </StackPanel >
+                <StackPanel Name="sp_6" Margin="20,0,0,0"  Visibility="Collapsed"  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <CheckBox x:Name="ck_Name6" Content="利用短信上传信息" Margin="20,5,20,5" Click="context_CheckBox_Click6"></CheckBox>
+                    <RadioButton x:Name="context_11" Content="禁止" GroupName="radio6" Visibility="Collapsed"  Margin="20,5,20,5" Click="Context_Info_Click6"></RadioButton>
+                    <RadioButton x:Name="context_12" Content="允许" GroupName="radio6" Visibility="Collapsed"  Margin="15,5,15,5" Click="Context_Info_Click6"></RadioButton>
+                </StackPanel >
+                <StackPanel Name="sp_7" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <CheckBox x:Name="ck_Name7" Content="开关门检测上传" Margin="20,5,20,5" Click="context_CheckBox_Click7"></CheckBox>
+                    <RadioButton x:Name="context_13" Content="不上传" GroupName="radio7" IsChecked="True" Visibility="Collapsed"  Margin="20,5,20,5" Click="Context_Info_Click7"></RadioButton>
+                    <RadioButton x:Name="context_14" Content="上传" GroupName="radio7" Visibility="Collapsed"  Margin="15,5,15,5" Click="Context_Info_Click7"></RadioButton>
+                </StackPanel>
+                <StackPanel Name="sp_8" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <CheckBox x:Name="ck_Name8" Content="ACC开关状态上传" Margin="20,5,20,5" Click="context_CheckBox_Click8"></CheckBox>
+                    <RadioButton x:Name="context_15" Content="不上传" GroupName="radio8" Visibility="Collapsed"  IsChecked="True"  Margin="20,5,20,5" Click="Context_Info_Click8"></RadioButton>
+                    <RadioButton x:Name="context_16" Content="上传" GroupName="radio8" Visibility="Collapsed"  Margin="15,5,15,5" Click="Context_Info_Click8"></RadioButton>
+                </StackPanel>
+                <StackPanel Name="sp_9" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <CheckBox x:Name="ck_Name9" Content="终端省电后关闭GPRS/CDMA通信模块" Margin="20,5,20,5" Click="context_CheckBox_Click9"></CheckBox>
+                    <RadioButton x:Name="context_17" Content="需要关闭" GroupName="radio9" Visibility="Collapsed"  IsChecked="True"  Margin="20,5,20,5" Click="Context_Info_Click9"></RadioButton>
+                    <RadioButton x:Name="context_18" Content="不需要" GroupName="radio9" Visibility="Collapsed"  Margin="15,5,15,5" Click="Context_Info_Click9"></RadioButton>
+                </StackPanel >
+                <StackPanel Name="sp_10" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <CheckBox x:Name="ck_Name10" Content="没有速度时上传定时回传信息" Margin="20,5,20,5" Click="context_CheckBox_Click10"></CheckBox>
+                    <RadioButton x:Name="context_19" Content="关闭" GroupName="radio10" Visibility="Collapsed"  Margin="20,5,20,5" Click="Context_Info_Click10"></RadioButton>
+                    <RadioButton x:Name="context_20" Content="打开" GroupName="radio10" Visibility="Collapsed"  Margin="15,5,15,5" Click="Context_Info_Click10"></RadioButton>
+                </StackPanel >
+                <StackPanel Name="sp_11" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <CheckBox x:Name="ck_Name11" Content="需要语音提示" Margin="20,5,20,5" Click="context_CheckBox_Click11"></CheckBox>
+                    <RadioButton x:Name="context_21" Content="关闭" GroupName="radio11" Visibility="Collapsed"  Margin="20,5,20,5" Click="Context_Info_Click11"></RadioButton>
+                    <RadioButton x:Name="context_22" Content="打开" GroupName="radio11" Visibility="Collapsed"  Margin="15,5,15,5" Click="Context_Info_Click11"></RadioButton>
+                </StackPanel>
+                <StackPanel Name="sp_12" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" >
+                    <CheckBox x:Name="ck_Name12" Content="打开行车记录功能" Margin="20,5,20,5" Click="context_CheckBox_Click12"></CheckBox>
+                    <RadioButton x:Name="context_23" Content="关闭" GroupName="radio12" Visibility="Collapsed"  Margin="20,5,20,5" Click="Context_Info_Click12"></RadioButton>
+                    <RadioButton x:Name="context_24" Content="打开" GroupName="radio12" Visibility="Collapsed"  Margin="15,5,15,5" Click="Context_Info_Click12"></RadioButton>
+                </StackPanel>
+                <StackPanel Name="sp_13" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <CheckBox x:Name="ck_Name13" Content="选择开机界面" Margin="20,5,20,5" Click="context_CheckBox_Click13"></CheckBox>
+                    <RadioButton x:Name="context_25" Content="通用界面" GroupName="radio13" Visibility="Collapsed"  Margin="20,5,20,5" Click="Context_Info_Click13"></RadioButton>
+                    <RadioButton x:Name="context_26" Content="华强界面" GroupName="radio13" Visibility="Collapsed"  Margin="15,5,15,5" Click="Context_Info_Click13"></RadioButton>
+                    <RadioButton x:Name="context_27" Content="遥薇界面" GroupName="radio13" Visibility="Collapsed"  Margin="15,5,15,5" Click="Context_Info_Click13"></RadioButton>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Button Content="发送指令" Margin="20,5" Click="SendIntruction_Click"></Button>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+        <Border Grid.Row="3">
+            <Border.Background>
+                <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+            </Border.Background>
+            <TextBlock Text="指令发送状态" VerticalAlignment="Center" Margin="10,5,10,5"></TextBlock>
+        </Border>
+        <Border Grid.Row="4">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="车牌号：" Margin="20,5,5,5" VerticalAlignment="Center"></TextBlock>
+                    <TextBlock x:Name="VehicleId" Width="100"  Margin="5,5,20,5"  Text="{Binding VehicleId}"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="sim卡号：" Margin="20,5,5,5" VerticalAlignment="Center"></TextBlock>
+                    <TextBlock x:Name="SIM" Width="100"  Margin="5,5,20,5"  Text="{Binding SIM}"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="所属单位：" Margin="20,5,5,5" VerticalAlignment="Center"></TextBlock>
+                    <TextBlock x:Name="EUSERNAME" Width="100"  Margin="5,5,20,5"  Text="{Binding EUSERNAME}"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="发送状态：" Margin="20,5,5,5" VerticalAlignment="Center"></TextBlock>
+                    <TextBlock x:Name="States" Width="100"  Margin="5,5,20,5" Text="{Binding States}"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="发送结果：" Margin="120,5,5,5" VerticalAlignment="Center"></TextBlock>
+                    <TextBlock x:Name="Result" Width="200"  Margin="5,5,20,5" Text="{Binding Result}"></TextBlock>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

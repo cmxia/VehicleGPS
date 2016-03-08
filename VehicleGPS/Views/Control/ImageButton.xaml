@@ -1,0 +1,48 @@
+﻿<!--ImageButton.xaml.cs-->
+    <UserControl x:Class="VehicleGPS.Views.Control.ImageButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             Name="UC">
+    <UserControl.Resources>
+        <Style x:Key="button" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" Background="{Binding ElementName=UC, Path=NormalBorderBackground}"
+                                CornerRadius="{Binding ElementName=UC, Path=NormalBorderCorner}">
+                            <ContentPresenter Content="{TemplateBinding Content}"></ContentPresenter>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True" >
+                                <Setter TargetName="border"  Property="CornerRadius" Value="{Binding ElementName=UC, Path=MouseOverBorderCorner}"></Setter>
+                                <Setter TargetName="border" Property="Background" Value="{Binding ElementName=UC, Path=MouseOverBorderBackground}"></Setter>
+                                <Setter TargetName="border"  Property="Cursor" Value="Hand"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Button Style="{StaticResource button}">
+            <StackPanel Orientation="{Binding ElementName=UC, Path=ControlOrientation}">
+                <Image Source="{Binding ElementName=UC, Path=Image}"
+                       Width="{Binding ElementName=UC, Path=ImageWidth}"
+                       Height="{Binding ElementName=UC, Path=ImageHeight}"
+                       Margin="{Binding ElementName=UC, Path=ImageMargin}"/>
+                <TextBlock Text="{Binding ElementName=UC, Path=Text}"
+                           FontSize="{Binding ElementName=UC, Path=TextFontSize}"
+                           FontFamily="{Binding ElementName=UC, Path=TextFontFamily}"
+                           Foreground="{Binding ElementName=UC, Path=TextFontColor}"
+                           Margin="{Binding ElementName=UC, Path=TextMargin}"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Button>
+    </Grid>
+</UserControl>
+

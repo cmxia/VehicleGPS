@@ -1,0 +1,118 @@
+﻿<Window x:Class="VehicleGPS.Views.Control.DispatchCentre.VehicleDispatch.BackToStation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:MyTree="clr-namespace:VehicleGPS.Views.Control.DispatchCentre.VehicleDispatch" x:Name="window"
+        Title="强制回站"     
+        mc:Ignorable="d"  MinWidth="650" MaxWidth="700"  ResizeMode="CanMinimize" WindowStartupLocation="CenterOwner" >
+    <Window.Resources>
+        <Style x:Key="seperateborder" TargetType="Border">
+            <Setter Property="BorderThickness" Value="0,0,2,0"></Setter>
+            <Setter Property="Margin" Value="0,5,0,5"></Setter>
+            <Setter Property="BorderBrush">
+                <Setter.Value>
+                    <ImageBrush ImageSource="/Images/background.jpg"></ImageBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Border BorderThickness="4">
+        <Border.BorderBrush>
+            <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+        </Border.BorderBrush>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="220"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <MyTree:BackToStationTree x:Name="vechicleTree" Grid.Column="0"></MyTree:BackToStationTree>
+            <GridSplitter Grid.Column="1" VerticalAlignment="Stretch" Width="4" HorizontalAlignment="Center" ShowsPreview="False">
+                <GridSplitter.Background>
+                    <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                </GridSplitter.Background>
+            </GridSplitter>
+            <Grid Grid.Column="2" Background="White">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="30"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0">
+                    <StackPanel>
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10">
+                            <Image Source="{Binding ImageUrl}" VerticalAlignment="Center" HorizontalAlignment="Center" Height="110" Width="170"></Image>
+                        </Grid>
+                        <Border Height="4" HorizontalAlignment="Stretch">
+                            <Border.Background>
+                                <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                            </Border.Background>
+                        </Border>
+                        <Grid x:Name="Grid" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="{Binding IsVisibility}">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="4*" ></ColumnDefinition>
+                                <ColumnDefinition Width="5*" ></ColumnDefinition>
+                                <ColumnDefinition Width="4*" ></ColumnDefinition>
+                                <ColumnDefinition Width="5*" ></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition Height="40"></RowDefinition>
+                                <RowDefinition Height="40"></RowDefinition>
+                                <RowDefinition Height="40"></RowDefinition>
+                                <RowDefinition Height="40"></RowDefinition>
+                                <RowDefinition Height="40"></RowDefinition>
+                                <RowDefinition Height="40"></RowDefinition>
+                                <RowDefinition Height="40"></RowDefinition>
+                            </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Text="任务单号: "></TextBlock>
+                                <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Text="车牌号: "></TextBlock>
+                                <TextBlock Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" Text="SIM卡号: "></TextBlock>
+                                <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Text="发车站点: "></TextBlock>
+                                <TextBlock Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" Text="运往工地: "></TextBlock>
+                                <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Text="车辆类别: "></TextBlock>
+                                <TextBlock Grid.Row="3" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" Text="运输物品: "></TextBlock>
+                                <TextBlock Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Text="核载方量: "></TextBlock>
+                                <TextBlock Grid.Row="4" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" Text="实载方量: "></TextBlock>
+                                <TextBlock Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Text="出行状态: "></TextBlock>
+                                <TextBlock Grid.Row="5" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" Text="卸料方式: "></TextBlock>
+                                <TextBlock Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Text="驾驶员编号: "></TextBlock>
+                                <TextBlock Grid.Row="6" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" Text="驾驶员姓名: "></TextBlock>
+
+                            <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0"   Text="{Binding FPlanId}"></TextBlock>
+                            <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="5,0,0,0"  Text="{Binding VehicleID}"></TextBlock>
+                            <TextBlock Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="5,0,0,0"  Text="{Binding SIM}"></TextBlock>
+                            <TextBlock Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="5,0,0,0"  Text="{Binding StartPoint}"></TextBlock>
+                            <TextBlock Grid.Row="2" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="5,0,0,0" Text="{Binding EndPoint}"></TextBlock>
+                            <TextBlock Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="5,0,0,0"  Text="{Binding VehicleTypeName}"></TextBlock>
+                            <TextBlock Grid.Row="3" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="5,0,0,0"  Text="{Binding ConcreteName}"></TextBlock>
+                            <TextBlock Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="5,0,0,0"  Text="{Binding LoadAmount}"></TextBlock>
+                            <TextBlock Grid.Row="4" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="5,0,0,0"  Text="{Binding TransCapPer}"></TextBlock>
+                            <TextBlock Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="5,0,0,0"  Text="{Binding CarsStatus}"></TextBlock>
+                            <TextBlock Grid.Row="5" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="5,0,0,0"  Text="{Binding OffTypeName}"></TextBlock>
+                            <TextBlock Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="5,0,0,0"  Text="{Binding DriverId}"></TextBlock>
+                            <TextBlock Grid.Row="6" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="5,0,0,0"  Text="{Binding DriverName}"></TextBlock>
+                        </Grid>
+                        <!--<Border Height="4" HorizontalAlignment="Stretch">
+                            <Border.Background>
+                                <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                            </Border.Background>
+                        </Border>
+                        <CheckBox Margin="15,10,5,10" VerticalAlignment="Center" Content="是否仍要增加方量" IsChecked="{Binding IsAdd,UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding IsVisibility}"></CheckBox>-->
+                    </StackPanel>
+                </Border>
+                <Border Grid.Row="1">
+                    <Border.Background>
+                        <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                    </Border.Background>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Grid.Column="0" Content="确 定" Width="60" Margin="2" Command="{Binding ConfirmCommand}" CommandParameter="{Binding ElementName=window}"  ></Button>
+                        <Button Grid.Column="1" Content="关 闭" Width="60" Margin="50,2,2,2" Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=window}"></Button>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

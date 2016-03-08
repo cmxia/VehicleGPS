@@ -1,0 +1,60 @@
+﻿<Window x:Class="VehicleGPS.Views.Control.DispatchCentre.VehicleDispatch.ForceBackToStation"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mybinding="clr-namespace:VehicleGPS.Views"   
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        x:Name="WinBack"
+        Title="强制回站" Height="300" Width="500" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Models/ResourceDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+    </Window.Resources>
+    <xctk:BusyIndicator x:Name="Indicator" IsBusy="{Binding IsBusy}" BusyContent="正在执行,请稍后...">
+        <Grid>
+            <Grid.Background>
+                <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+            </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <DataGrid IsReadOnly="True" AutoGenerateColumns="False" CanUserAddRows="False" Background="White" ItemsSource="{Binding VehicleList}"
+                       CanUserDeleteRows="False"   SelectionMode="Single" Margin="5">
+                    <DataGrid.Resources>
+                        <mybinding:BindingProxy x:Key="proxy" Data="{Binding}"></mybinding:BindingProxy>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="选择">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}"></CheckBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="车牌号" Binding="{Binding vehicleID}"/>
+                        <DataGridTextColumn Header="驾驶员" Binding="{Binding driverName}"/>
+                        <DataGridTextColumn Header="运输方量" Binding="{Binding transCapPer}"/>
+                        <DataGridTemplateColumn Header="是否增加方量（是则勾上）">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding IsAddCount, UpdateSourceTrigger=PropertyChanged}"></CheckBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+            <Border Grid.Row="1">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10,0">
+                    <Button Content="确定" Padding="10,1" Margin="5,0" Command="{Binding ConfirmCommand}" CommandParameter="{Binding ElementName=WinBack}"></Button>
+                    <Button Content="取消" Padding="10,1" x:Name="cancel" Click="cancel_Click"></Button>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </xctk:BusyIndicator>
+</Window>

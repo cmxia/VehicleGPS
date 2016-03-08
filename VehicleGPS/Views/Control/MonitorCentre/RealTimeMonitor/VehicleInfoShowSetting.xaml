@@ -1,0 +1,185 @@
+﻿<Window x:Class="VehicleGPS.Views.Control.MonitorCentre.RealTimeMonitor.VehicleInfoShowSetting"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="显示设置" Icon="/Images/TreeSet.png"
+        SizeToContent="Height"
+        Width="1050" WindowStartupLocation="CenterOwner">
+    <Border>
+        <Border.Background>
+            <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+        </Border.Background>
+
+        <StackPanel>
+
+            <Border  Background="White" Margin="10" CornerRadius="5">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                    <Grid VerticalAlignment="Stretch" x:Name="Grid_Checkbox">
+                        <StackPanel Orientation="Horizontal">
+                            <GroupBox Header="车辆基本信息" BorderThickness="3" BorderBrush="LightSlateGray"  Margin="10">
+                                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                                    <StackPanel Orientation="Horizontal" Margin="10">
+                                        <StackPanel x:Name="sp_BasicInfo1">
+                                            <CheckBox x:Name="nbbh" Content="内部编号" Margin="5,0,0,5" IsChecked="{Binding FInnerId,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox x:Name="cphm" Content="车牌号码" Margin="5,0,0,5" IsChecked="{Binding VehicleId,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox x:Name="simkh" Content="SIM卡号" Margin="5,0,0,5" IsChecked="{Binding SIM,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox x:Name="clzt" Content="车辆状态" Margin="5,0,0,5" IsChecked="{Binding VehiclecurState,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox x:Name="ssdw" Content="所属单位" Margin="5,0,0,5" IsChecked="{Binding CustomerName,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox x:Name="cllb" Content="车辆类别" Margin="5,0,0,5" IsChecked="{Binding VehicleTypeName,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox x:Name="cpxh" Content="厂牌型号" Margin="5,0,0,5" IsChecked="{Binding BrandModel,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox x:Name="rylx" Content="燃油类型" Margin="5,0,0,5" IsChecked="{Binding OilType,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox x:Name="cjh" Content="车架号" Margin="5,0,0,5" IsChecked="{Binding VIN,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox x:Name="fdjh" Content="发动机号" Margin="5,0,0,5" IsChecked="{Binding EngineId,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox x:Name="clxh" Content="车辆型号" Margin="5,0,0,5" IsChecked="{Binding VehicleModel,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox x:Name="gzzh" Content="购置证号" Margin="5,0,0,5" IsChecked="{Binding PurchaseNum,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox x:Name="yyzh" Content="营运证号" Margin="5,0,0,5" IsChecked="{Binding OperatNum,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox x:Name="clys" Content="车辆颜色" Margin="5,0,0,5" IsChecked="{Binding VehicleColor,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox x:Name="dw" Content="吨位" Margin="5,0,0,5" IsChecked="{Binding Tonnage,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox x:Name="lts" Content="轮胎数" Margin="5,0,0,5" IsChecked="{Binding TiresNum,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                        </StackPanel>
+                                        <StackPanel Margin="10,0,0,0" x:Name="sp_BasicInfo2">
+                                            <CheckBox x:Name="bglyykz" Content="百公里油耗（空载）" Margin="5,5,0,5"  IsChecked="{Binding EmptyCost,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox x:Name="bglyymz" Content="百公里油耗（满载）" Margin="5,0,0,5" IsChecked="{Binding FullCost,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox x:Name="hdczfl" Content="核定承载方量" Margin="5,0,0,5" IsChecked="{Binding LoadAmount,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox x:Name="gpsczzdbh" Content="GPS车载终端编号" Margin="5,0,0,5" IsChecked="{Binding GPSID,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox x:Name="zws" Content="座位数" Margin="5,0,0,5" IsChecked="{Binding SeatsNum,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox x:Name="qcxss" Content="汽车销售商" Margin="5,0,0,5" IsChecked="{Binding CarDealers,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox x:Name="gmrq" Content="购买日期" Margin="5,0,0,5" IsChecked="{Binding PurchaseDate,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox x:Name="sprq" Content="上牌日期" Margin="5,0,0,5" IsChecked="{Binding CardDate,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox x:Name="sfdb" Content="是否贷保" Margin="5,0,0,5" IsChecked="{Binding DebetOrNot,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox x:Name="czrl" Content="承载容量" Margin="5,0,0,5" IsChecked="{Binding LoadCapacity,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox x:Name="yxrl" Content="油箱容量" Margin="5,0,0,5" IsChecked="{Binding FuelCapacity,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox x:Name="sfdk" Content="是否贷款" Margin="5,0,0,5" IsChecked="{Binding LoansOrNot,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox x:Name="clcb" Content="车辆成本" Margin="5,0,0,5" IsChecked="{Binding VehicleCosts,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox x:Name="synx" Content="使用年限" Margin="5,0,0,5" IsChecked="{Binding Life,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox x:Name="yjcz" Content="预计残值" Margin="5,0,0,5" IsChecked="{Binding SalvageValue,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox x:Name="xwzk" Content="任务状况" Margin="5,0,0,5" IsChecked="{Binding VehicleState,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </ScrollViewer>
+                            </GroupBox>
+
+                            <GroupBox Header="GPS信息" BorderThickness="3" BorderBrush="LightSlateGray"  Margin="10">
+                                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                                    <StackPanel Orientation="Horizontal" Margin="10">
+                                        <StackPanel x:Name="sp_GpsInfo1">
+                                            <CheckBox Content="当前位置" Margin="5,0,0,5" IsChecked="{Binding CurLocation,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="经度" Margin="5,0,0,5" IsChecked="{Binding Longitude,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="纬度" Margin="5,0,0,5" IsChecked="{Binding Latitude,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="在线状态" Margin="5,0,0,5" IsChecked="{Binding OnlineStates,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="GPS状态" Margin="5,0,0,5" IsChecked="{Binding GpsStatus,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="GPS速度" Margin="5,0,0,5" IsChecked="{Binding Speed,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="仪表速度" Margin="5,0,0,5" IsChecked="{Binding DevSpeed,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="海拔高原" Margin="5,0,0,5" IsChecked="{Binding Altitude,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="方向" Margin="5,0,0,5" IsChecked="{Binding Direction,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="仪表里程" Margin="5,0,0,5" IsChecked="{Binding Mileage,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="GPS里程" Margin="5,0,0,5" IsChecked="{Binding GPSMileage,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="油量" Margin="5,0,0,5" IsChecked="{Binding OilVolumn,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="上传时间" Margin="5,0,0,5" IsChecked="{Binding Datetime,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </ScrollViewer>
+                            </GroupBox>
+
+                            <GroupBox Header="车辆状态信息" BorderThickness="3" BorderBrush="LightSlateGray"  Margin="10">
+                                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                                    <StackPanel Orientation="Horizontal" Margin="10">
+                                        <StackPanel x:Name="sp_StateInfo1">
+                                            <CheckBox Content="ACC状态" Margin="5,0,0,5" IsChecked="{Binding Accstatus,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="运营状态" Margin="5,0,0,5" IsChecked="{Binding Workstatus,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="GPS模式" Margin="5,0,0,5" IsChecked="{Binding Gpsmode,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="油路状态" Margin="5,0,0,5" IsChecked="{Binding Oilwaystatus,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="震动状态" Margin="5,0,0,5" IsChecked="{Binding Shakestatus,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="喇叭状态" Margin="5,0,0,5" IsChecked="{Binding Hornstatus,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="空调状态" Margin="5,0,0,5" IsChecked="{Binding Conditionerstatus,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="车门状态" Margin="5,0,0,5" IsChecked="{Binding Vdstatus,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="前车门状态" Margin="5,0,0,5" IsChecked="{Binding Fdstatus,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="后车门状态" Margin="5,0,0,5" IsChecked="{Binding Bdstatus,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="左转向状态" Margin="5,0,0,5" IsChecked="{Binding Ltstatus,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="右转向状态" Margin="5,0,0,5" IsChecked="{Binding Rtstatus,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="远光灯状态" Margin="5,0,0,5" IsChecked="{Binding Farlstatus,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="近光灯状态" Margin="5,0,0,5" IsChecked="{Binding Nearlstatus,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="车辆电路状态" Margin="5,0,0,5" IsChecked="{Binding Vcstatus,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="经纬度加密状态" Margin="5,0,0,5" IsChecked="{Binding Llsecret,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                        </StackPanel>
+                                        <StackPanel Margin="10,0,0,0" x:Name="sp_StateInfo2">
+                                            <CheckBox Content="正反转状态" Margin="5,0,0,5" IsChecked="{Binding Pnstatus,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="发动机状态" Margin="5,0,0,5" IsChecked="{Binding Enginestatus,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="刹车状态" Margin="5,0,0,5" IsChecked="{Binding Brakestatus,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="安全状态" Margin="5,0,0,5" IsChecked="{Binding Protectstatus,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="负载状态" Margin="5,0,0,5" IsChecked="{Binding Loadstatus,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="总线状态" Margin="5,0,0,5" IsChecked="{Binding Busstatus,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="GSM模块状态" Margin="5,0,0,5" IsChecked="{Binding Gsmstatus,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="锁车电路状态" Margin="5,0,0,5" IsChecked="{Binding Lcstatus,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="前雾灯状态" Margin="5,0,0,5" IsChecked="{Binding Ffstatus,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="后雾灯状态" Margin="5,0,0,5" IsChecked="{Binding Bfstatus,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="GPS天线状态" Margin="5,0,0,5" IsChecked="{Binding Gpsantstatus,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </ScrollViewer>
+                            </GroupBox>
+
+                            <GroupBox Header="报警状态信息" BorderThickness="3" BorderBrush="LightSlateGray" Margin="10">
+                                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                                    <StackPanel Orientation="Horizontal" Margin="10">
+                                        <StackPanel x:Name="sp_WarnInfo1">
+                                            <CheckBox Content="紧急报警" Margin="5,0,0,5" IsChecked="{Binding Soswarn,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="超速报警" Margin="5,0,0,5" IsChecked="{Binding Overspeedwarn,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="疲劳驾驶" Margin="5,0,0,5" IsChecked="{Binding Tiredwarn,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="预警" Margin="5,0,0,5" IsChecked="{Binding Prewarn,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="GNSS模块故障" Margin="5,0,0,5" IsChecked="{Binding Gnssfatal,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="GNSS天线未接或被剪断" Margin="5,0,0,5" IsChecked="{Binding Gnssantwarn,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="GNSS天线短路" Margin="5,0,0,5" IsChecked="{Binding Gnssshortwarn,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="终端主电源欠压" Margin="5,0,0,5" IsChecked="{Binding Lowvolwarn,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="终端主电源高压" Margin="5,0,0,5" IsChecked="{Binding Highvolwarn,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="终端主电源断电" Margin="5,0,0,5" IsChecked="{Binding Outagewarn,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="终端LCD或者显示器故障" Margin="5,0,0,5" IsChecked="{Binding Lcdfatalwarn,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="TTS模块故障" Margin="5,0,0,5" IsChecked="{Binding Ttsfatalwarn,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="摄像头故障" Margin="5,0,0,5" IsChecked="{Binding Camerafatalwarn,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="视频丢失报警" Margin="5,0,0,5" IsChecked="{Binding Vediolosewarn,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="视频遮挡报警" Margin="5,0,0,5" IsChecked="{Binding Vedioshelterwarn,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="当天累计驾驶超时" Margin="5,0,0,5" IsChecked="{Binding Accumtimeout,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="超时停车" Margin="5,0,0,5" IsChecked="{Binding Stoptimeout,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                        </StackPanel>
+                                        <StackPanel Margin="10,0,0,0" x:Name="sp_WarnInfo2">
+                                            <CheckBox Content="进出区域报警" Margin="5,0,0,5" IsChecked="{Binding Inoutareawarn,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="路段行驶时间不足/过长报警" Margin="5,0,0,5" IsChecked="{Binding Drivingtimewarn,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="路线偏离报警" Margin="5,0,0,5" IsChecked="{Binding Deviatewarn,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="车辆VSS故障" Margin="5,0,0,5" IsChecked="{Binding Vssfatalwarn,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="车辆油量异常报警" Margin="5,0,0,5" IsChecked="{Binding Oilexceptionwarn,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="车辆被盗报警" Margin="5,0,0,5" IsChecked="{Binding Vehiclestolenwarn,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="非法点火报警" Margin="5,0,0,5" IsChecked="{Binding Illignitewarn,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="非法位移报警" Margin="5,0,0,5" IsChecked="{Binding Illmovewarn,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="碰撞侧翻报警" Margin="5,0,0,5" IsChecked="{Binding Crashwarn,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="SD卡异常报警" Margin="5,0,0,5" IsChecked="{Binding Sdexceptionwarn,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="劫警" Margin="5,0,0,5" IsChecked="{Binding Robwarn,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="司机停车休息时间不足报警" Margin="5,0,0,5" IsChecked="{Binding Sleeptimewarn,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="非法时段行驶报警" Margin="5,0,0,5" IsChecked="{Binding Illtimedrivingwarn,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="越战报警" Margin="5,0,0,5" IsChecked="{Binding Overstationwarn,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="非法开车门报警" Margin="5,0,0,5" IsChecked="{Binding Ilopendoorwarn,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="设防报警" Margin="5,0,0,5" IsChecked="{Binding Protectwarn,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="剪线报警" Margin="5,0,0,5" IsChecked="{Binding Trimmingwarn,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="密码错误报警" Margin="5,0,0,5" IsChecked="{Binding Passwdwarn,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="禁行报警" Margin="5,0,0,5" IsChecked="{Binding Prohibitmovewarn,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                            <CheckBox Content="非法停车报警" Margin="5,0,0,5" IsChecked="{Binding Illstopwarn,UpdateSourceTrigger=Explicit}"></CheckBox>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </ScrollViewer>
+                            </GroupBox>
+                        </StackPanel>
+                    </Grid>
+                </ScrollViewer>
+            </Border>
+
+            <Border>
+                <Border.Background>
+                    <ImageBrush ImageSource="/Images/background.jpg"></ImageBrush>
+                </Border.Background>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button x:Name="btn_Confirm" Content="确 定" Width="60" Margin="10,5,10,5" Click="btn_Confirm_Click"></Button>
+                    <!--<Button x:Name="btn_Defualt" Content="恢复默认" Width="60" Margin="10,5,10,5"  Command="{Binding BackToDefaultCommand}" ></Button>-->
+                    <Button x:Name="btn_Close" Content="关 闭" Width="60" Margin="10,5,10,5" Click="btn_Close_Click" ></Button>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </Border>
+</Window>

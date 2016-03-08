@@ -1,0 +1,40 @@
+﻿<Window x:Class="VehicleGPS.Views.Control.DispatchCentre.VehicleDispatch.DispatchVehicleQuery"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mybinding="clr-namespace:VehicleGPS.Views"
+        Title="派车单" Height="500" Width="1000" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Models/ResourceDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <DataGrid IsReadOnly="True" AutoGenerateColumns="False" CanUserAddRows="False" Background="White" ItemsSource="{Binding VehicleList}"
+                       CanUserDeleteRows="False"   SelectionMode="Single" Margin="5">
+            <DataGrid.Resources>
+                <mybinding:BindingProxy x:Key="proxy" Data="{Binding}"></mybinding:BindingProxy>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="任务单号" Binding="{Binding TaskInfo.FPlanId}"/>
+                <DataGridTextColumn Header="客户名称" Binding="{Binding TaskInfo.UnitName}"/>
+                <DataGridTextColumn Header="厂区" Binding="{Binding TaskInfo.StartRegion}"/>
+                <DataGridTextColumn Header="工地" Binding="{Binding TaskInfo.EndRegion}"/>
+                <DataGridTextColumn Header="塔楼" Binding="{Binding TaskInfo.TowerName}"/>
+                <DataGridTextColumn Header="标号" Binding="{Binding TaskInfo.ConcreteName}"/>
+                <DataGridTextColumn Header="车牌号" Binding="{Binding TaskInfo.VehicleID}"/>
+                <DataGridTextColumn Header="驾驶员" Binding="{Binding TaskInfo.DriverName}"/>
+                <DataGridTextColumn Header="运输方量" Binding="{Binding TaskInfo.TransCapPer}"/>
+                <DataGridTextColumn Header="派车时间" Binding="{Binding TaskInfo.InsertTime}"/>
+                <DataGridTemplateColumn Header="打印">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="打印" Padding="10,1" Margin="5,1" Command="{Binding PrintCommand}"></Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

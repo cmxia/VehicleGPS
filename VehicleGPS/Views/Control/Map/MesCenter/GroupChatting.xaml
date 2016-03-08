@@ -1,0 +1,71 @@
+﻿<Window x:Class="VehicleGPS.Views.Control.MessCenter.GroupChatting"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Height="450" Width="600" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
+    <Grid x:Name="LayoutRoot" Margin="2,0,0,2">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="200*" />
+            <RowDefinition Height="140*" />
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400*"/>
+            <ColumnDefinition Width="200*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Grid.ColumnSpan="2">
+            <Border BorderBrush="Azure"  BorderThickness="1,2,2,2">
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFECF5F4" Offset="0" />
+                        <GradientStop Color="#FFECFCFA" Offset="1" />
+                        <GradientStop Color="#FF9FA1E8" Offset="0.505" />
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+            <TextBlock x:Name="RcePart" Height="40" Width="Auto" FontSize="18" Padding="2,4,2,2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="0" Background="White">
+            <Border BorderBrush="Azure" BorderThickness="2">
+                <StackPanel x:Name="mesReceive" Orientation="Vertical" Height="Auto" />
+            </Border>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="0" Background="White" Margin="0">
+            <Border BorderBrush="Azure" BorderThickness="2,0,2,2" Padding="0"></Border>
+            <StackPanel  Height="10" VerticalAlignment="Top" Margin="2,0">
+                <StackPanel.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFECF5F4" Offset="0" />
+                        <GradientStop Color="#FFECFCFA" Offset="1" />
+                        <GradientStop Color="#FF9FA1E8" Offset="0.505" />
+                    </LinearGradientBrush>
+                </StackPanel.Background>
+            </StackPanel>
+            <TextBox x:Name="sendMessage" FontSize="13" Height="Auto" Width="385" AcceptsReturn="True" Padding="2" Margin="0,10,0,0" BorderThickness="0" HorizontalAlignment="Left"/>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="1" Grid.RowSpan="3">
+            <Border BorderBrush="Azure" BorderThickness="2,2,3,3">
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFECF5F4" Offset="0" />
+                        <GradientStop Color="#FFECFCFA" Offset="1" />
+                        <GradientStop Color="#FF9FA1E8" Offset="0.505" />
+                    </LinearGradientBrush>
+                </Border.Background>
+                <TreeView Name="gdetails" Margin="10" Width="auto" Height="auto" />
+            </Border>
+        </Grid>
+        <Border Grid.Row="3" Grid.Column="0" BorderBrush="Azure" BorderThickness="3,2,1,2"/>
+        <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal">
+            <StackPanel.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFECF5F4" Offset="0" />
+                    <GradientStop Color="#FFECFCFA" Offset="1" />
+                    <GradientStop Color="#FF9FA1E8" Offset="0.505" />
+                </LinearGradientBrush>
+            </StackPanel.Background>
+            <Button x:Name="Close" Height="25" Width="68" Content="关   闭" HorizontalAlignment="Right" Margin="200,0,0,0" Background="Beige" Click="Close_Click"/>
+            <Button x:Name="Commit" Height="25" Width="68" Content="发   送" HorizontalAlignment="Right" Margin="40,0,0,0" Background="Beige" Click="Commit_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

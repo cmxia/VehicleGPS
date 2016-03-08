@@ -1,0 +1,60 @@
+﻿<Window x:Class="VehicleGPS.Views.Control.DispatchCentre.VehicleDispatch.AlarmSetting"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+         Title="报警设置" Height="400" Width="400" WindowStartupLocation="CenterOwner"  ResizeMode="CanMinimize"
+         x:Name="mainWindow">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*" MinHeight="240"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="80"/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Row="1" Grid.Column="0" Margin="1" BorderThickness="2" BorderBrush="#FFC7C2C2">
+        <ScrollViewer  Margin="1" Grid.Row="1" Grid.Column="0" VerticalScrollBarVisibility="Auto" 
+                       HorizontalScrollBarVisibility="Auto" >
+            <ScrollViewer.Content>
+                <StackPanel  Grid.Row="2" Grid.Column="0" MinHeight="230" >
+                    <!--<ListBox x:Name="listBox" Padding="3" MinHeight="230" BorderThickness="0"/>-->
+                        <DataGrid Grid.Row="1" x:Name="dg_ColumnsList" AutoGenerateColumns="False" CanUserAddRows="False" Background="White">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn  Header="报警ID" Binding="{Binding WarnID}" Width="80"></DataGridTextColumn>
+                                <DataGridTextColumn  Header="报警名称" Binding="{Binding WarnName}" Width="100"></DataGridTextColumn>
+                                <DataGridTemplateColumn Header="是否报警" Width="100">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding Path=IsOpen, UpdateSourceTrigger=PropertyChanged}" Content="选择" VerticalAlignment="Center" HorizontalAlignment="Center"  />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+            </ScrollViewer.Content>
+            </ScrollViewer>
+        </Border>
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Bottom">
+            <Button x:Name="btn_allSelect" Content="全选" Margin="3" Click="all_Select_Click"></Button>
+            <Button x:Name="btn_inverse" Content="反选" Margin="3" Click="inverse_Click"></Button>
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal">
+            <TextBlock Text="报警声音：" Margin="4" Padding="2" Width="60"></TextBlock>
+            <TextBox x:Name="voice" Width="280" Margin="2"></TextBox>
+            <Button x:Name="btn_voice" Content="..." Height="20" Width="20" Click="voicefile_Click"></Button>
+        </StackPanel>
+        <!--<StackPanel Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal">
+            <TextBlock Text="监听号码：" Margin="4" Padding="2" Width="60"></TextBlock>
+            <TextBox x:Name="number" Width="200" Margin="2" ></TextBox>
+        </StackPanel>-->
+        <StackPanel Grid.Row="3" Grid.ColumnSpan="2"  Orientation="Horizontal" VerticalAlignment="Center" Margin="150,0,0,0">
+            <Button Content="确定" Margin="3" Height="20" Width="50" x:Name="confirm" Click="ConfirmCommand_Click "></Button>
+            <Button Content="取消" Margin="3" Height="20" Width="50"  x:Name="close" Click="close_Click"></Button>
+            <!--<Button Content="帮助" Margin="3" Height="20" Width="50"></Button>-->
+        </StackPanel>
+    </Grid>
+</Window>

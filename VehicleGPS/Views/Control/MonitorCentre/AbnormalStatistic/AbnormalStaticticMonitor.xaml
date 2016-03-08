@@ -1,0 +1,134 @@
+﻿<Window x:Class="VehicleGPS.Views.Control.MonitorCentre.AbnoermalStatistic.AbnormalStaticticMonitor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+          xmlns:local="clr-namespace:VehicleGPS.Views.Control"
+           xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:mybinding="clr-namespace:VehicleGPS.Views"
+         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        Title="异常统计" MinHeight="700" MinWidth="1100" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Models/ResourceDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="55"></RowDefinition>
+            <!--<RowDefinition Height="450"></RowDefinition>-->
+            <RowDefinition Height="4"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <StackPanel.Background>
+                <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+            </StackPanel.Background>
+            <GroupBox Header="离线车辆查询" Margin="2,2,10,6">
+                <StackPanel Orientation="Horizontal" Margin="5,3,3,2">
+                    <TextBlock Text="离线时间超过：" Foreground="Red"></TextBlock>
+                    <TextBox Width="30"  Text="{Binding Days}" ></TextBox>
+                    <TextBlock Text="天" Margin="0,0,10,0" Foreground="Red"></TextBlock>
+                    <local:ImageButton x:Name="imgBtn_Query" Image="/Images/query.png" ImageHeight="20" ImageWidth="20"
+                                   Text="查询" TextFontColor="Black" TextMargin="2,4,4,4"
+                                   Margin="2,0,0,0" >
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                <i:InvokeCommandAction Command="{Binding QueryCommand}"></i:InvokeCommandAction>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </local:ImageButton>
+                </StackPanel>
+            </GroupBox>
+
+
+        </StackPanel>
+
+        <Grid Grid.Row="1">
+            <WebBrowser x:Name="webMap" Visibility="Hidden"></WebBrowser>
+            <!--Visibility="{Binding MapVisibility}"-->
+        </Grid>
+
+        <GridSplitter Grid.Row="1" VerticalAlignment="Center" Height="4" HorizontalAlignment="Stretch" ShowsPreview="False">
+            <GridSplitter.Background>
+                <ImageBrush ImageSource="/Images/background.jpg"></ImageBrush>
+            </GridSplitter.Background>
+        </GridSplitter>
+
+        <xctk:BusyIndicator Grid.Row="2" IsBusy="{Binding IsBusy}" BusyContent="正在查询,请稍后...">
+            <Border >
+                <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="25"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <DataGrid Grid.Row="0" x:Name="Grid_VehicleInfo" AutoGenerateColumns="False" 
+                               CanUserDeleteRows="False" SelectedItem="{Binding SelectedVehicle}" 
+                        Background="Transparent" ItemsSource="{Binding ListVehicleInfoCurrentPage}" 
+                              IsReadOnly="True" >
+                        <DataGrid.Resources>
+                            <mybinding:BindingProxy x:Key="proxy" Data="{Binding}"></mybinding:BindingProxy>
+
+                        </DataGrid.Resources>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseDoubleClick">
+                                <i:InvokeCommandAction Command="{Binding DoubleClickCommand}" CommandParameter="{Binding SelectedItem,ElementName=Grid_VehicleInfo}"></i:InvokeCommandAction>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="序号" Width="auto" Binding="{Binding Sequence}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="车牌号码" Width="auto" Binding="{Binding VehicleId}" ></DataGridTextColumn>
+                            <DataGridTextColumn Header="内部编号" Width="auto" Binding="{Binding FInnerId}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="SIM卡号" Width="auto" Binding="{Binding SIM}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="所属单位" Width="auto" Binding="{Binding CustomerName}"  ></DataGridTextColumn>
+                            <!--<DataGridTextColumn Header="车辆状态" Binding="{Binding GPSInfo.VehiclecurState}" ></DataGridTextColumn>
+                            <DataGridTextColumn Header="车辆类别" Binding="{Binding VehicleTypeName}" ></DataGridTextColumn>-->
+                            <DataGridTextColumn Header="在线状态" Width="auto" Binding="{Binding GpsInfo.OnlineStates}" ></DataGridTextColumn>
+                            <DataGridTextColumn Header="经度" Width="auto" Binding="{Binding GpsInfo.Longitude}" ></DataGridTextColumn>
+                            <DataGridTextColumn Header="纬度" Width="auto" Binding="{Binding GpsInfo.Latitude}" ></DataGridTextColumn>
+                            <DataGridTextColumn Header="上传时间" Width="auto" Binding="{Binding GpsInfo.Datetime}" ></DataGridTextColumn>
+                            <DataGridTextColumn Header="当前位置" Width="*"  Binding="{Binding GpsInfo.CurLocation}" ></DataGridTextColumn>
+
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <WrapPanel Grid.Row="1">
+                        <WrapPanel.Background>
+                            <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                        </WrapPanel.Background>
+                        <WrapPanel  Margin="2">
+                            <WrapPanel >
+                                <Button Width="50" Height="20" Command="{Binding ComeFirstCommand}" Content="首页"  
+                                    IsEnabled="{Binding FirstEnable}"/>
+                                <Button Width="50" Height="20" Command="{Binding ComePrevCommand}" Content="前一页" Margin="10,0"
+                                    IsEnabled="{Binding PrevEnable}" />
+                            </WrapPanel>
+                            <WrapPanel VerticalAlignment="Center">
+                                <TextBlock Text="当前第 "/>
+                                <TextBlock Text="{Binding CurrentPage}" Foreground="Red"/>
+                                <TextBlock Text=" 页,共 " />
+                                <TextBlock Foreground="Red"  Text="{Binding TotalPage}"/>
+                                <TextBlock Text=" 页"/>
+                            </WrapPanel>
+                            <WrapPanel >
+                                <Button Width="50" Height="20" Command="{Binding ComeNextCommand}" Content="下一页" Margin="10,0"
+                                    IsEnabled="{Binding NextEnable}" />
+                                <Button Width="50" Height="20" Command="{Binding ComeLastCommand}" Content="末页" Margin="0,0,10,0" 
+                                    IsEnabled="{Binding LastEnable}"/>
+                            </WrapPanel>
+                        </WrapPanel>
+                        <WrapPanel VerticalAlignment="Center" >
+                            <TextBlock Text="显示记录从 "/>
+                            <TextBlock Text="{Binding CurrentStart}"  Foreground="Red" />
+                            <TextBlock Text=" 到 "/>
+                            <TextBlock Text="{Binding CurrentEnd}" Foreground="Red" />
+                            <TextBlock Text=" 条, 总数 "/>
+                            <TextBlock Text="{Binding TotalCount}" Foreground="Red" />
+                            <TextBlock Text=" 条"/>
+                        </WrapPanel>
+                        <Button Content="导出excel表" Height="20" Command="{Binding ExportExcelCommand}" HorizontalAlignment="Right" Margin="20,0" VerticalAlignment="Center" Padding="10,0"></Button>
+                    </WrapPanel>
+                </Grid>
+            </Border>
+        </xctk:BusyIndicator>
+    </Grid>
+</Window>

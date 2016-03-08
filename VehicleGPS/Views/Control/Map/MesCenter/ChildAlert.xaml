@@ -1,0 +1,11 @@
+﻿<Window x:Class="VehicleGPS.Views.Control.MessCenter.ChildAlert"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="提示消息" FontSize="14" Cursor="Hand" MaxHeight="90" MaxWidth="250" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
+    <Grid x:Name="LayoutRoot" Margin="2" Background="#99bbe8">
+        <StackPanel Orientation="Horizontal" Margin="8" HorizontalAlignment="Center" Width="200">
+            <Image  Stretch="None" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,5,0,0" Source="/VehicleGPS;component/Images/alert_icon.png"></Image>
+            <TextBlock x:Name="info" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="12" Margin="15,0,0,0"/>
+        </StackPanel>
+    </Grid>
+</Window>

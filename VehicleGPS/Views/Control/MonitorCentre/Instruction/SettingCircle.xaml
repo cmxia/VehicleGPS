@@ -1,0 +1,137 @@
+﻿<Window x:Class="VehicleGPS.Views.Control.MonitorCentre.Instruction.SettingCircle"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        Title="设置圆形区域" Height="580" Width="620" WindowStartupLocation="CenterScreen"
+        Icon="/Images/set.png">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Models/ResourceDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="Auto" ></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Border>
+            <Border.Background>
+                <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+            </Border.Background>
+            <TextBlock Text="指令设置" VerticalAlignment="Center" Margin="10,5,10,5"></TextBlock>
+        </Border>
+        <Border Grid.Row="1" BorderThickness="0.5" Margin="5">
+            <Border.BorderBrush>
+                <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+            </Border.BorderBrush>
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock x:Name="lb_Common" Text="设置属性：" Margin="20,5,5,5" VerticalAlignment="Center"></TextBlock>
+                    <RadioButton x:Name="context_1" Content="更新区域" GroupName="radio1" IsChecked="True" Margin="20,5,20,5" Click="Context_Info_Click"></RadioButton>
+                    <RadioButton x:Name="context_2" Content="追加区域" GroupName="radio1"  Margin="15,5,15,5" Click="Context_Info_Click"></RadioButton>
+                    <RadioButton x:Name="context_3" Content="修改区域" GroupName="radio1"  Margin="15,5,15,5" Click="Context_Info_Click"></RadioButton>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="区域ID" Margin="20,5,5,5" VerticalAlignment="Center"></TextBlock>
+                    <TextBox x:Name="tb_1" Width="100"  Margin="5,5,0,5" VerticalAlignment="Center"></TextBox>
+                </StackPanel>
+                <GroupBox  Name="groupbox">
+                    <GroupBox.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock>区域属性</TextBlock>
+                        </StackPanel>
+                    </GroupBox.Header>
+                    <StackPanel >
+                        <StackPanel Orientation="Horizontal">
+                            <CheckBox x:Name="Time" Content="根据时间" Margin="5,5,30,5" Click="context_CheckBox_Click"></CheckBox>
+                            <CheckBox x:Name="Speed" Content="限速"  Margin="5,5,30,5" Click="context_CheckBox_Click"></CheckBox>
+                            <CheckBox x:Name="InAlarm"  Content="进区域报警给驾驶员"  Margin="5,5,30,5" Click="context_CheckBox_Click"></CheckBox>
+                            <CheckBox x:Name="InPlatform" Content="进区域报警给平台"  Margin="5,5,5,5" Click="context_CheckBox_Click"></CheckBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                        <CheckBox x:Name="OutAlarm"  Content="出区域报警给驾驶员"  Margin="5,5,30,5" Click="context_CheckBox_Click"></CheckBox>
+                        <CheckBox x:Name="OutPlatform" Content="出区域报警给平台"  Margin="5,5,5,5" Click="context_CheckBox_Click"></CheckBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton x:Name="context_4" Content="北纬" IsChecked="True" GroupName="radio2"  Margin="5,5,5,5" ></RadioButton>
+                            <RadioButton x:Name="context_5" Content="南纬" GroupName="radio2"  Margin="5,5,30,5" Click="Context_Info_Click"></RadioButton>
+                            <RadioButton x:Name="context_6" Content="东经" IsChecked="True" GroupName="radio3"  Margin="20,5,5,5" ></RadioButton>
+                            <RadioButton x:Name="context_7" Content="西经" GroupName="radio3"  Margin="5,5,30,5" Click="Context_Info_Click"></RadioButton>
+                            <RadioButton x:Name="context_8" Content="允许开门" IsChecked="True" GroupName="radio4"  Margin="30,5,5,5" ></RadioButton>
+                            <RadioButton x:Name="context_9" Content="禁止开门" GroupName="radio4"  Margin="5,5,30,5" Click="Context_Info_Click"></RadioButton>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton x:Name="context_10" Content="进区域开启通信模块" IsChecked="True" GroupName="radio5"  Margin="5,5,10,5" ></RadioButton>
+                            <RadioButton x:Name="context_11" Content="进区域关闭通信模块" GroupName="radio5"  Margin="5,5,20,5" Click="Context_Info_Click"></RadioButton>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton x:Name="context_12" Content="进区域不采集GNSS详细定位数据" IsChecked="True" GroupName="radio6"  Margin="5,5,10,5" ></RadioButton>
+                            <RadioButton x:Name="context_13" Content="进区域采集GNSS详细定位数据" GroupName="radio6"  Margin="5,5,20,5" Click="Context_Info_Click"></RadioButton>
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <TextBlock x:Name="TB_2" Text="中心点纬度" Margin="5,5,0,5" VerticalAlignment="Center"></TextBlock>
+                    <TextBox x:Name="tb_2" Width="100"  Margin="0,5,5,5" VerticalAlignment="Center"></TextBox>
+                    <TextBlock x:Name="TB_3" Text="中心点经度" Margin="5,5,0,5" VerticalAlignment="Center"></TextBlock>
+                    <TextBox x:Name="tb_3" Width="100"  Margin="0,5,5,5" VerticalAlignment="Center"></TextBox>
+                    <TextBlock x:Name="TB_4" Text="半径(m)" Margin="5,5,0,5" VerticalAlignment="Center"></TextBlock>
+                    <TextBox x:Name="tb_4" Width="100"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBox>
+                    <!--<TextBlock x:Name="TB_9" Text="右下点经度" Visibility="Collapsed"  Margin="5,5,0,5" VerticalAlignment="Center"></TextBlock>
+                    <TextBox x:Name="tb_9" Visibility="Collapsed"  Width="80"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBox>-->
+                </StackPanel>
+                <StackPanel Name="sp_time" Visibility="Collapsed"  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center"  Margin="5,3,3,0">
+                    <TextBlock Text="时间限制" Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                    <xctk:DateTimePicker x:Name="dtp_BeginTime" Format="Custom" FormatString="yyyy-MM-dd HH:mm" Width="150"  Value="{Binding BeginTime}"></xctk:DateTimePicker>
+                    <TextBlock Text=" 至 " VerticalAlignment="Center"></TextBlock>
+                    <xctk:DateTimePicker x:Name="dtp_EndTime" Format="Custom" FormatString="yyyy-MM-dd HH:mm" Width="150" Value="{Binding EndTime}"></xctk:DateTimePicker>
+                    <!--<TextBlock Text="起始时间" Margin="5,5,0,5" VerticalAlignment="Center"></TextBlock>
+                    <TextBox x:Name="tb_5" Width="100"  Margin="0,5,17,5" VerticalAlignment="Center"></TextBox>
+                    <TextBlock Text="结束时间" Margin="5,5,0,5" VerticalAlignment="Center"></TextBlock>
+                    <TextBox x:Name="tb_6" Width="100"  Margin="0,5,5,5" VerticalAlignment="Center"></TextBox>-->
+                </StackPanel>
+                <StackPanel Name="sp_speed" Visibility="Collapsed"  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <TextBlock Text="最高速度" Margin="5,5,0,5" VerticalAlignment="Center"></TextBlock>
+                    <TextBox x:Name="tb_7" Width="100"  Margin="0,5,17,5" VerticalAlignment="Center"></TextBox>
+                    <TextBlock Text="超速持续时间" Margin="5,5,0,5" VerticalAlignment="Center"></TextBlock>
+                    <TextBox x:Name="tb_8" Width="100"  Margin="0,5,5,5" VerticalAlignment="Center"></TextBox>
+                </StackPanel>
+                <Button Content="发送指令" Margin="20,5" Width="80"  Click="SendIntruction_Click"></Button>
+            </StackPanel>
+        </Border>
+        <Border Grid.Row="2">
+            <Border.Background>
+                <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+            </Border.Background>
+            <TextBlock Text="指令发送状态" VerticalAlignment="Center" Margin="10,5,10,5"></TextBlock>
+        </Border>
+        <Border Grid.Row="3" Height="Auto">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="车牌号：" Margin="20,5,5,5" VerticalAlignment="Center"></TextBlock>
+                    <TextBlock x:Name="VehicleId" Width="100"  Margin="5,5,20,5"  Text="{Binding VehicleId}"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="sim卡号：" Margin="20,5,5,5" VerticalAlignment="Center"></TextBlock>
+                    <TextBlock x:Name="SIM" Width="100"  Margin="5,5,20,5"  Text="{Binding SIM}"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="所属单位：" Margin="20,5,5,5" VerticalAlignment="Center"></TextBlock>
+                    <TextBlock x:Name="EUSERNAME" Width="100"  Margin="5,5,20,5"  Text="{Binding EUSERNAME}"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="发送状态：" Margin="20,5,5,5" VerticalAlignment="Center"></TextBlock>
+                    <TextBlock x:Name="States" Width="100"  Margin="5,5,20,5" Text="{Binding States}"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="发送结果：" Margin="20,5,5,5" VerticalAlignment="Center"></TextBlock>
+                    <TextBlock x:Name="Result" Width="100"  Margin="5,5,20,5" Text="{Binding Result}"></TextBlock>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

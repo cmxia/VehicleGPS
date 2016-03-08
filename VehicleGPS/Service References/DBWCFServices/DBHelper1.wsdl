@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="DBHelper" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://61.183.9.107:4013/DBHelper.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://61.183.9.107:4013/DBHelper.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IDBHelper_YExecuteSql_InputMessage">
+    <wsdl:part name="parameters" element="tns:YExecuteSql" />
+  </wsdl:message>
+  <wsdl:message name="IDBHelper_YExecuteSql_OutputMessage">
+    <wsdl:part name="parameters" element="tns:YExecuteSqlResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBHelper_YExecuteHis_InputMessage">
+    <wsdl:part name="parameters" element="tns:YExecuteHis" />
+  </wsdl:message>
+  <wsdl:message name="IDBHelper_YExecuteHis_OutputMessage">
+    <wsdl:part name="parameters" element="tns:YExecuteHisResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBHelper_YExecuteDBExits_InputMessage">
+    <wsdl:part name="parameters" element="tns:YExecuteDBExits" />
+  </wsdl:message>
+  <wsdl:message name="IDBHelper_YExecuteDBExits_OutputMessage">
+    <wsdl:part name="parameters" element="tns:YExecuteDBExitsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBHelper_YExecuteReportSql_InputMessage">
+    <wsdl:part name="parameters" element="tns:YExecuteReportSql" />
+  </wsdl:message>
+  <wsdl:message name="IDBHelper_YExecuteReportSql_OutputMessage">
+    <wsdl:part name="parameters" element="tns:YExecuteReportSqlResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBHelper_BexecuteProc_InputMessage">
+    <wsdl:part name="parameters" element="tns:BexecuteProc" />
+  </wsdl:message>
+  <wsdl:message name="IDBHelper_BexecuteProc_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BexecuteProcResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBHelper_BexecuteProcNoPara_InputMessage">
+    <wsdl:part name="parameters" element="tns:BexecuteProcNoPara" />
+  </wsdl:message>
+  <wsdl:message name="IDBHelper_BexecuteProcNoPara_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BexecuteProcNoParaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBHelper_BexecuteProcWithBackPara_InputMessage">
+    <wsdl:part name="parameters" element="tns:BexecuteProcWithBackPara" />
+  </wsdl:message>
+  <wsdl:message name="IDBHelper_BexecuteProcWithBackPara_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BexecuteProcWithBackParaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBHelper_BInsertTransDetailProc_InputMessage">
+    <wsdl:part name="parameters" element="tns:BInsertTransDetailProc" />
+  </wsdl:message>
+  <wsdl:message name="IDBHelper_BInsertTransDetailProc_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BInsertTransDetailProcResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBHelper_testGetTableProc_InputMessage">
+    <wsdl:part name="parameters" element="tns:testGetTableProc" />
+  </wsdl:message>
+  <wsdl:message name="IDBHelper_testGetTableProc_OutputMessage">
+    <wsdl:part name="parameters" element="tns:testGetTableProcResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBHelper_BexcuteSql_InputMessage">
+    <wsdl:part name="parameters" element="tns:BexcuteSql" />
+  </wsdl:message>
+  <wsdl:message name="IDBHelper_BexcuteSql_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BexcuteSqlResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBHelper_BgetAllVehicleWithRight_InputMessage">
+    <wsdl:part name="parameters" element="tns:BgetAllVehicleWithRight" />
+  </wsdl:message>
+  <wsdl:message name="IDBHelper_BgetAllVehicleWithRight_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BgetAllVehicleWithRightResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBHelper_BgetTreeVehicleWithRight_InputMessage">
+    <wsdl:part name="parameters" element="tns:BgetTreeVehicleWithRight" />
+  </wsdl:message>
+  <wsdl:message name="IDBHelper_BgetTreeVehicleWithRight_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BgetTreeVehicleWithRightResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBHelper_BInsertIntoMsgGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:BInsertIntoMsgGroup" />
+  </wsdl:message>
+  <wsdl:message name="IDBHelper_BInsertIntoMsgGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BInsertIntoMsgGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBHelper_GgpsTranslate2Baidu_InputMessage">
+    <wsdl:part name="parameters" element="tns:GgpsTranslate2Baidu" />
+  </wsdl:message>
+  <wsdl:message name="IDBHelper_GgpsTranslate2Baidu_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GgpsTranslate2BaiduResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBHelper_GgpsTranslate2BaiduPoi_InputMessage">
+    <wsdl:part name="parameters" element="tns:GgpsTranslate2BaiduPoi" />
+  </wsdl:message>
+  <wsdl:message name="IDBHelper_GgpsTranslate2BaiduPoi_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GgpsTranslate2BaiduPoiResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IDBHelper">
+    <wsdl:operation name="YExecuteSql">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBHelper/YExecuteSql" message="tns:IDBHelper_YExecuteSql_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBHelper/YExecuteSqlResponse" message="tns:IDBHelper_YExecuteSql_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="YExecuteHis">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBHelper/YExecuteHis" message="tns:IDBHelper_YExecuteHis_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBHelper/YExecuteHisResponse" message="tns:IDBHelper_YExecuteHis_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="YExecuteDBExits">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBHelper/YExecuteDBExits" message="tns:IDBHelper_YExecuteDBExits_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBHelper/YExecuteDBExitsResponse" message="tns:IDBHelper_YExecuteDBExits_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="YExecuteReportSql">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBHelper/YExecuteReportSql" message="tns:IDBHelper_YExecuteReportSql_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBHelper/YExecuteReportSqlResponse" message="tns:IDBHelper_YExecuteReportSql_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BexecuteProc">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBHelper/BexecuteProc" message="tns:IDBHelper_BexecuteProc_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBHelper/BexecuteProcResponse" message="tns:IDBHelper_BexecuteProc_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BexecuteProcNoPara">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBHelper/BexecuteProcNoPara" message="tns:IDBHelper_BexecuteProcNoPara_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBHelper/BexecuteProcNoParaResponse" message="tns:IDBHelper_BexecuteProcNoPara_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BexecuteProcWithBackPara">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBHelper/BexecuteProcWithBackPara" message="tns:IDBHelper_BexecuteProcWithBackPara_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBHelper/BexecuteProcWithBackParaResponse" message="tns:IDBHelper_BexecuteProcWithBackPara_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BInsertTransDetailProc">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBHelper/BInsertTransDetailProc" message="tns:IDBHelper_BInsertTransDetailProc_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBHelper/BInsertTransDetailProcResponse" message="tns:IDBHelper_BInsertTransDetailProc_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="testGetTableProc">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBHelper/testGetTableProc" message="tns:IDBHelper_testGetTableProc_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBHelper/testGetTableProcResponse" message="tns:IDBHelper_testGetTableProc_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BexcuteSql">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBHelper/BexcuteSql" message="tns:IDBHelper_BexcuteSql_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBHelper/BexcuteSqlResponse" message="tns:IDBHelper_BexcuteSql_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BgetAllVehicleWithRight">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBHelper/BgetAllVehicleWithRight" message="tns:IDBHelper_BgetAllVehicleWithRight_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBHelper/BgetAllVehicleWithRightResponse" message="tns:IDBHelper_BgetAllVehicleWithRight_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BgetTreeVehicleWithRight">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBHelper/BgetTreeVehicleWithRight" message="tns:IDBHelper_BgetTreeVehicleWithRight_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBHelper/BgetTreeVehicleWithRightResponse" message="tns:IDBHelper_BgetTreeVehicleWithRight_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BInsertIntoMsgGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBHelper/BInsertIntoMsgGroup" message="tns:IDBHelper_BInsertIntoMsgGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBHelper/BInsertIntoMsgGroupResponse" message="tns:IDBHelper_BInsertIntoMsgGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GgpsTranslate2Baidu">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBHelper/GgpsTranslate2Baidu" message="tns:IDBHelper_GgpsTranslate2Baidu_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBHelper/GgpsTranslate2BaiduResponse" message="tns:IDBHelper_GgpsTranslate2Baidu_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GgpsTranslate2BaiduPoi">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBHelper/GgpsTranslate2BaiduPoi" message="tns:IDBHelper_GgpsTranslate2BaiduPoi_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBHelper/GgpsTranslate2BaiduPoiResponse" message="tns:IDBHelper_GgpsTranslate2BaiduPoi_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IDBHelper" type="tns:IDBHelper">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="YExecuteSql">
+      <soap:operation soapAction="http://tempuri.org/IDBHelper/YExecuteSql" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="YExecuteHis">
+      <soap:operation soapAction="http://tempuri.org/IDBHelper/YExecuteHis" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="YExecuteDBExits">
+      <soap:operation soapAction="http://tempuri.org/IDBHelper/YExecuteDBExits" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="YExecuteReportSql">
+      <soap:operation soapAction="http://tempuri.org/IDBHelper/YExecuteReportSql" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BexecuteProc">
+      <soap:operation soapAction="http://tempuri.org/IDBHelper/BexecuteProc" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BexecuteProcNoPara">
+      <soap:operation soapAction="http://tempuri.org/IDBHelper/BexecuteProcNoPara" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BexecuteProcWithBackPara">
+      <soap:operation soapAction="http://tempuri.org/IDBHelper/BexecuteProcWithBackPara" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BInsertTransDetailProc">
+      <soap:operation soapAction="http://tempuri.org/IDBHelper/BInsertTransDetailProc" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="testGetTableProc">
+      <soap:operation soapAction="http://tempuri.org/IDBHelper/testGetTableProc" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BexcuteSql">
+      <soap:operation soapAction="http://tempuri.org/IDBHelper/BexcuteSql" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BgetAllVehicleWithRight">
+      <soap:operation soapAction="http://tempuri.org/IDBHelper/BgetAllVehicleWithRight" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BgetTreeVehicleWithRight">
+      <soap:operation soapAction="http://tempuri.org/IDBHelper/BgetTreeVehicleWithRight" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BInsertIntoMsgGroup">
+      <soap:operation soapAction="http://tempuri.org/IDBHelper/BInsertIntoMsgGroup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GgpsTranslate2Baidu">
+      <soap:operation soapAction="http://tempuri.org/IDBHelper/GgpsTranslate2Baidu" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GgpsTranslate2BaiduPoi">
+      <soap:operation soapAction="http://tempuri.org/IDBHelper/GgpsTranslate2BaiduPoi" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DBHelper">
+    <wsdl:port name="BasicHttpBinding_IDBHelper" binding="tns:BasicHttpBinding_IDBHelper">
+      <soap:address location="http://61.183.9.107:4013/DBHelper.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

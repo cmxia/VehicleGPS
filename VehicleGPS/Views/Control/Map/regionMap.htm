@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">  
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!-- saved from url=(0014)about:internet -->
+<head>  
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
+    <title>百度地图</title>  
+    <style type="text/css">  
+        body, html, #allmap  
+        {  
+            width: 100%;  
+            height: 100%;  
+            overflow: hidden;  
+            margin: 0;  
+        }  
+        #l-map  
+        {  
+            height: 100%;  
+            width: 78%;  
+            float: left;  
+            border-right: 2px solid #bcbcbc;  
+        }  
+        #r-result  
+        {  
+            height: 100%;  
+            width: 20%;  
+            float: left;  
+        }  
+    </style>  
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.5&ak=6c497f51c06477544e5fa6e9bd68f7c3"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/LuShu/1.2/src/LuShu_min.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js"></script>
+    
+</head>  
+<body>
+    <div id="allmap">  
+    </div>
+    <script type="text/javascript">
+        var m_Map; //地图对象
+        baiduMapInit(114.309817, 30.562716, 13);
+        /*<summary>初始化地图</summary>
+        *<param name="lng">经度</param>
+        *<param name="lat">纬度</param>
+        *<param name="zoom">地图级别</param>
+        *<return></return>
+        */
+        function baiduMapInit(lng, lat, zoom) {
+            m_Map = new BMap.Map("allmap");               // 创建Map实例
+            m_Map.centerAndZoom(new BMap.Point(lng, lat), zoom);
+            m_Map.addControl(new BMap.NavigationControl());   // 添加平移缩放控件  
+            m_Map.addControl(new BMap.ScaleControl());        // 添加比例尺控件  
+            m_Map.addControl(new BMap.OverviewMapControl());  //添加缩略地图控件  
+            m_Map.addControl(new BMap.MapTypeControl());      //添加地图类型控件  
+            m_Map.enableScrollWheelZoom();                    //启用滚轮放大缩小
+            m_Map.addEventListener("dblclick", ZoomIn);
+        }
+        //放大地图一级
+        function ZoomIn() {
+            m_Map.zoomIn();
+        }
+
+        function removeCircle() {
+        if(circle !=null)
+            m_Map.removeOverlay(circle);
+        }
+        /*==================================================================================================*/
+        /*-----------------------------------标区·变量·函数----------------------------------*/
+        var color; //区域颜色
+        var circle = null;  //标区对象
+        var circleLng = null, circleLat = null, circleRadius = null;
+        /*<summary>为地图添加标区监听事件</summary>
+        *<param name="Color">区域颜色</param>
+        */
+        function addCircleListener(Color) {
+            color = Color;
+            if (m_Map.getZoom() < 13) {
+                m_Map.setZoom(13); //设置地图级别为：14
+            }
+            m_Map.addEventListener("click", addCircle);
+        }
+        //在地图上添加一个圆：可编辑；并移除地图的标区监听事件
+        function addCircle(e) {
+            var point = new BMap.Point(e.point.lng, e.point.lat);
+            circle = new BMap.Circle(point, 500, {
+                strokeColor: color,         //圆边线颜色
+                fillColor: color,           //填充颜色
+                fillOpacity: 0.35,          //填充透明度
+                strokeWeight: 2              //边线宽度
+            });
+            m_Map.addOverlay(circle);
+            circle.enableEditing();
+            m_Map.removeEventListener("click", addCircle);
+        }
+
+        /*<summary>单个添加圆形区域</summary>
+        *<param name="lng">经度</param>
+        *<param name="lat">纬度</param>
+        *<param name="radius">区域半径</param>
+        *<param name="color">区域颜色</param>
+        *<param name="isEnableEdit">是否可编辑</param>
+        *<return></return>
+        */
+        function addCircleByOne(Onelng, Onelat, Oneradius, OneColor, isEnableEdit) {
+            var Onepoint = new BMap.Point(Onelng, Onelat);
+            if (m_Map.getZoom() < 14) {
+                m_Map.centerAndZoom(Onepoint, 14);  //设置地图级别为：14
+            } else {
+                m_Map.setCenter(Onepoint);
+            }
+            circle = new BMap.Circle(Onepoint, Oneradius, {
+                strokeColor: OneColor,     //圆边线颜色
+                fillColor: OneColor,       //填充颜色
+                fillOpacity: 0.35,      //填充透明度
+                strokeWeight: 2         //边线宽度
+            })
+            m_Map.addOverlay(circle);
+            if (isEnableEdit) {
+                circle.enableEditing();
+            }
+        }
+
+        /*<summary>单个添加圆形区域</summary>
+        *<param name="lng">经度</param>
+        *<param name="lat">纬度</param>
+        *<param name="radius">区域半径</param>
+        *<param name="color">区域颜色</param>
+        *<param name="isEnableEdit">是否可编辑</param>
+        *<return></return>
+        */
+        function addCircleByLngLat(Onelng, Onelat, Oneradius, OneColor, isEnableEdit) {
+            var Onepoint = new BMap.Point(Onelng, Onelat);
+            if (m_Map.getZoom() < 14) {
+                m_Map.centerAndZoom(Onepoint, 14);  //设置地图级别为：14
+            } else {
+                m_Map.setCenter(Onepoint);
+            }
+            circle = new BMap.Circle(Onepoint, Oneradius, {
+                strokeColor: OneColor,     //圆边线颜色
+                fillColor: OneColor,       //填充颜色
+                fillOpacity: 0.35,      //填充透明度
+                strokeWeight: 2         //边线宽度
+            })
+            m_Map.addOverlay(circle);
+            if (isEnableEdit) {
+                circle.enableEditing();
+            }
+        }
+        //返回圆的圆心经纬度和半径
+        function returnLngLatRadius() {
+            if (circle == null) {
+                return null;
+            } else {
+                circleLng = circle.getCenter().lng;
+                circleLat = circle.getCenter().lat;
+                circleRadius = circle.getRadius();
+                return circleLng + ";" + circleLat + ";" + circleRadius;
+            }
+        }
+    </script>
+</body>  
+</html>  
+  
+

@@ -1,0 +1,61 @@
+﻿<Window x:Class="VehicleGPS.Views.Control.MonitorCentre.Instruction.Overspeed"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="超速设置" Height="600" Width="800" WindowStartupLocation="CenterOwner"
+        Icon="/Images/overspeed.png">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Models/ResourceDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Border>
+                <Border.Background>
+                    <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                </Border.Background>
+                <TextBlock Text="指令设置" VerticalAlignment="Center" Margin="10,5,10,5"></TextBlock>
+            </Border>
+            <Border Grid.Row="1" BorderThickness="0.5" Margin="5">
+                <Border.BorderBrush>
+                    <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                </Border.BorderBrush>
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="限速值（km/h）" Margin="20,5,5,5" VerticalAlignment="Center"></TextBlock>
+                        <TextBox x:Name="SpeedLimit" Width="100"  Margin="5,5,20,5" Text="30"></TextBox>
+                        <TextBlock Text="持续时间（s）" Margin="20,5,5,5" VerticalAlignment="Center"></TextBlock>
+                        <TextBox x:Name="ContinueTime" Width="100"  Margin="5,5,20,5" Text="30"></TextBox>
+                        <Button Content="发送指令" Margin="20,5" Click="SendIntruction_Click"></Button>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+            <Border Grid.Row="2">
+                <Border.Background>
+                    <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                </Border.Background>
+                <TextBlock Text="指令发送状态" VerticalAlignment="Center" Margin="10,5,10,5"></TextBlock>
+            </Border>
+            <Border Grid.Row="3">
+                <DataGrid x:Name="dg_InfoList" CanUserAddRows="False" AutoGenerateColumns="False" Background="White">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="序号" IsReadOnly="True" Binding="{Binding CurrentId}" Width="100"/>
+                        <DataGridTextColumn Header="车牌号" IsReadOnly="True" Binding="{Binding VehicleNumber}" Width="100"/>
+                        <DataGridTextColumn Header="Sim卡号" IsReadOnly="True" Binding="{Binding Sim}" Width="100"/>
+                        <DataGridTextColumn Header="所属单位" IsReadOnly="True" Binding="{Binding CustomerName}" Width="100"/>
+                        <DataGridTextColumn Header="发送状态" IsReadOnly="True" Binding="{Binding States}" Width="100"/>
+                        <DataGridTextColumn Header="发送结果" IsReadOnly="True" Binding="{Binding Result}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

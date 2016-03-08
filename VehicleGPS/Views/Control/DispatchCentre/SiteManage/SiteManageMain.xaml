@@ -1,0 +1,203 @@
+﻿<Window x:Class="VehicleGPS.Views.Control.DispatchCentre.SiteManage.SiteManageMain"
+         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:VehicleGPS.Views.Control"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             mc:Ignorable="d" x:Name="SiteManageWin"
+             Title="{Binding title}"
+             HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1150" MinHeight="700"  WindowStartupLocation="CenterOwner">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Models/ResourceDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style x:Key="seperateborder" TargetType="Border">
+                <Setter Property="BorderThickness" Value="0,0,2,0"></Setter>
+                <Setter Property="Margin" Value="0,5,0,5"></Setter>
+                <Setter Property="BorderBrush">
+                    <Setter.Value>
+                        <ImageBrush ImageSource="/Images/background.jpg"></ImageBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="4"></RowDefinition>
+            <RowDefinition Height="120"></RowDefinition>
+            <RowDefinition Height="4"></RowDefinition>
+            <RowDefinition Height="500"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <!---纵向分割线-->
+        <GridSplitter Grid.Column="1" Grid.Row="2" Grid.RowSpan="3" VerticalAlignment="Stretch" Width="4" HorizontalAlignment="Center" ShowsPreview="False">
+            <GridSplitter.Background>
+                <ImageBrush ImageSource="/Images/background.jpg"></ImageBrush>
+            </GridSplitter.Background>
+        </GridSplitter>
+        <!---横向分割线1-->
+        <GridSplitter Grid.Column="0" Grid.Row="1"  Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Height="4" VerticalAlignment="Center" ShowsPreview="False">
+            <GridSplitter.Background>
+                <ImageBrush ImageSource="/Images/background.jpg"></ImageBrush>
+            </GridSplitter.Background>
+        </GridSplitter>
+        <!---功能菜单-->
+        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
+            <Grid>
+                <Grid.Background>
+                    <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                </Grid.Background>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid x:Name="Grid_OperateMenu" Grid.Column="0" >
+
+                    <StackPanel Orientation="Horizontal">
+                        <local:ImageButton Image="/Images/update.png" Text="修改" x:Name="Mod" Margin="3,0,3,0" VerticalAlignment="Center" HorizontalAlignment="Center"
+                               ImageHeight="15" ImageWidth="15" ImageMargin="0" TextFontColor="Black" TextMargin="3"
+                               MouseOverBorderBackground="#fff3ce" MouseOverBorderCorner="3" >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                    <i:InvokeCommandAction Command="{Binding ModSiteCommand}"></i:InvokeCommandAction>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </local:ImageButton>
+                        <local:SeperateBorder Margin="0,2,0,2"></local:SeperateBorder>
+                        <local:ImageButton Image="/Images/delete.png" Text="删除" Margin="3,0,3,0" VerticalAlignment="Center" HorizontalAlignment="Center"
+                               ImageHeight="15" ImageWidth="15" ImageMargin="0" TextFontColor="Black" TextMargin="3"
+                               MouseOverBorderBackground="#fff3ce" MouseOverBorderCorner="3">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                    <i:InvokeCommandAction Command="{Binding DelSiteCommand}"></i:InvokeCommandAction>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </local:ImageButton>
+                        <!--<local:SeperateBorder Margin="0,2,0,2"></local:SeperateBorder>-->
+                    </StackPanel>
+
+                </Grid>
+                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <TextBlock x:Name="searchTitle" Text="{Binding TypeName}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" Visibility="Collapsed"></TextBlock>
+                  
+                </StackPanel>
+            </Grid>
+        </Border>
+        <!---树形结构-->
+        <Border Grid.Row="2" Background="White" Grid.Column="0" Grid.RowSpan="3" MinWidth="150">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" >
+                    <Border.Background>
+                        <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                    </Border.Background>
+                    <!---->
+                    <ComboBox ItemsSource="{Binding SiteNameList}" SelectedIndex="{Binding SiteNameSelectedIndex}" DisplayMemberPath="UNITNAME" VerticalAlignment="Center" FontSize="12"  FontWeight="Bold" Foreground="SeaGreen" />
+                </Border> 
+                <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" Height="4" VerticalAlignment="Center" ShowsPreview="False">
+                    <GridSplitter.Background>
+                        <ImageBrush ImageSource="/Images/background.jpg"></ImageBrush>
+                    </GridSplitter.Background>
+                </GridSplitter>
+                <TreeView x:Name="t_Site"  Grid.Row="3"  ItemsSource="{Binding ListDispatchSiteInfo}" Margin="5" BorderThickness="0" 
+                      BorderBrush="White" ><!--SelectedItemChanged="SelectedItemChangedCommand"-->
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectedItemChanged">
+                            <i:InvokeCommandAction Command="{Binding SelectedItemChangedCommand}" CommandParameter="{Binding SelectedItem,ElementName=t_Site}"></i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <TreeView.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding ListDispatchSiteInfo}" x:Name="template">
+                            <StackPanel Orientation="Horizontal" Margin="0,3,0,3">
+                                <TextBlock Text="{Binding regName}" VerticalAlignment="Center" FontSize="12" ></TextBlock>
+                                <TextBlock Text="{Binding regId}" VerticalAlignment="Center" FontSize="12" Visibility="Collapsed" ></TextBlock>
+                            </StackPanel>
+                        </HierarchicalDataTemplate>
+                    </TreeView.ItemTemplate>
+                    <TreeView.ItemContainerStyle>
+                        <Style TargetType="TreeViewItem">
+                            <Setter Property="IsSelected" Value="{Binding IsSelected,Mode=TwoWay}"></Setter>
+                        </Style>
+                    </TreeView.ItemContainerStyle>
+                    </TreeView>
+            </Grid>
+        </Border>
+        <!---详细信息-->
+        <Grid Grid.Row="2" Grid.Column="2" x:Name="regDetailInfo" IsEnabled="False">
+            <Grid.Background>
+                <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+            </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition Height="40"></RowDefinition>
+                <!--<RowDefinition Height="50"></RowDefinition>-->
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0" BorderThickness="1" Margin="5,0">
+                <Border.BorderBrush>
+                    <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                </Border.BorderBrush>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="区域名称：" VerticalAlignment="Center"></TextBlock>
+                    <TextBox Width="150" Margin="3,3,10,3" Text="{Binding Path=regName}"></TextBox>
+                    <TextBlock Text="所属单位：" VerticalAlignment="Center"></TextBlock>
+                    <ComboBox Width="150" Margin="3,3,10,3" ItemsSource="{Binding Path=DepartmentList}" DisplayMemberPath="UNITNAME" SelectedIndex="{Binding DepartSelecteIndex}"></ComboBox>
+                    <TextBlock Text="区域类型：" VerticalAlignment="Center"></TextBlock>
+                    <ComboBox Width="80" Margin="3,3,10,3" ItemsSource="{Binding Path=RegionTypeList}" DisplayMemberPath="regionname" SelectedIndex="{Binding RegTypeSelectedIndex}"></ComboBox>
+                    <TextBlock Text="联系人名：" VerticalAlignment="Center"></TextBlock>
+                    <TextBox Width="80" Margin="3,3,10,3" Text="{Binding Path=ContactName}"></TextBox>
+                    <TextBlock Text="联系电话：" VerticalAlignment="Center"></TextBlock>
+                    <TextBox Width="150" Margin="3,3,10,3" Text="{Binding Path=contactPhone}"></TextBox>
+                </StackPanel>
+            </Border>
+            <Border Grid.Row="1" BorderThickness="1" Margin="5,0">
+                <Border.BorderBrush>
+                    <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                </Border.BorderBrush>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="半       径：" VerticalAlignment="Center"></TextBlock>
+                    <TextBox Width="138" Margin="3,3,0,3" IsEnabled="False" Text="{Binding Path=RegRadius,Mode=OneWay}" IsReadOnly="True"></TextBox>
+                    <TextBlock Text="m" Margin="0,5,10,5"></TextBlock>
+                    <TextBlock Text="经       度：" VerticalAlignment="Center"></TextBlock>
+                    <TextBox Width="150" Margin="3,3,10,3" IsEnabled="False" Text="{Binding Path=regLongitude,Mode=OneWay}" IsReadOnly="True"></TextBox>
+                    <TextBlock Text="纬       度：" VerticalAlignment="Center"></TextBlock>
+                    <TextBox Width="150" Margin="3,3,10,3" IsEnabled="False" Text="{Binding Path=regLatitude,Mode=OneWay}" IsReadOnly="True"></TextBox>
+                    <TextBlock Text="地       址：" VerticalAlignment="Center"></TextBlock>
+                    <TextBox Width="230" Margin="3,3,10,3" IsEnabled="False" Text="{Binding Path=regAddress,Mode=OneWay}" IsReadOnly="True"></TextBox>
+                </StackPanel>
+            </Border>
+            <Border Grid.Row="2" BorderThickness="1" Margin="5,0">
+                <Border.BorderBrush>
+                    <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                </Border.BorderBrush>
+                <StackPanel Orientation="Horizontal" Margin="5,2" HorizontalAlignment="Center">
+                    <Button Content="重新标区" Command="{Binding RemarkCommand}" Margin="5" Padding="15,1"></Button>
+                    <Button x:Name="getgeobtn" Content="获取地理信息" Command="{Binding GetGeoCommand}" Margin="5" Padding="15,1" IsEnabled="False"></Button>
+                    <Button x:Name="modconfirmbtn" Content="确认" Command="{Binding ModifyCommand}" Margin="5" Padding="15,1"></Button>
+                    <Button  Content="取消" Command="{Binding CancelCommand}" Margin="5" Padding="15,1"></Button>
+                </StackPanel>
+            </Border>
+        </Grid>
+        <!---横向分割线2-->
+        <GridSplitter Grid.Column="2" Grid.Row="3"  HorizontalAlignment="Stretch" Height="4" VerticalAlignment="Center" ShowsPreview="False">
+            <GridSplitter.Background>
+                <ImageBrush ImageSource="/Images/background.jpg"></ImageBrush>
+            </GridSplitter.Background>
+        </GridSplitter>
+        <!---地图显示-->
+        <WebBrowser x:Name="webMap" Grid.Row="4" Grid.Column="2"></WebBrowser>
+    </Grid>
+</Window>

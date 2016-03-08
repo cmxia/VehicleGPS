@@ -1,0 +1,144 @@
+﻿<Window x:Class="VehicleGPS.Views.Control.ReportCentre.HistoryTrack"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:MyConvertor="clr-namespace:VehicleGPS.Views.Control.ReportCentre"
+             mc:Ignorable="d" Title="历史轨迹" Icon="/Images/Report/yxlsgj.png"
+             Height="660" Width="1028" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Models/ResourceDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <MyConvertor:DisplayConvertor x:Key="displayConvert" />
+        </ResourceDictionary>
+    </Window.Resources>
+    <xctk:BusyIndicator x:Name="Indicator" BusyContent="正在查询,请稍后...">
+        <Grid>
+            <Border BorderThickness="2" >
+                <Border.BorderBrush>
+                    <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                </Border.BorderBrush>
+                <Grid x:Name="LayoutRoot" Background="White">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <DataGrid x:Name="dg_HistoryTrackList" AutoGenerateColumns="False" Background="White" CanUserAddRows="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="序号" IsReadOnly="True" Binding="{Binding serial}"/>
+                            <DataGridTextColumn Header="车牌号" IsReadOnly="True" Binding="{Binding vehicleNum}"/>
+                            <DataGridTextColumn  Header="SIM卡号" IsReadOnly="True" Binding="{Binding sim}"/>
+                            <DataGridTextColumn Header="所属单位" IsReadOnly="True" Binding="{Binding parentDepart}"/>
+                            <DataGridTextColumn  Header="经度" IsReadOnly="True" Binding="{Binding longitude}"/>
+                            <DataGridTextColumn  Header="纬度" IsReadOnly="True" Binding="{Binding latitude}"/>
+                            <DataGridTextColumn Header="方向" IsReadOnly="True" Binding="{Binding direction}"/>
+                            <DataGridTextColumn Header="GPS状态" IsReadOnly="True" Binding="{Binding gpsStatus}"/>
+                            <DataGridTextColumn Header="海拔高度" IsReadOnly="True" Binding="{Binding altitude}"/>
+                            <DataGridTextColumn Header="速度" IsReadOnly="True" Binding="{Binding speed}"/>
+                            <DataGridTextColumn Header="行驶记录速度" IsReadOnly="True" Binding="{Binding devSpeed}"/>
+                            <DataGridTextColumn Header="里程" IsReadOnly="True" Binding="{Binding mileage}"/>
+                            <DataGridTextColumn Header="油量" IsReadOnly="True" Binding="{Binding oilVolumn}"/>
+                            <DataGridTextColumn Header="时间" IsReadOnly="True" Binding="{Binding recordtime}"/>
+                            <DataGridTextColumn Header="ID时间" IsReadOnly="True" Binding="{Binding idtime}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="ACC状态" IsReadOnly="True" Binding="{Binding accstatus}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="运营状态" IsReadOnly="True" Binding="{Binding workstatus}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="经纬度加密状态" IsReadOnly="True" Binding="{Binding llsecret}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="GPS模式" IsReadOnly="True" Binding="{Binding gpsmode}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="油路状态" IsReadOnly="True" Binding="{Binding oilwaystatus}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="电路状态" IsReadOnly="True" Binding="{Binding vcstatus}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="车门状态" IsReadOnly="True" Binding="{Binding vdstatus}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="前车门状态" IsReadOnly="True" Binding="{Binding fdstatus}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="后车门状态" IsReadOnly="True" Binding="{Binding bdstatus}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="发动机状态" IsReadOnly="True" Binding="{Binding enginestatus}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="空调状态" IsReadOnly="True" Binding="{Binding conditionerstatus}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="车状态" IsReadOnly="True" Binding="{Binding brakestatus}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="左转向状态" IsReadOnly="True" Binding="{Binding ltstatus}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="右转向状态" IsReadOnly="True" Binding="{Binding rtstatus}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="远光灯状态" IsReadOnly="True" Binding="{Binding farlstatus}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="近光灯状态" IsReadOnly="True" Binding="{Binding nearlstatus}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="正反转状态" IsReadOnly="True" Binding="{Binding pnstatus}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="震动状态" IsReadOnly="True" Binding="{Binding shakestatus}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="喇叭状态" IsReadOnly="True" Binding="{Binding hornstatus}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="安全状态" IsReadOnly="True" Binding="{Binding protectstatus}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="负载状态" IsReadOnly="True" Binding="{Binding loadstatus}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="总线状态" IsReadOnly="True" Binding="{Binding busstatus}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="GSM模块状态" IsReadOnly="True" Binding="{Binding gsmstatus}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="锁车电路状态" IsReadOnly="True" Binding="{Binding lcstatus}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="前雾灯状态" IsReadOnly="True" Binding="{Binding ffstatus}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="后雾灯状态" IsReadOnly="True" Binding="{Binding bfstatus}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="GPS天线状态" IsReadOnly="True" Binding="{Binding gpsantstatus}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="紧急报警" IsReadOnly="True" Binding="{Binding soswarn}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="超速报警" IsReadOnly="True" Binding="{Binding overspeedwarn}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="疲劳驾驶" IsReadOnly="True" Binding="{Binding tiredwarn}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="预警" IsReadOnly="True" Binding="{Binding prewarn}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="GNSS模块故障" IsReadOnly="True" Binding="{Binding gnssfatal}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="GNSS天线故障" IsReadOnly="True" Binding="{Binding gnssantwarn}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="终端主电源断电" IsReadOnly="True" Binding="{Binding lowvolwarn}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="终端主电源高压" IsReadOnly="True" Binding="{Binding highvolwarn}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="终端主电源掉电" IsReadOnly="True" Binding="{Binding outagewarn}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="终端LCD或者显示器故障" IsReadOnly="True" Binding="{Binding lcdfatalwarn}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="TSS模块故障" IsReadOnly="True" Binding="{Binding ttsfatalwarn}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="摄像头故障" IsReadOnly="True" Binding="{Binding camerafatalwarn}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="视频丢失报警" IsReadOnly="True" Binding="{Binding vediolosewarn}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="当天累计驾驶超时" IsReadOnly="True" Binding="{Binding accumtimeout}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="超时停车" IsReadOnly="True" Binding="{Binding stoptimeout}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="进出区域报警" IsReadOnly="True" Binding="{Binding inoutareawarn}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="进出路段报警" IsReadOnly="True" Binding="{Binding inoutlinewarn}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="路段行驶时间不足/过长报警" IsReadOnly="True" Binding="{Binding drivingtimewarn}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="路线偏离报警" IsReadOnly="True" Binding="{Binding deviatewarn}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="车辆VSS故障" IsReadOnly="True" Binding="{Binding vssfatalwarn}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="油量异常报警" IsReadOnly="True" Binding="{Binding oilexceptionwarn}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="车辆被盗报警" IsReadOnly="True" Binding="{Binding vehiclestolenwarn}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="非法点火报警" IsReadOnly="True" Binding="{Binding illignitewarn}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="非法位移报警" IsReadOnly="True" Binding="{Binding illmovewarn}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="碰撞侧翻报警" IsReadOnly="True" Binding="{Binding crashwarn}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="SD卡异常报警" IsReadOnly="True" Binding="{Binding sdexceptionwarn}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="劫警"         IsReadOnly="True" Binding="{Binding robwarn}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="司机停车休息时间不足报警" IsReadOnly="True" Binding="{Binding sleeptimewarn}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="非法时段行驶报警" IsReadOnly="True" Binding="{Binding illtimedrivingwarn}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="越站报警" IsReadOnly="True" Binding="{Binding overstationwarn}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="非法开车门报警" IsReadOnly="True" Binding="{Binding ilopendoorwarn}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="设防报警" IsReadOnly="True" Binding="{Binding protectwarn}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="剪线报警" IsReadOnly="True" Binding="{Binding trimmingwarn}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="密码错误报警" IsReadOnly="True" Binding="{Binding passwdwarn}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="禁行报警" IsReadOnly="True" Binding="{Binding prohibitmovewarn}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="非法停车报警" IsReadOnly="True" Binding="{Binding illstopwarn}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="GNSS天线短路" IsReadOnly="True" Binding="{Binding gnssshortwarn}" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="视频遮挡报警" IsReadOnly="True" Binding="{Binding vedioshelterwarn}" Visibility="Collapsed"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Border Grid.Row="1">
+                        <Border.Background>
+                            <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                        </Border.Background>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Right" >
+                            <StackPanel x:Name="pagerContainer" HorizontalAlignment="Center" Margin="5,5,10,5">
+                                <!--加入分页符-->
+
+                            </StackPanel>
+                            <Button x:Name="export_static" Content="导出到Excel" Margin="5" HorizontalAlignment="Center" Click="export_static_Click"></Button>
+                            <Button Content="关闭" Margin="5" HorizontalAlignment="Center" x:Name="close" Click="close_Click"></Button>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Border>
+            <Canvas>
+                <Button Canvas.Top="0" Canvas.Right="0" x:Name="btn_ColumnsList" Content="选列" Click="ColumnsList_Click" Height="25"  Width="50"/>
+                <Border Canvas.Top="27" Canvas.Right="52" BorderThickness="1" x:Name="border_ColumnList" Visibility="Collapsed" CornerRadius="2">
+                    <Border.BorderBrush>
+                        <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                    </Border.BorderBrush>
+                    <DataGrid x:Name="dg_ColumnsList" BorderThickness="0" AutoGenerateColumns="False" Height="550" Width="250">
+                        <DataGrid.Columns>
+                            <DataGridCheckBoxColumn  Header="是否显示"  Width="65" Binding="{Binding Visibility, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource displayConvert}}"/>
+                            <DataGridTextColumn  Header="各列名称" Width="auto" IsReadOnly="True"  Binding="{Binding Header}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Border>
+            </Canvas>
+        </Grid>
+    </xctk:BusyIndicator>
+</Window>

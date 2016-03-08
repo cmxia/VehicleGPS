@@ -1,0 +1,42 @@
+﻿<Window x:Class="VehicleGPS.Views.Control.MonitorCentre.RealTimeMonitor.VehicleInfoConfig"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="车辆信息显示设置" Height="100" Width="200"  WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize">
+    <Border>
+        <Border.Background>
+            <ImageBrush ImageSource="/Images/background.jpg"></ImageBrush>
+        </Border.Background>
+        <Grid Margin="5" Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Row="0" Grid.Column="0" >
+                <Border.Background>
+                    <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                </Border.Background>
+                <RadioButton x:Name="vehicleid" Content="车牌号" IsChecked="True" VerticalAlignment="Center" HorizontalAlignment="Left" GroupName="showmember"></RadioButton>
+            </Border>
+            <Border Grid.Row="0" Grid.Column="1">
+                <Border.Background>
+                    <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                </Border.Background>
+                <RadioButton x:Name="innerid" Content="内部编号" VerticalAlignment="Center" HorizontalAlignment="Left" GroupName="showmember"></RadioButton>
+            </Border>
+            <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
+                <Border.Background>
+                    <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                </Border.Background>
+                <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Content="确定" x:Name="confirm_btn" Click="confirm_btn_Click" Padding="10,3" Margin="3"></Button>
+                    <Button Content="取消" x:Name="cancel_btn" Click="cancel_btn_Click" Padding="10,3" Margin="3"></Button>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

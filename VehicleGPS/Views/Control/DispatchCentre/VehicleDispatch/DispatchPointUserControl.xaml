@@ -1,0 +1,140 @@
+﻿<UserControl x:Class="VehicleGPS.Views.Control.DispatchCentre.VehicleDispatch.DispatchPointUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <StackPanel>
+        <Grid Height="25" Width="70" Margin="{Binding ImageMargin}" x:Name="grid_DispatchPoint">
+            <Grid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="车辆跟踪" Command="{Binding VehicleTrackCommand}"></MenuItem>
+                </ContextMenu>
+            </Grid.ContextMenu>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseMove">
+                    <i:InvokeCommandAction Command="{Binding ImageMouseMove}" CommandParameter="{Binding ElementName=grid_DispatchPoint}"></i:InvokeCommandAction>
+                </i:EventTrigger>
+                <i:EventTrigger EventName="MouseLeave">
+                    <i:InvokeCommandAction Command="{Binding ImageMouseLeave}"></i:InvokeCommandAction>
+                </i:EventTrigger>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding ImageMouseDown}" CommandParameter="{Binding ElementName=grid_DispatchPoint}"></i:InvokeCommandAction>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Image x:Name="myImage" Height="25" Width="70" Source="/Images/dispatchpoint.png" Cursor="Hand">
+            </Image>
+            <TextBlock Text="{Binding InnerId}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="2" Visibility="{Binding InnerIdVisibility}"></TextBlock>
+            <TextBlock Text="{Binding VehicleId}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="2" Visibility="{Binding VehicleIdVisibility}"></TextBlock>
+        </Grid>
+        <Popup x:Name="myPopup" IsOpen="{Binding ShowPopup}" PlacementTarget="{Binding ElementName=myImage}" Placement="Center"
+               PopupAnimation="Fade"  AllowsTransparency="True" Width="350" VerticalOffset="{Binding PopupVerticalOffset}">
+            <Grid x:Name="Grid" Width="350" Height="240" Background="Transparent">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseMove">
+                        <i:InvokeCommandAction Command="{Binding MouseMovePopup}"></i:InvokeCommandAction>
+                    </i:EventTrigger>
+                    <i:EventTrigger EventName="MouseLeave">
+                        <i:InvokeCommandAction Command="{Binding MouseLeavePopup}"></i:InvokeCommandAction>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <Path x:Name ="myPathDown" Visibility="{Binding DownVisibility}" Width="350" Height="240" Data="M 0,10 L 350,10 350,215 250,215 175,240 100,215 0,215  0,10">
+                    <Path.Fill>
+                        <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                    </Path.Fill>
+                </Path>
+                <Path x:Name ="myPathUp" Visibility="{Binding UpVisibility}" Width="350" Height="240" Data="M 0,15 L 100,15 175,0 250,15 350,15 350,230 0,230  0,15">
+                    <Path.Fill>
+                        <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                    </Path.Fill>
+                </Path>
+                <Grid HorizontalAlignment="Right" VerticalAlignment="Center" Height="220" Width="350"  ClipToBounds="True">
+                    <!--<Border Panel.ZIndex="999" Width="20" Background="Black" Opacity="0.1" Height="220" HorizontalAlignment="Left" VerticalAlignment="Top"></Border>
+                    <Image x:Name="img_Pre" Panel.ZIndex="999" Source="/Images/dispatchleft.png" Width="20" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Cursor="Hand">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonDown">
+                                <i:InvokeCommandAction Command="{Binding PrePopUp}" CommandParameter="{Binding ElementName=lv_OverlapVehicle}"></i:InvokeCommandAction>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Image>
+                    <Border  Panel.ZIndex="999" Width="20" Background="Black" Opacity="0.1" Height="220" HorizontalAlignment="Right" VerticalAlignment="Top"></Border>
+                    <Image x:Name="img_Next" Panel.ZIndex="999" Source="/Images/dispatchright.png" Width="20" Height="30" VerticalAlignment="Center" HorizontalAlignment="Right" Cursor="Hand" >
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonDown">
+                                <i:InvokeCommandAction Command="{Binding NextPopUp}" CommandParameter="{Binding ElementName=lv_OverlapVehicle}"></i:InvokeCommandAction>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Image>-->
+                    <ListView x:Name="lv_OverlapVehicle" ItemsSource="{Binding ListOverlapVehicle}" VerticalAlignment="Top"  Height="220">
+                        <ListView.Template>
+                            <ControlTemplate>
+                                <ItemsPresenter />
+                            </ControlTemplate>
+                        </ListView.Template>
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"></StackPanel>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListViewItem}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                            <Grid Height="220" Width="350">
+                                                <Grid.Background>
+                                                    <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                                                </Grid.Background>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="4*" ></ColumnDefinition>
+                                                    <ColumnDefinition Width="5*" ></ColumnDefinition>
+                                                    <ColumnDefinition Width="4*" ></ColumnDefinition>
+                                                    <ColumnDefinition Width="5*" ></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="28"></RowDefinition>
+                                                    <RowDefinition Height="28"></RowDefinition>
+                                                    <RowDefinition Height="28"></RowDefinition>
+                                                    <RowDefinition Height="28"></RowDefinition>
+                                                    <RowDefinition Height="28"></RowDefinition>
+                                                    <RowDefinition Height="28"></RowDefinition>
+                                                    <RowDefinition Height="28"></RowDefinition>
+                                                </Grid.RowDefinitions>
+                                                <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="12" Margin="0,0,5,0" Text="车牌号:"></TextBlock>
+                                                <TextBlock Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="12" Margin="0,0,5,0" Text="速度(km/h):"></TextBlock>
+                                                <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="12" Margin="0,0,5,0" Text="ACC状态:"></TextBlock>
+                                                <TextBlock Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="12" Margin="0,0,5,0" Text="油量(升):"></TextBlock>
+                                                <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="12" Margin="0,0,5,0" Text="SIM卡号:"></TextBlock>
+                                                <TextBlock Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="12" Margin="0,0,5,0" Text="货物类型:"></TextBlock>
+                                                <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="12" Margin="0,0,5,0" Text="核载方量:"></TextBlock>
+                                                <TextBlock Grid.Row="3" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="12" Margin="0,0,5,0" Text="实载方量:"></TextBlock>
+                                                <TextBlock Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="12" Margin="0,0,5,0" Text="任务单距离:"></TextBlock>
+                                                <TextBlock Grid.Row="4" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="12" Margin="0,0,5,0" Text="{Binding DistanceType,StringFormat=\{0\}:}"></TextBlock>
+                                                <TextBlock Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="12" Margin="0,0,5,0" Text="出站时间:"></TextBlock>
+                                                <TextBlock Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="12" Margin="0,0,5,0" Text="所在地址:"></TextBlock>
+                                                <TextBlock Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Text="{Binding DispatchInfo.VehicleID}"></TextBlock>
+                                                <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Text="{Binding DetailInfo.VehicleGPSInfo.Accstatus}"></TextBlock>
+                                                <TextBlock Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Text="{Binding DetailInfo.VehicleGPSInfo.Speed,StringFormat=\{0:N2\}}"></TextBlock>
+                                                <TextBlock Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Text="{Binding DetailInfo.VehicleGPSInfo.OilVolumn,StringFormat=\{0:N2\}}"></TextBlock>
+                                                <TextBlock Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Text="{Binding DetailInfo.SIM}"></TextBlock>
+                                                <TextBlock Grid.Row="2" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Text="{Binding DispatchInfo.ConcreteName}"></TextBlock>
+                                                <TextBlock Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Text="{Binding DetailInfo.LoadAmount,StringFormat=\{0\}方}"></TextBlock>
+                                                <TextBlock Grid.Row="3" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Text="{Binding DispatchInfo.TransCapPer,StringFormat=\{0\}方}"></TextBlock>
+                                                <TextBlock Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Text="{Binding Path=DataContext.TaskNumberInfo.RealTransDistance,StringFormat=\{0:N2\}km,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListView}}}"></TextBlock>
+                                                <TextBlock Grid.Row="4" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Text="{Binding RealDistance,StringFormat=\{0:N2\}km}"></TextBlock>
+                                                <TextBlock Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Text="{Binding DispatchInfo.LeaveStartPointTime}"></TextBlock>
+                                                <TextBlock Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="left" Margin="10,0,0,0" FontSize="12" Text="{Binding DetailInfo.VehicleGPSInfo.Datetime}"></TextBlock>
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
+                </Grid>
+            </Grid>
+        </Popup>
+    </StackPanel>
+</UserControl>

@@ -1,0 +1,134 @@
+﻿<Window x:Class="VehicleGPS.Views.Control.MonitorCentre.Instruction.SetPointsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="设置点属性" Height="400" Width="930">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Models/ResourceDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="seperateborder" TargetType="Border">
+                <Setter Property="BorderThickness" Value="0,0,2,0"></Setter>
+                <Setter Property="Margin" Value="0,5,0,5"></Setter>
+                <Setter Property="BorderBrush">
+                    <Setter.Value>
+                        <ImageBrush ImageSource="/Images/background.jpg"></ImageBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" CornerRadius="5" Background="White" Margin="10,0,10,10">
+            <GroupBox Header="设置点属性" BorderThickness="2" Margin="5">
+                <GroupBox.BorderBrush>
+                    <ImageBrush ImageSource="/Images/background.jpg"></ImageBrush>
+                </GroupBox.BorderBrush>
+                <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"  SelectionMode="Single"
+                           IsReadOnly="True" Background="White" ItemsSource="{Binding PointList}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="拐点纬度" Binding="{Binding Lat}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="拐点经度" Binding="{Binding Lng}"></DataGridTextColumn>
+                        <DataGridTemplateColumn Header="拐点ID" Width="Auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox  Text="{Binding InflectinID,UpdateSourceTrigger=PropertyChanged}" Width="70" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="路段ID" Width="Auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox  Text="{Binding RoadID,UpdateSourceTrigger=PropertyChanged}" Width="70" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="路段宽度" Width="Auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox  Text="{Binding RoadWidth,UpdateSourceTrigger=PropertyChanged}" Width="70" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="行驶时间" Width="Auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding Path=IsSelectedTime,  UpdateSourceTrigger=PropertyChanged}"
+                                        VerticalAlignment="Center" HorizontalAlignment="Center" >
+                                    </CheckBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="限速" Width="Auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding Path=IsSelectedSpeed,  UpdateSourceTrigger=PropertyChanged}"
+                                        VerticalAlignment="Center" HorizontalAlignment="Center" >
+                                    </CheckBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="纬度" Width="50">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ComboBox ItemsSource="{Binding NSLatitude }" SelectedIndex="{Binding NSLatSelectedIndex,UpdateSourceTrigger=PropertyChanged}" Width="50"></ComboBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="经度" Width="50">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ComboBox ItemsSource="{Binding NSLongitude }" SelectedIndex="{Binding NSLngSelectedIndex,UpdateSourceTrigger=PropertyChanged}" Width="50"></ComboBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="行驶过长阈值" Width="Auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox IsEnabled="{Binding TimeEnable}" Text="{Binding LongLimit,UpdateSourceTrigger=PropertyChanged}" Width="70" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="行驶不足阈值" Width="Auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox  IsEnabled="{Binding TimeEnable}" Text="{Binding LessLimit,UpdateSourceTrigger=PropertyChanged}" Width="70" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="最高速度" Width="Auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox IsEnabled="{Binding SpeedEnable}" Text="{Binding HighSpeed,UpdateSourceTrigger=PropertyChanged}" Width="70" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="超速持续时间" Width="Auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox IsEnabled="{Binding SpeedEnable}" Text="{Binding HighTime,UpdateSourceTrigger=PropertyChanged}" Width="70" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+        </Border>
+        <Border Grid.Row="1">
+            <Border.Background>
+                <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+            </Border.Background>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="btn_Add" Content="确定" Width="60" Margin="5" Command="{Binding ConfirmCommand}"></Button>
+                <Button x:Name="btn_Cel" Content="取消" Width="60" Margin="5" Click="btn_Cel_Click"></Button>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

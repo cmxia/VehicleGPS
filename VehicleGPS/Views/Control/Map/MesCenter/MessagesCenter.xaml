@@ -1,0 +1,77 @@
+﻿<Window x:Class="VehicleGPS.Views.Control.MessCenter.MessagesCenter"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Height="470" Width="290" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
+    <Border x:Name="allBorder" BorderBrush="#99bbe8" BorderThickness="1" VerticalAlignment="Stretch"  HorizontalAlignment="Stretch">
+        <Border  BorderBrush="#99bbe8"  Grid.Column="0" BorderThickness="1" VerticalAlignment="Stretch"  HorizontalAlignment="Stretch">
+            <Grid  x:Name="LayoutRoot" VerticalAlignment="Stretch" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Border  BorderBrush="#99bbe8"  Grid.Row="0" BorderThickness="1" VerticalAlignment="Stretch"  HorizontalAlignment="Stretch">
+                    <Grid Height="30">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.Background>
+                            <ImageBrush Stretch="Fill" ImageSource="../../../Images/leftTitle_bg.png"/>
+                        </Grid.Background>
+
+                        <Border Grid.Column="0" Grid.Row="0"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <StackPanel  Orientation="Horizontal">
+                                <Image Source="../../../Images/add.png" Cursor="Hand" Stretch="None" Margin="1,0,0,2" MouseLeftButtonDown="addFriend_Click" />
+                                <TextBlock Text="添加好友" FontSize="12" Cursor="Hand" VerticalAlignment="Center" Margin="1" MouseLeftButtonDown="addFriend_Click" />
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Column="1" Grid.Row="0"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="../../../Images/do_split.png" Stretch="None" Margin="3"/>
+                                <Image Source="../../../Images/add.png" Cursor="Hand" Stretch="None" Margin="0,0,0,2"  MouseLeftButtonDown="OnCreate"/>
+                                <TextBlock Text="创建讨论组" FontSize="12" Cursor="Hand" VerticalAlignment="Center" Margin="1" MouseLeftButtonDown="OnCreate"/>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </Border>
+                <Grid Grid.Row="1" Background="White"  x:Name="MenuPanel" VerticalAlignment="Stretch">
+                    <TabControl  HorizontalAlignment="Left" Margin="0,2,0,0" Name="AllList" VerticalAlignment="Top" Width="271" DataContext="{Binding}" SelectedIndex="1">
+                        <TabItem Name="Friends" Header="好  友"  Width="87"  BorderBrush="White">
+                            <TreeView Name="FriendList"  BorderBrush="White">
+                            </TreeView>
+                        </TabItem>
+                        <TabItem Name="Groups" Header="讨论组" Width="87" BorderBrush="White">
+                            <TreeView Name="GroupList" BorderBrush="White">
+                            </TreeView>
+                        </TabItem>
+                        <TabItem Name="Message" Header="消  息"  Width="87"  BorderBrush="White">
+                            <StackPanel x:Name="myMes" Orientation="Vertical" Height="Auto">
+                            </StackPanel>
+                        </TabItem>
+                    </TabControl>
+                    <Grid Name="addFriend" Width="271" Margin="-2,332,-1,-2" Visibility="Collapsed"  Background="#C5DCFA" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <StackPanel Orientation="Horizontal" Grid.Row="0">
+                            <TextBlock Height="26" HorizontalAlignment="Left" Margin="7,4,0,0" Name="textBlock1" Text="好友ID：" VerticalAlignment="Center"
+                                       FontSize="12" Padding="2" />
+                            <TextBox Height="26" HorizontalAlignment="Left"  Name="FriendID" VerticalAlignment="Top" Width="120" Margin="0,5,0,0" />
+                            <Button Content="确  定" Height="25" Name="Confirm" Width="68" Margin="10,0,0,0" Background="Azure" Click="Confirm_Click" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Grid.Row="1">
+                            <TextBlock Height="26" HorizontalAlignment="Left" Margin="7,4,0,0" Name="nick" Text="备　注：" VerticalAlignment="Center"
+                                       FontSize="12" Padding="2" />
+                            <TextBox Height="26" HorizontalAlignment="Left"  Name="NickName" VerticalAlignment="Top" Width="120" Margin="0,5,0,0" />
+                            <Button Content="取  消" Height="25" Name="Cancel" Width="68" Margin="10,0,0,0" Background="Azure" Click="Cancel_Click" />
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Border>
+    </Border>
+</Window>

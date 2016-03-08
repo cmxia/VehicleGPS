@@ -1,0 +1,56 @@
+﻿<Window x:Class="VehicleGPS.Views.Control.ReportCentre.OilStatistic"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" Title="油耗统计" Icon="/Images/Report/yhtj.png"
+            xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:tb="clr-namespace:Visifire.Charts;assembly=WPFVisifire.Charts"
+             Height="660" d:DesignWidth="1028" WindowStartupLocation="CenterScreen" >
+    <Window.Resources>
+        <Style x:Key="ChartStyle" TargetType="tb:Chart">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="White" Offset="0"/>
+                        <GradientStop Color="White" Offset="0.5"/>
+                        <GradientStop Color="#FFB2ADAD" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Padding" Value="10"/>
+        </Style>
+        <Style x:Key="TitleStyle" TargetType="tb:Title">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontColor" Value="LightGray"/>
+        </Style>
+    </Window.Resources>
+
+    <xctk:BusyIndicator x:Name="Indicator" BusyContent="正在查询,请稍后...">
+        <Border BorderThickness="2" >
+            <Border.BorderBrush>
+                <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+            </Border.BorderBrush>
+            <Grid x:Name="LayoutRoot" Background="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                    <Border Grid.Row="0">
+                        <Border.Background>
+                            <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                        </Border.Background>
+                        <TextBlock x:Name="tbTitle" Text="" Margin="5,0,0,0" VerticalAlignment="Center"></TextBlock>
+                    </Border>
+                    <tb:Chart Grid.Row="1" Name="chartTest1" Margin="5" Theme="Theme1" Style="{StaticResource ChartStyle}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <tb:Chart.AxesX>
+                            <tb:Axis StartFromZero="True" Title="时间"></tb:Axis>
+                        </tb:Chart.AxesX>
+                        <tb:Chart.AxesY>
+                            <tb:Axis StartFromZero="True" Title="油耗()"></tb:Axis>
+                        </tb:Chart.AxesY>
+                    </tb:Chart>
+            </Grid>
+        </Border>
+    </xctk:BusyIndicator>
+</Window>

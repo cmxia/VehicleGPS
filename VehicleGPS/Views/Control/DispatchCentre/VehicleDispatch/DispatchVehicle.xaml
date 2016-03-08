@@ -1,0 +1,153 @@
+﻿<Window x:Class="VehicleGPS.Views.Control.DispatchCentre.VehicleDispatch.DispatchVehicle"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"      
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        Title="派车" Height="600" Width="900" Icon="/Images/Factory.png" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+        x:Name="DispatchVehicleWin">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Models/ResourceDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="seperateborder" TargetType="Border">
+                <Setter Property="BorderThickness" Value="0,0,2,0"></Setter>
+                <Setter Property="Margin" Value="0,5,0,5"></Setter>
+                <Setter Property="BorderBrush">
+                    <Setter.Value>
+                        <ImageBrush ImageSource="/Images/background.jpg"></ImageBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <xctk:BusyIndicator x:Name="Indicator" IsBusy="{Binding IsBusy}" BusyContent="正在派车,请稍后...">
+        <Grid>
+            <Grid.Background>
+                <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+            </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="35"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0" CornerRadius="5" Background="White" Margin="10,10,10,10">
+                <GroupBox Header="调度信息" BorderThickness="2" Margin="5">
+                    <GroupBox.BorderBrush>
+                        <ImageBrush ImageSource="/Images/background.jpg"></ImageBrush>
+                    </GroupBox.BorderBrush>
+                    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="20,10,20,10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="发车站点：  " Margin="5" VerticalAlignment="Center" HorizontalAlignment="Right"></TextBlock>
+                        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding SelectedItem.TaskNumberInfo.RegionName}" VerticalAlignment="Center" HorizontalAlignment="Left" Width="150"></TextBlock>
+                        <TextBlock Grid.Row="0" Grid.Column="2" Text="发车区域：  " Margin="5" VerticalAlignment="Center" HorizontalAlignment="Right"></TextBlock>
+                        <TextBlock Grid.Row="0" Grid.Column="3" Text="{Binding SelectedItem.TaskNumberInfo.StartPoint}" VerticalAlignment="Center" HorizontalAlignment="Left" Width="150"></TextBlock>
+                        <TextBlock Grid.Row="0" Grid.Column="4" Text="施工工地：  " Margin="5" VerticalAlignment="Center" HorizontalAlignment="Right"></TextBlock>
+                        <TextBlock Grid.Row="0" Grid.Column="5" Text="{Binding SelectedItem.TaskNumberInfo.EndPoint}" VerticalAlignment="Center" HorizontalAlignment="Left" Width="200"></TextBlock>
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="任务单号：  " Margin="5" VerticalAlignment="Center" HorizontalAlignment="Right"></TextBlock>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding SelectedItem.TaskNumberInfo.FPlanId}" VerticalAlignment="Center" HorizontalAlignment="Left"></TextBlock>
+                        <TextBlock Grid.Row="1" Grid.Column="2" Text="需求方量：  " Margin="5" VerticalAlignment="Center" HorizontalAlignment="Right"></TextBlock>
+                        <TextBlock Grid.Row="1" Grid.Column="3" Text="{Binding SelectedItem.TaskNumberInfo.TransCap, StringFormat=\{0\}方}" VerticalAlignment="Center" HorizontalAlignment="Left"></TextBlock>
+                        <TextBlock Grid.Row="1" Grid.Column="4" Text="已派方量：  " Margin="5" VerticalAlignment="Center" HorizontalAlignment="Right"></TextBlock>
+                        <TextBlock Grid.Row="1" Grid.Column="5" Text="{Binding SelectedItem.TaskNumberInfo.TransedCap, StringFormat=\{0\}方}" VerticalAlignment="Center" HorizontalAlignment="Left"></TextBlock>
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="未派方量：  " Margin="5" VerticalAlignment="Center" HorizontalAlignment="Right"></TextBlock>
+                        <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding SelectedItem.TaskNumberInfo.NoTransCap, StringFormat=\{0\}方}" VerticalAlignment="Center" HorizontalAlignment="Left"></TextBlock>
+                        <TextBlock Grid.Row="2" Grid.Column="2" Text="上班时间：  " Margin="5" VerticalAlignment="Center" HorizontalAlignment="Right"></TextBlock>
+                        <ComboBox Grid.Row="2" Grid.Column="3" Width="100" ItemsSource="{Binding ListHolidayType}" DisplayMemberPath="DayName" SelectedIndex="{Binding SelectedHolidayIndex}" VerticalAlignment="Center" HorizontalAlignment="Left"></ComboBox>
+                        <TextBlock Grid.Row="2" Grid.Column="4" Text="循环派车：  " Margin="5" VerticalAlignment="Center" HorizontalAlignment="Right"></TextBlock>
+                        <CheckBox Grid.Row="2" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding IsLoopDispatch,UpdateSourceTrigger=PropertyChanged}" Content="选择"></CheckBox>
+                    </Grid>
+                </GroupBox>
+            </Border>
+            <Border Grid.Row="1" CornerRadius="5" Background="White" Margin="10,0,10,10">
+                <GroupBox Header="可选车辆" BorderThickness="2" Margin="5">
+                    <GroupBox.BorderBrush>
+                        <ImageBrush ImageSource="/Images/background.jpg"></ImageBrush>
+                    </GroupBox.BorderBrush>
+                    <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"  SelectionMode="Single"
+                           IsReadOnly="True" Background="White" ItemsSource="{Binding ListAvailableVehicle}" SelectionChanged="DataGrid_SelectionChanged">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="选择" Width="50">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <CheckBox IsChecked="{Binding Path=IsSelected,  UpdateSourceTrigger=PropertyChanged}"
+                                        VerticalAlignment="Center" HorizontalAlignment="Center" >
+
+                                        </CheckBox>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="车牌号" Binding="{Binding VehicleId}" Width="auto"></DataGridTextColumn>
+                            <DataGridTextColumn Header="内部编号" Binding="{Binding InnerId}" Width="auto"></DataGridTextColumn>
+                            <DataGridTextColumn Header="核定承载方量" Binding="{Binding LoadAmount,StringFormat=\{0\}方}" Width="auto"></DataGridTextColumn>
+                            <!--<DataGridTextColumn Header="进厂时间" Binding="{Binding InstallDate}" Width="auto"></DataGridTextColumn>-->
+                            <DataGridTextColumn Header="当前位置" Binding="{Binding Location}" Width="*"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </GroupBox>
+            </Border>
+            <Border Grid.Row="2" CornerRadius="5" Background="White" Margin="10,0,10,10">
+                <GroupBox Header="已选车辆" BorderThickness="2" Margin="5">
+                    <GroupBox.BorderBrush>
+                        <ImageBrush ImageSource="/Images/background.jpg"></ImageBrush>
+                    </GroupBox.BorderBrush>
+                    <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"  SelectionMode="Single"
+                           IsReadOnly="True" Background="White" ItemsSource="{Binding ListSelectedVehicle}" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="车牌号" Binding="{Binding VehicleId}" Width="auto"></DataGridTextColumn>
+                            <DataGridTextColumn Header="内部编号" Binding="{Binding InnerId}" Width="auto"></DataGridTextColumn>
+                            <DataGridTextColumn Header="任务单号" Binding="{Binding FPlanId}" Width="180"></DataGridTextColumn>
+                            <DataGridTemplateColumn Header="驾驶员" Width="auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <ComboBox ItemsSource="{Binding DriverList}" DisplayMemberPath="DriverName" SelectedIndex="{Binding DriverSelectedIndex,UpdateSourceTrigger=PropertyChanged}" Width="100"></ComboBox>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="核定承载方量" Binding="{Binding  LoadAmount,StringFormat=\{0\}方}" Width="auto"></DataGridTextColumn>
+                            <DataGridTextColumn Header="厂区" Binding="{Binding startRegName}"   Width="auto"></DataGridTextColumn>
+                            <DataGridTemplateColumn Header="塔楼" Width="auto" >
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <ComboBox ItemsSource="{Binding TowerList}" DisplayMemberPath="towername" SelectedIndex="{Binding TowerSelectedIndex,UpdateSourceTrigger=PropertyChanged}" Width="100"></ComboBox>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="工地" Binding="{Binding EndRegName}" Width="auto"></DataGridTextColumn>
+                            <DataGridTemplateColumn Header="运输方量" Width="70">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox  Text="{Binding LoadCapacity,UpdateSourceTrigger=PropertyChanged}" Width="50" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBox>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </GroupBox>
+            </Border>
+            <Border Grid.Row="3">
+                <Border.Background>
+                    <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                </Border.Background>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button x:Name="btn_Add" Content="确定" Width="60" Margin="5" Command="{Binding ConfirmCommand}"></Button>
+                    <Button x:Name="btn_Cel" Content="取消" Width="60" Margin="5" Click="btn_Cel_Click"></Button>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </xctk:BusyIndicator>
+</Window>

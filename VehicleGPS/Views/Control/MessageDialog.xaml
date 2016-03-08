@@ -1,0 +1,8 @@
+﻿<Window x:Class="VehicleGPS.Views.Control.MessageDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="消息提示" Height="200" Width="300" WindowStartupLocation="Manual" Icon="/Images/tipmessage.png">
+    <Grid>
+        
+    </Grid>
+</Window>

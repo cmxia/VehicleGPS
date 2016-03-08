@@ -1,0 +1,33 @@
+﻿<Window x:Class="VehicleGPS.Views.Control.ReportCentre.ReportTreeSetting"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="车辆信息显示模式" Width="200" SizeToContent="Height"  ResizeMode="CanMinimize" 
+        WindowStartupLocation="CenterOwner" Icon="/Images/TreeSet.png">
+    <Border>
+        <Border.Background>
+            <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+        </Border.Background>
+        <StackPanel>
+            <Border CornerRadius="5" Background="White" Margin="10">
+                <GroupBox Header="显示模式" BorderThickness="2" Margin="5">
+                    <GroupBox.BorderBrush>
+                        <ImageBrush ImageSource="/Images/background.jpg"></ImageBrush>
+                    </GroupBox.BorderBrush>
+                    <StackPanel Margin="10">
+                        <CheckBox x:Name="cb_Name" Content="显示车牌号" Margin="5"  IsChecked="{Binding Path=NameVisibleSelected,UpdateSourceTrigger=Explicit}"></CheckBox>
+                        <CheckBox x:Name="cb_InnerID" Content="显示内部编号" Margin="5"  IsChecked="{Binding Path=InnerIDVisibleSelected,UpdateSourceTrigger=Explicit}"></CheckBox>
+                    </StackPanel>
+                </GroupBox>
+            </Border>
+            <Border>
+                <Border.Background>
+                    <ImageBrush ImageSource="/Images/background.jpg"></ImageBrush>
+                </Border.Background>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Content="确定" Width="50" Margin="0,5,10,5" x:Name="btn_Confirm" Click="btn_Confirm_Click"></Button>
+                    <Button Content="取消" Width="50" Margin="10,5,0,5" x:Name="btn_Cancel" Click="btn_Cancel_Click"></Button>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </Border>
+</Window>

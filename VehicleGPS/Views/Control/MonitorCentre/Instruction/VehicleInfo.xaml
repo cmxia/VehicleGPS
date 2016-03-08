@@ -1,0 +1,116 @@
+﻿<Window x:Class="VehicleGPS.Views.Control.MonitorCentre.Instruction.VehicleInfo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="车辆信息" Height="auto" Width="530" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Border Grid.Row="0" BorderThickness="1" Margin="5">
+            <Border.BorderBrush>
+                <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+            </Border.BorderBrush>
+            <GroupBox  Header="车辆信息" Height="auto" HorizontalAlignment="Left"    VerticalAlignment="Top" Width="auto">
+           
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="50"></RowDefinition>
+                        <RowDefinition Height="50"></RowDefinition>
+                        <RowDefinition Height="50"></RowDefinition>
+                        <RowDefinition Height="50"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="50"></RowDefinition>
+                        <RowDefinition Height="50"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0">
+                        <Border.Background>
+                            <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                        </Border.Background>
+                        <TextBlock Text="车辆信息" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,5,5,5"></TextBlock>
+                    </Border>
+                    <Border Grid.Row="1" BorderThickness="1" Margin="5">
+                        <Border.BorderBrush>
+                            <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                        </Border.BorderBrush>
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <TextBlock Text="  车牌号 ：" VerticalAlignment="Center"></TextBlock>
+                            <TextBox Width="150" Margin="3,3,30,3" Text="{Binding VehicleId}" IsReadOnly="True"></TextBox>
+                            <TextBlock Text="内部编号：" VerticalAlignment="Center"></TextBlock>
+                            <TextBox Width="150" Margin="3,3,30,3" Text="{Binding  FInnerId}" IsReadOnly="True"></TextBox>
+                        </StackPanel>
+                    </Border>
+                    <Border Grid.Row="2" BorderThickness="1" Margin="5">
+                        <Border.BorderBrush>
+                            <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                        </Border.BorderBrush>
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <TextBlock Text="车辆类别：" VerticalAlignment="Center"></TextBlock>
+                            <TextBox Width="150" Margin="3,3,30,3"  Text="{Binding  VehicleType}" IsReadOnly="True"></TextBox>
+                            <TextBlock Text="车辆品牌：" VerticalAlignment="Center"></TextBlock>
+                            <TextBox Width="150" Margin="3,3,30,3"  Text="{Binding  VehicleBrand}" IsReadOnly="True"></TextBox>
+                        </StackPanel>
+                    </Border>
+                    <Border Grid.Row="3" BorderThickness="1" Margin="5">
+                        <Border.BorderBrush>
+                            <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                        </Border.BorderBrush>
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <TextBlock Text="车辆型号：" VerticalAlignment="Center"></TextBlock>
+                            <TextBox Width="150" Margin="3,3,30,3"  Text="{Binding  VehicleModel}" IsReadOnly="True"></TextBox>
+                            <TextBlock Text="车辆颜色：" VerticalAlignment="Center"></TextBlock>
+                            <TextBox Width="150" Margin="3,3,30,3"  Text="{Binding  VehicleColor}" IsReadOnly="True"></TextBox>
+
+                            <!-- <TextBlock Text="终端版本号：" VerticalAlignment="Center"></TextBlock>
+                            <TextBox Width="150" Margin="3,3,30,3" Text="{Binding GPSVersion}" IsReadOnly="True"></TextBox>-->
+                        </StackPanel>
+                    </Border>
+                    <Border Grid.Row="4" BorderThickness="1" Margin="5">
+                        <Border.BorderBrush>
+                            <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                        </Border.BorderBrush>
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <TextBlock Text="终端类型：" VerticalAlignment="Center"></TextBlock>
+                            <TextBox Width="150" Margin="3,3,30,3" Text="{Binding GPSType}" IsReadOnly="True"></TextBox>
+                            <TextBlock Text="SIM卡号：" VerticalAlignment="Center"></TextBlock>
+                            <TextBox Width="150" Margin="3,3,30,3" Text="{Binding SIM}" IsReadOnly="True"></TextBox>
+                        </StackPanel>
+                    </Border>
+                    <Border Grid.Row="5">
+                        <Border.Background>
+                            <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                        </Border.Background>
+                        <TextBlock Text="所属单位信息" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,5,5,5"></TextBlock>
+                    </Border>
+                    <Border Grid.Row="6" BorderThickness="1" Margin="5">
+                        <Border.BorderBrush>
+                            <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                        </Border.BorderBrush>
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <TextBlock Text="单位名称：" VerticalAlignment="Center"></TextBlock>
+                            <TextBox Width="150" Margin="3,3,30,3" Text="{Binding EUSERNAME}"  IsReadOnly="True"></TextBox>
+                            <TextBlock Text="联系人：" VerticalAlignment="Center"></TextBlock>
+                            <TextBox Width="150" Margin="3,3,30,3" Text="{Binding ContactPeo }"  IsReadOnly="True"></TextBox>
+                        </StackPanel>
+                    </Border>
+                    <Border Grid.Row="7" BorderThickness="1" Margin="5">
+                        <Border.BorderBrush>
+                            <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                        </Border.BorderBrush>
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <TextBlock Text="联系地址：" VerticalAlignment="Center"></TextBlock>
+                            <TextBox Width="150" Margin="3,3,30,3" Text="{Binding Address}" IsReadOnly="True"></TextBox>
+                            <TextBlock Text="联系电话：" VerticalAlignment="Center"></TextBlock>
+                            <TextBox Width="150" Margin="3,3,30,3"  Text="{Binding ContactTel }" IsReadOnly="True"></TextBox>
+                        </StackPanel>
+                    </Border>
+
+
+
+
+
+
+
+                </Grid>
+          
+        </GroupBox>
+        </Border>
+    </Grid>
+</Window>

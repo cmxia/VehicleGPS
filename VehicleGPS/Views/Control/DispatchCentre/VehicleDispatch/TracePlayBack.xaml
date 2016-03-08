@@ -1,0 +1,42 @@
+﻿<Window x:Class="VehicleGPS.Views.Control.DispatchCentre.VehicleDispatch.TracePlayBack"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mybinding="clr-namespace:VehicleGPS.Views"
+         x:Name="WinRelieve"
+        Title="趟次轨迹回放" Height="300" Width="500" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Models/ResourceDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+    </Window.Resources>
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+        </Grid.Background>
+
+        <DataGrid IsReadOnly="True" AutoGenerateColumns="False" CanUserAddRows="False" Background="White" ItemsSource="{Binding VehicleList}"
+                       CanUserDeleteRows="False"   SelectionMode="Single" Margin="5">
+            <DataGrid.Resources>
+                <mybinding:BindingProxy x:Key="proxy" Data="{Binding}"></mybinding:BindingProxy>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="车牌号" Binding="{Binding vehicleID}"/>
+                <DataGridTextColumn Header="驾驶员" Binding="{Binding driverName}"/>
+                <DataGridTextColumn Header="趟次" Binding="{Binding tripTime}"/>
+                <DataGridTextColumn Header="方量" Binding="{Binding transCount}"/>
+                <DataGridTextColumn Header="派车时间" Binding="{Binding AssignTime}"/>
+                <DataGridTextColumn Header="完成时间" Binding="{Binding FinishTime}"/>
+                <DataGridTemplateColumn Header="轨迹回放">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Padding="10,1" Margin="10,0" Content="轨迹回放" Command="{Binding PlayBackCommand}"></Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

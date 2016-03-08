@@ -1,0 +1,168 @@
+﻿<Window x:Class="VehicleGPS.Views.Control.MonitorCentre.Instruction.DelRegion"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Width="480" Height="480" Title="删除区域或路线"
+        Icon="/Images/set.png">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Models/ResourceDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="43"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="140"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Border>
+            <Border.Background>
+                <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+            </Border.Background>
+            <TextBlock Text="指令设置" VerticalAlignment="Center" Margin="10,5,10,5"></TextBlock>
+        </Border>
+        <Border Grid.Row="1" BorderThickness="0.5" Margin="5">
+            <Border.BorderBrush>
+                <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+            </Border.BorderBrush>
+            <StackPanel x:Name="SettingRegion"  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock x:Name="lb_Common" Text="删除类型：" Margin="20,5,5,5" VerticalAlignment="Center"></TextBlock>
+                <RadioButton x:Name="RB_Circle" Content="圆形区域" GroupName="radio1" IsChecked="{Binding IsRadioCircle}"   Margin="15,5,15,5" ></RadioButton>
+                <RadioButton x:Name="RB_Rect" Content="矩形区域" GroupName="radio1" IsChecked="{Binding IsRadioRec}"  Margin="15,5,15,5" ></RadioButton>
+                <RadioButton x:Name="RB_Polygon" Content="多边形区域" GroupName="radio1" IsChecked="{Binding IsRadioPolygon}" Margin="15,5,15,5" ></RadioButton>
+                <RadioButton x:Name="RB_Line" Content="路线" GroupName="radio1" IsChecked="{Binding IsRadioLine}" Margin="15,5,15,5" ></RadioButton>
+            </StackPanel>
+        </Border>
+        <Border Grid.Row="2" CornerRadius="5" Background="White" Margin="10,0,10,10">
+            <ScrollViewer  Margin="1" Grid.Row="2"  VerticalScrollBarVisibility="Auto" 
+                       HorizontalScrollBarVisibility="Auto" >
+                <ScrollViewer.Content>
+                    <StackPanel>
+                    <Border x:Name="CircleGeo" Visibility="{Binding VisibleCircle}">
+                    <GroupBox Header="圆形区域" BorderThickness="2" Margin="5">
+                        <GroupBox.BorderBrush>
+                            <ImageBrush ImageSource="/Images/background.jpg"></ImageBrush>
+                        </GroupBox.BorderBrush>
+                        <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"  SelectionMode="Single"
+                           IsReadOnly="True" Background="White" ItemsSource="{Binding CircleList}">
+                                    <DataGrid.ColumnHeaderStyle>
+                                        <Style TargetType="DataGridColumnHeader">
+                                            <Setter Property="HorizontalContentAlignment" Value="Center">
+                                            </Setter>
+                                        </Style>
+                                    </DataGrid.ColumnHeaderStyle>
+                                    <DataGrid.Columns >
+                                        <DataGridTemplateColumn Header="选择"  Width="190">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding IsCheckedCircle, UpdateSourceTrigger=PropertyChanged}"></CheckBox>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTextColumn Header="区域ID" Width="200" Binding="{Binding CircleID}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </GroupBox>
+                </Border>
+                    <Border x:Name="RectGeo" Visibility="{Binding VisibleRect}">
+                    <GroupBox Header="矩形区域" BorderThickness="2" Margin="5">
+                        <GroupBox.BorderBrush>
+                            <ImageBrush ImageSource="/Images/background.jpg"></ImageBrush>
+                        </GroupBox.BorderBrush>
+                        <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"  SelectionMode="Single"
+                           IsReadOnly="True" Background="White" ItemsSource="{Binding RectList}">
+                            <DataGrid.Columns >
+                                <DataGridTemplateColumn Header="选择" Width="190">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding IsCheckedRec, UpdateSourceTrigger=PropertyChanged}"></CheckBox>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTextColumn Header="区域ID" Width="200" Binding="{Binding RectID}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </GroupBox>
+                </Border>
+                    <Border x:Name="PolyGeo" Visibility="{Binding VisiblePoly}">
+                    <GroupBox Header="多边形区域" BorderThickness="2" Margin="5">
+                        <GroupBox.BorderBrush>
+                            <ImageBrush ImageSource="/Images/background.jpg"></ImageBrush>
+                        </GroupBox.BorderBrush>
+                        <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"  SelectionMode="Single"
+                           IsReadOnly="True" Background="White" ItemsSource="{Binding PolyList}">
+                            <DataGrid.Columns >
+                                <DataGridTemplateColumn Header="选择" Width="190">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding IsCheckedPoly, UpdateSourceTrigger=PropertyChanged}"></CheckBox>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTextColumn Header="区域ID" Width="200" Binding="{Binding PolyID}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </GroupBox>
+                </Border>
+                    <Border x:Name="LineGeo" Visibility="{Binding VisibleLine}">
+                    <GroupBox Header="路线" BorderThickness="2" Margin="5">
+                        <GroupBox.BorderBrush>
+                            <ImageBrush ImageSource="/Images/background.jpg"></ImageBrush>
+                        </GroupBox.BorderBrush>
+                        <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"  SelectionMode="Single"
+                           IsReadOnly="True" Background="White" ItemsSource="{Binding LineList}">
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Header="选择" Width="190">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding IsCheckedLine, UpdateSourceTrigger=PropertyChanged}"></CheckBox>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTextColumn Header="路线ID" Width="200" Binding="{Binding LineID}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </GroupBox>
+                </Border>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Content="发送指令" Padding="10,2" Margin="5,0" Command="{Binding SendInstructionCommand}"></Button>
+                    </StackPanel>
+                    </StackPanel>
+                </ScrollViewer.Content>
+            </ScrollViewer>
+        </Border>
+        <Border Grid.Row="3">
+            <Border.Background>
+                <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+            </Border.Background>
+            <TextBlock Text="指令发送状态" VerticalAlignment="Center" Margin="10,5,10,5"></TextBlock>
+        </Border>
+        <Border Grid.Row="4">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="车牌号：" Margin="20,5,5,5" VerticalAlignment="Center"></TextBlock>
+                    <TextBlock x:Name="VehicleId" Width="100"  Margin="5,5,20,5"  Text="{Binding VehicleId}"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="sim卡号：" Margin="20,5,5,5" VerticalAlignment="Center"></TextBlock>
+                    <TextBlock x:Name="SIM" Width="100"  Margin="5,5,20,5"  Text="{Binding SIM}"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="所属单位：" Margin="20,5,5,5" VerticalAlignment="Center"></TextBlock>
+                    <TextBlock x:Name="EUSERNAME" Width="100"  Margin="5,5,20,5"  Text="{Binding EUSERNAME}"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="发送状态：" Margin="20,5,5,5" VerticalAlignment="Center"></TextBlock>
+                    <TextBlock x:Name="States" Width="100"  Margin="5,5,20,5" Text="{Binding States}"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="发送结果：" Margin="120,5,5,5" VerticalAlignment="Center"></TextBlock>
+                    <TextBlock x:Name="Result" Width="200"  Margin="5,5,20,5" Text="{Binding Result}"></TextBlock>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

@@ -1,0 +1,103 @@
+﻿<Window x:Class="VehicleGPS.Views.Control.MonitorCentre.Instruction.HQ.HQ_Setting_Poloygn"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Common" Height="650" Width="600" WindowStartupLocation="CenterScreen"
+        Icon="/Images/set.png">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Models/ResourceDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="43"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Border>
+            <Border.Background>
+                <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+            </Border.Background>
+            <TextBlock Text="指令设置" VerticalAlignment="Center" Margin="10,5,10,5"></TextBlock>
+        </Border>
+        <Border Grid.Row="1" BorderThickness="0.5" Margin="5">
+            <Border.BorderBrush>
+                <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+            </Border.BorderBrush>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox x:Name="ck_Store" Content="需要存储" Margin="20,5,20,5" Click="Store_CheckBox_Click"></CheckBox>
+                <CheckBox x:Name="ck_Reply" Content="需要回复" IsChecked="True"  Margin="20,5,20,5" Click="Reply_CheckBox_Click"></CheckBox>
+            </StackPanel>
+        </Border>
+        <Border Grid.Row="2" BorderThickness="0.5" Margin="5">
+            <Border.BorderBrush>
+                <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+            </Border.BorderBrush>
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Width="336">
+                    <TextBlock Text="多边形序号" Margin="5,5,5,5" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+                    <TextBox x:Name="tpoloygnId" Width="100"  Margin="5,5,5,5" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBox>
+                </StackPanel >
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Width="336">
+                    <TextBlock Text="报警限制" Margin="5,5,5,5" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+                    <TextBox x:Name="twarnLimit" Width="100"  Margin="5,5,5,5" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Width="336">
+                    <TextBlock Text="速度限制" Margin="5,5,5,5" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+                    <TextBox x:Name="tspeedLimit" Width="100"  Margin="5,5,5,5" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBox>
+                </StackPanel>
+
+                <StackPanel x:Name="pointList">
+                    <StackPanel Name="site" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center"  Width="336">
+                        <TextBlock  Text="经度" Margin="5,5,5,5" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+                        <TextBox x:Name="tlongitude0" Width="100"  Margin="5,5,5,5" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBox>
+                    </StackPanel>
+                    <StackPanel Name="phone" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center"  Width="336">
+                        <TextBlock Text="纬度" Margin="5,5,5,5" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+                        <TextBox x:Name="tlatitude0" Width="100"  Margin="5,5,5,5" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBox>
+                    </StackPanel>                  
+                </StackPanel>
+                <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center"  Width="336">
+                    <Button Content="添加顶点" Margin="5,5" Click="AddPhone_Click" ></Button>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Button Content="发送指令" Margin="20,5" Click="SendIntruction_Click"></Button>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+        <Border Grid.Row="3">
+            <Border.Background>
+                <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+            </Border.Background>
+            <TextBlock Text="指令发送状态" VerticalAlignment="Center" Margin="10,5,10,5"></TextBlock>
+        </Border>
+        <Border Grid.Row="4">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="车牌号：" Margin="20,5,5,5" VerticalAlignment="Center"></TextBlock>
+                    <TextBlock x:Name="VehicleId" Width="100"  Margin="5,5,20,5"  Text="{Binding VehicleId}"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="sim卡号：" Margin="20,5,5,5" VerticalAlignment="Center"></TextBlock>
+                    <TextBlock x:Name="SIM" Width="100"  Margin="5,5,20,5"  Text="{Binding SIM}"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="所属单位：" Margin="20,5,5,5" VerticalAlignment="Center"></TextBlock>
+                    <TextBlock x:Name="EUSERNAME" Width="100"  Margin="5,5,20,5"  Text="{Binding EUSERNAME}"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="发送状态：" Margin="20,5,5,5" VerticalAlignment="Center"></TextBlock>
+                    <TextBlock x:Name="States" Width="100"  Margin="5,5,20,5" Text="{Binding States}"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="发送结果：" Margin="120,5,5,5" VerticalAlignment="Center"></TextBlock>
+                    <TextBlock x:Name="Result" Width="200"  Margin="5,5,20,5" Text="{Binding Result}"></TextBlock>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

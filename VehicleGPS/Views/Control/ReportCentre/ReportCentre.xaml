@@ -1,0 +1,196 @@
+﻿<UserControl x:Class="VehicleGPS.Views.Control.ReportCentre.ReportCentre"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:MyTree="clr-namespace:VehicleGPS.Views.Control.ReportCentre"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             mc:Ignorable="d" 
+             HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <UserControl.Resources>
+        <Style x:Key="seperateborder" TargetType="Border">
+            <Setter Property="BorderThickness" Value="0,0,2,0"></Setter>
+            <Setter Property="Margin" Value="0,5,0,5"></Setter>
+            <Setter Property="BorderBrush">
+                <Setter.Value>
+                    <ImageBrush ImageSource="/Images/background.jpg"></ImageBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MinWidth="110px" Width="220px" MaxWidth="330px"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <MyTree:ReportTree x:Name="vechicleTree" Grid.Column="0"></MyTree:ReportTree>
+        <GridSplitter Grid.Column="1" VerticalAlignment="Stretch" Width="4" HorizontalAlignment="Center" ShowsPreview="False">
+            <GridSplitter.Background>
+                <ImageBrush ImageSource="/Images/background.jpg"></ImageBrush>
+            </GridSplitter.Background>
+        </GridSplitter>
+        <Grid Grid.Column="2" Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" VerticalAlignment="Center" Height="4" HorizontalAlignment="Stretch">
+                <Border.Background>
+                    <ImageBrush ImageSource="/Images/SolidContent_bg.png"></ImageBrush>
+                </Border.Background>
+            </Border>
+
+            <Border Grid.Row="1" Margin="5" >
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <Expander Header="油耗分析" Margin="0,0,0,5" x:Name="ep_Oil" IsExpanded="True">
+                            <Expander.Background>
+                                <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                            </Expander.Background>
+                            <Expander.Content>
+                                <Grid Background="White" x:Name="Grid_Oil">
+
+                                </Grid>
+                            </Expander.Content>
+                        </Expander>
+                        <Expander Header="常用报表" Margin="0,0,0,5" x:Name="ep_Common" IsExpanded="True">
+                            <Expander.Background>
+                                <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                            </Expander.Background>
+                            <Expander.Content>
+                                <Grid Background="White" x:Name="Grid_Common">
+
+                                </Grid>
+                            </Expander.Content>
+                        </Expander>
+                        <Expander Header="里程分析" Margin="0,0,0,5" x:Name="ep_Mileage" IsExpanded="True">
+                            <Expander.Background>
+                                <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                            </Expander.Background>
+                            <Expander.Content>
+                                <Grid Background="White" x:Name="Grid_Mileage">
+
+                                </Grid>
+                            </Expander.Content>
+                        </Expander>
+                        <Expander Header="运行分析" Margin="0,0,0,5" x:Name="ep_Run" IsExpanded="True">
+                            <Expander.Background>
+                                <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                            </Expander.Background>
+                            <Expander.Content>
+                                <Grid Background="White" x:Name="Grid_Running">
+
+                                </Grid>
+                            </Expander.Content>
+                        </Expander>
+                        <Expander Header="告警分析" Margin="0,0,0,5" x:Name="ep_Alarm" IsExpanded="True">
+                            <Expander.Background>
+                                <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                            </Expander.Background>
+                            <Expander.Content>
+                                <Grid Background="White" x:Name="Grid_Alarm">
+
+                                </Grid>
+                            </Expander.Content>
+                        </Expander>
+                        <Expander Header="行车记录" Margin="0,0,0,5" x:Name="ep_Record" IsExpanded="True">
+                            <Expander.Background>
+                                <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                            </Expander.Background>
+                            <Expander.Content>
+                                <Grid Background="White" x:Name="Grid_Record">
+
+                                </Grid>
+                            </Expander.Content>
+                        </Expander>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+
+            <GridSplitter Grid.Row="2" VerticalAlignment="Center" Height="4" HorizontalAlignment="Stretch" ShowsPreview="False">
+                <GridSplitter.Background>
+                    <ImageBrush ImageSource="/Images/background.jpg"></ImageBrush>
+                </GridSplitter.Background>
+            </GridSplitter>
+            <Border Grid.Row="3">
+                <Border.Background>
+                    <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                </Border.Background>
+                <Border Background="White" CornerRadius="5" Margin="10">
+                    <GroupBox x:Name="gb_ReportQuery" Margin="5">
+                        <StackPanel Margin="5" x:Name="sp_Condition">
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel>
+                                    <StackPanel x:Name="sp_Time" Orientation="Horizontal" Margin="3">
+                                        <StackPanel Orientation="Horizontal" Margin="0,0,20,0">
+                                            <TextBlock Text="开始时间 " VerticalAlignment="Center"></TextBlock>
+                                            <DatePicker x:Name="dp_BeginTime"></DatePicker>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Margin="0,0,20,0">
+                                            <TextBlock Text="结束时间 " VerticalAlignment="Center"></TextBlock>
+                                            <DatePicker x:Name="dp_EndTime"></DatePicker>
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <StackPanel x:Name="sp_TimeWithHM" Orientation="Horizontal" Margin="3">
+                                        <StackPanel Orientation="Horizontal" Margin="0,0,20,0">
+                                            <TextBlock Text="开始时间 " VerticalAlignment="Center"></TextBlock>
+                                            <xctk:DateTimePicker x:Name="dtp_BeginTime" Format="Custom" FormatString="yyyy-MM-dd HH:mm" Width="150"></xctk:DateTimePicker>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Margin="0,0,20,0">
+                                            <TextBlock Text="结束时间 " VerticalAlignment="Center"></TextBlock>
+                                            <xctk:DateTimePicker x:Name="dtp_EndTime" Format="Custom" FormatString="yyyy-MM-dd HH:mm" Width="150"></xctk:DateTimePicker>
+                                        </StackPanel>
+                                        <StackPanel x:Name="sp_RegionType" Orientation="Horizontal" Margin="0,0,20,0">
+                                            <ComboBox x:Name="cb_RegionType" VerticalAlignment="Center" Width="100">
+                                                <ComboBoxItem Content="全部" IsSelected="True"></ComboBoxItem>
+                                                <ComboBoxItem Content="进出站点"></ComboBoxItem>
+                                                <ComboBoxItem Content="进出工地"></ComboBoxItem>
+                                            </ComboBox>
+                                        </StackPanel>
+                                        <StackPanel x:Name="sp_InterValLargerThan" Orientation="Horizontal" Margin="0,0,20,0">
+                                            <TextBlock Text="时长大于" VerticalAlignment="Center"></TextBlock>
+                                            <TextBox x:Name="tb_InterValLargerThan" Width="30" Height="20" Text="0"></TextBox>
+                                            <TextBlock Text="分钟" VerticalAlignment="Center"></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel x:Name="sp_SpeedLargerThan" Orientation="Horizontal" Margin="0,0,20,0">
+                                            <TextBlock Text="速度" VerticalAlignment="Center"></TextBlock>
+                                            <TextBox x:Name="tb_SpeedLargerThan" Width="30" Height="20" Text="0"></TextBox>
+                                            <TextBlock Text="公里每小时以上" VerticalAlignment="Center"></TextBlock>
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <StackPanel x:Name="sp_Overspeed" Orientation="Horizontal"  Margin="3">
+                                        <StackPanel Orientation="Horizontal" Margin="0,0,15,0">
+                                            <TextBlock Text="超速时速度大于" VerticalAlignment="Center"></TextBlock>
+                                            <TextBox x:Name="tb_MinSpeed" Width="30" Text="0"></TextBox>
+                                            <TextBlock Text="km/h" VerticalAlignment="Center"></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Margin="0,0,15,0">
+                                            <TextBlock Text="超速时速度小于" VerticalAlignment="Center"></TextBlock>
+                                            <TextBox x:Name="tb_MaxSpeed" Width="30" Text="80"></TextBox>
+                                            <TextBlock Text="km/h" VerticalAlignment="Center"></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Margin="0,0,10,0">
+                                            <TextBlock Text="超速时长大于" VerticalAlignment="Center"></TextBlock>
+                                            <TextBox x:Name="tb_OverSpeedInterval" Width="20" Text="2"></TextBox>
+                                            <TextBlock Text="分钟" VerticalAlignment="Center"></TextBlock>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel x:Name="sp_QueryButton" Orientation="Horizontal"  Margin="3" HorizontalAlignment="Center">
+                                    <Button Content="查 询" Width="60" Click="onSerach_Clicked"></Button>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </GroupBox>
+                </Border>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

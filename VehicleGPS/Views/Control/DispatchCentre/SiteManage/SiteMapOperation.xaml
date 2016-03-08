@@ -1,0 +1,27 @@
+﻿<Window x:Class="VehicleGPS.Views.Control.DispatchCentre.SiteManage.SiteMapOperation"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        Title="工地标区" Height="600" Width="1000" WindowStartupLocation="CenterScreen" >
+    <xctk:BusyIndicator x:Name="Indicator" BusyContent="正在解析地址,请稍后...">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0">
+                <Border.Background>
+                    <ImageBrush ImageSource="/Images/Content_bg.jpg" />
+                </Border.Background>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button x:Name="DispatchRegion_regionMarker" Content="重新标区" Width="60" Margin="5" Click="DispatchRegion_regionMarker_Click"/>
+                    <Button x:Name="DispatchRegion_btn_Confirm" Content="确定" Width="60" Margin="5" Click="DispatchRegion_btn_Confirm_Click"/>
+                </StackPanel>
+            </Border>
+            <Border Grid.Row="1">
+                <WebBrowser x:Name="MyWeb" LoadCompleted="MyWeb_LoadCompleted"></WebBrowser>
+            </Border>
+        </Grid>
+    </xctk:BusyIndicator>
+</Window>

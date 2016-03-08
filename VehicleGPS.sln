@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VehicleGPS", "VehicleGPS\VehicleGPS.csproj", "{410B5C42-7686-4B7C-9FE3-ACBF2BBA3C52}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{815597B6-DE3A-4D95-9F0B-552D194D7653}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{410B5C42-7686-4B7C-9FE3-ACBF2BBA3C52}.Debug|x86.ActiveCfg = Debug|x86
+		{410B5C42-7686-4B7C-9FE3-ACBF2BBA3C52}.Debug|x86.Build.0 = Debug|x86
+		{410B5C42-7686-4B7C-9FE3-ACBF2BBA3C52}.Release|x86.ActiveCfg = Release|x86
+		{410B5C42-7686-4B7C-9FE3-ACBF2BBA3C52}.Release|x86.Build.0 = Release|x86
+		{815597B6-DE3A-4D95-9F0B-552D194D7653}.Debug|x86.ActiveCfg = Debug
+		{815597B6-DE3A-4D95-9F0B-552D194D7653}.Release|x86.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
+EndGlobal

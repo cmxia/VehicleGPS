@@ -1,0 +1,27 @@
+﻿<Window x:Class="VehicleGPS.Models.Dialog.PopupBorder"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="PopupBorder"  WindowStartupLocation="CenterScreen"  Height="auto" Width="auto"
+         WindowStyle="None"  
+    AllowsTransparency="True">
+
+    <Grid x:Name="LayoutRoot" >
+        <!--<Border Background="#FFCC0D0D" BorderThickness="0" CornerRadius="5">-->
+        <Border BorderThickness="0" CornerRadius="5">
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF27A3D7" Offset="0.51"/>
+                    <GradientStop Color="#FF76C2E1" Offset="0.004"/>
+                    <GradientStop Color="#FF27A3D7" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="10" Color="#FFCC0D0D" ShadowDepth="0"/>
+            </Border.Effect>
+            <TextBlock x:Name="txtMessage" HorizontalAlignment="Center" Margin="10" VerticalAlignment="Center"
+                       FontSize="16" Foreground="White" FontFamily="Comic Sans MS"
+                       >This is a Simple Example</TextBlock>
+        </Border>
+    </Grid>
+
+</Window>

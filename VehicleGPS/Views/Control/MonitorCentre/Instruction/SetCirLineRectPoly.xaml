@@ -1,0 +1,184 @@
+﻿<Window x:Class="VehicleGPS.Views.Control.MonitorCentre.Instruction.SetCirLineRectPoly"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        Height="600" Width="1100"
+        Icon="/Images/set.png">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="4"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3">
+            <Border.Background>
+                <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+            </Border.Background>
+            <GroupBox Header="车辆信息" Margin="4,0">
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Text="车牌号：" Margin="10,5,5,5" VerticalAlignment="Center"></TextBlock>
+                        <TextBlock x:Name="VehicleId" Width="100"  Margin="5,5,10,5"  Text="{Binding VehicleId}"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Text="sim卡号：" Margin="10,5,5,5" VerticalAlignment="Center"></TextBlock>
+                        <TextBlock x:Name="SIM" Width="100"  Margin="5,5,10,5"  Text="{Binding SIM}"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Text="所属单位：" Margin="10,5,5,5" VerticalAlignment="Center"></TextBlock>
+                        <TextBlock x:Name="EUSERNAME" Width="100"  Margin="5,5,10,5"  Text="{Binding EUSERNAME}"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Text="发送状态：" Margin="10,5,5,5" VerticalAlignment="Center"></TextBlock>
+                        <TextBlock x:Name="States" Width="100"  Margin="5,5,10,5" Text="{Binding States}"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Text="发送结果：" Margin="10,5,5,5" VerticalAlignment="Center"></TextBlock>
+                        <TextBlock x:Name="Result" Width="200"  Margin="5,5,20,5" Text="{Binding Result}"></TextBlock>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+        </Border>
+        <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+            <Border.Background>
+                <ImageBrush ImageSource="/Images/background.jpg"></ImageBrush>
+            </Border.Background>
+        </Border>
+        <Grid Grid.Row="2" Grid.Column="0">
+            <Grid.Background>
+                <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+            </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <GroupBox Grid.Row="0" Margin="5" Header="地理信息">
+                <StackPanel>
+                    <Border x:Name="LineGeo" Visibility="Collapsed">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="路线信息: " Margin="5"/>
+                            <TextBlock Text="{Binding LineInfo}" Margin="5"></TextBlock>
+                            <TextBlock Text="点信息：" Margin="5"/>
+                            <TextBlock Text="{Binding LinePointsInfo}" Margin="5,0,5,5" TextWrapping="Wrap"></TextBlock>
+                        </StackPanel>
+                    </Border>
+                    <Border x:Name="CircleGeo" Visibility="Collapsed">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="圆信息：" Margin="5"/>
+                            <TextBlock Text="{Binding CircleInfo}" Margin="5" TextWrapping="Wrap"></TextBlock>
+                        </StackPanel>
+                    </Border>
+                    <Border x:Name="RectGeo" Visibility="Collapsed">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="矩形信息:" Margin="5"></TextBlock>
+                            <TextBlock Text="{Binding RectInfo}" Margin="5" TextWrapping="Wrap"></TextBlock>
+                        </StackPanel>
+                    </Border>
+                    <Border x:Name="PolyGeo" Visibility="Collapsed">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="多边形信息: " Margin="5"/>
+                            <TextBlock Text="{Binding PolyInfo}" Margin="5" TextWrapping="Wrap"></TextBlock>
+                            <TextBlock Text="点信息：" Margin="5"/>
+                            <TextBlock Text="{Binding PolyPointInfo}" Margin="5,0,5,5" TextWrapping="Wrap"></TextBlock>
+                        </StackPanel>
+                    </Border>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Content="获取地理信息" Padding="10,2" Margin="5,0" Command="{Binding GetGeoCommand}"></Button>
+                        <Button Content="清除覆盖物" Padding="10,2" Margin="5,0" Command="{Binding ClearMarkerCommand}"></Button>
+                        <Button Content="设置点属性" Visibility="{Binding SetPoint}"  Padding="10,2" Margin="5,0" Command="{Binding SetPointCommand}"></Button>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Grid.Row="1" Header="指令信息" Margin="5">
+                <Border Grid.Row="1" BorderThickness="0.5" Margin="5">
+                    <Border.BorderBrush>
+                        <ImageBrush ImageSource="/Images/Content_bg.jpg"></ImageBrush>
+                    </Border.BorderBrush>
+                    <StackPanel>
+                        <StackPanel x:Name="SettingRegion"  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock x:Name="lb_Common" Text="设置属性：" Margin="20,5,5,5" VerticalAlignment="Center"></TextBlock>
+                            <RadioButton x:Name="context_1" Content="更新区域" GroupName="radio1" IsChecked="{Binding IsUpdateRegion}" Margin="15,5,15,5" ></RadioButton>
+                            <RadioButton x:Name="context_2" Content="追加区域" GroupName="radio1" IsChecked="{Binding IsAddRegion}"  Margin="15,5,15,5" ></RadioButton>
+                            <RadioButton x:Name="context_3" Content="修改区域" GroupName="radio1" IsChecked="{Binding IsModify}" Margin="15,5,15,5" ></RadioButton>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock Text="区域ID" Margin="20,5,5,5" VerticalAlignment="Center"></TextBlock>
+                            <TextBox x:Name="tb_1" Text="{Binding RegionID}" Width="100"  Margin="5,5,0,5" VerticalAlignment="Center"></TextBox>
+                        </StackPanel>
+                        <GroupBox  Name="groupbox">
+                            <GroupBox.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock>区域属性</TextBlock>
+                                </StackPanel>
+                            </GroupBox.Header>
+                            <StackPanel x:Name="Sp_AreaAttribute">
+                                <!--<StackPanel x:Name="SpLine"  Orientation="Horizontal" Visibility="Collapsed">
+                                    <TextBlock Text="拐点ID" Margin="5,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <TextBox x:Name="tb_guaidian" Width="80"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBox>
+                                    <TextBlock Text="路段ID" Margin="5,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <TextBox x:Name="tb_luduan" Width="80"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBox>
+                                </StackPanel>-->
+                                <StackPanel Orientation="Horizontal">
+                                    <CheckBox x:Name="Time" Content="根据时间" Margin="5,5,30,5" IsChecked="{Binding IsBaseTime}"></CheckBox>
+                                    <CheckBox x:Name="Speed" Content="限速"  Margin="5,5,30,5" IsChecked="{Binding IsLimitSpeed}"></CheckBox>
+                                    <!--<CheckBox x:Name="DriveTime" Content="行驶时间" Margin="5,5,30,5" Visibility="Collapsed"  IsChecked="{Binding IsDriveTime}"></CheckBox>-->
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <CheckBox x:Name="InAlarm"  Content="进区域报警给驾驶员"  Margin="5,5,30,5" IsChecked="{Binding InAlarmDriver}"></CheckBox>
+                                    <CheckBox x:Name="InPlatform" Content="进区域报警给平台"  Margin="5,5,5,5" IsChecked="{Binding InAlarmPlat}"></CheckBox>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <CheckBox x:Name="OutAlarm"  Content="出区域报警给驾驶员"  Margin="5,5,30,5" IsChecked="{Binding OutAlarmDriver}"></CheckBox>
+                                    <CheckBox x:Name="OutPlatform" Content="出区域报警给平台"  Margin="5,5,5,5" IsChecked="{Binding OutAlarmPlat}"></CheckBox>
+                                </StackPanel>
+                                <StackPanel x:Name="SpLatiLong" Orientation="Horizontal">
+                                    <RadioButton x:Name="context_4" Content="北纬" IsChecked="{Binding Latitude}" GroupName="radio2"  Margin="5,5,5,5" ></RadioButton>
+                                    <RadioButton x:Name="context_5" Content="南纬" GroupName="radio2"  Margin="0,5,18,5"></RadioButton>
+                                    <RadioButton x:Name="context_6" Content="东经" IsChecked="{Binding Longitude}" GroupName="radio3"  Margin="5,5,5,5" ></RadioButton>
+                                    <RadioButton x:Name="context_7" Content="西经" GroupName="radio3"  Margin="0,5,18,5"></RadioButton>
+                                    <RadioButton x:Name="context_8" Content="允许开门" IsChecked="{Binding openDoor}" GroupName="radio4"  Margin="5,5,5,5" ></RadioButton>
+                                    <RadioButton x:Name="context_9" Content="禁止开门" GroupName="radio4"  Margin="0,5,0,5"></RadioButton>
+                                </StackPanel>
+                                <StackPanel x:Name="SpGprs"  Orientation="Horizontal">
+                                    <RadioButton x:Name="context_10" Content="进区域开启通信模块" IsChecked="{Binding InGPRS}" GroupName="radio5"  Margin="5,5,10,5" ></RadioButton>
+                                    <RadioButton x:Name="context_11" Content="进区域关闭通信模块" GroupName="radio5"  Margin="5,5,20,5"></RadioButton>
+                                </StackPanel>
+                                <StackPanel x:Name="SpGnss"  Orientation="Horizontal">
+                                    <RadioButton x:Name="context_12" Content="进区域不采集GNSS详细定位数据" IsChecked="{Binding InGNSS}" GroupName="radio6"  Margin="5,5,10,5" ></RadioButton>
+                                    <RadioButton x:Name="context_13" Content="进区域采集GNSS数据" GroupName="radio6"  Margin="5,5,20,5"></RadioButton>
+                                </StackPanel>
+                            </StackPanel>
+                        </GroupBox>
+                        <StackPanel Name="sp_time" Visibility="{Binding TimeVisible}"  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center"  Margin="0,3,0,3">
+                            <TextBlock Text="时间限制" Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                            <xctk:DateTimePicker x:Name="dtp_BeginTime" Format="Custom" FormatString="yyyy-MM-dd HH:mm" Width="150"  Value="{Binding BeginTime}"></xctk:DateTimePicker>
+                            <TextBlock Text=" 至 " VerticalAlignment="Center"></TextBlock>
+                            <xctk:DateTimePicker x:Name="dtp_EndTime" Format="Custom" FormatString="yyyy-MM-dd HH:mm" Width="150" Value="{Binding EndTime}"></xctk:DateTimePicker>                           
+                        </StackPanel>
+                        <StackPanel Name="sp_speed" Visibility="{Binding SpeedVisible}"  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <TextBlock Text="最高速度" Margin="5,5,0,5" VerticalAlignment="Center"></TextBlock>
+                            <TextBox x:Name="tb_7" Width="100" Text="{Binding MaxSpeed}" Margin="0,5,17,5" VerticalAlignment="Center"></TextBox>
+                            <TextBlock Text="超速持续时间" Margin="5,5,0,5" VerticalAlignment="Center"></TextBlock>
+                            <TextBox x:Name="tb_8" Width="100" Text="{Binding MaxTime}"  Margin="0,5,5,5" VerticalAlignment="Center"></TextBox>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </GroupBox>
+            <Button Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="发送指令" Command="{Binding SendInstructionCommand}" Padding="10,2" Margin="5"></Button>
+        </Grid>
+        <GridSplitter Grid.Row="2" Grid.Column="1" Width="4" HorizontalAlignment="Center" VerticalAlignment="Stretch">
+            <GridSplitter.Background>
+                <ImageBrush ImageSource="/Images/background.jpg"></ImageBrush>
+            </GridSplitter.Background>
+        </GridSplitter>
+        <Border Grid.Row="2" Grid.Column="2">
+            <WebBrowser x:Name="InsMap"></WebBrowser>
+        </Border>
+    </Grid>
+</Window>

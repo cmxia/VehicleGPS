@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<servers>
+  <server name="web">
+    <ip>61.183.9.107</ip>
+    <port>81</port>
+  </server>
+  <server name="business">
+    <ip>61.183.9.107</ip>
+    <port>4011</port>
+  </server>
+  <server name="instruction">
+    <ip>61.183.9.107</ip>
+    <port>4012</port>
+  </server>
+</servers>
